@@ -1,0 +1,98 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.example.tomz.electroniccity"
+        minSdkVersion 16
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://old.electronic-city.com/api\"")
+        }
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"https://electronic-city.com/api\"")
+        }
+    }
+    dataBinding {
+        enabled = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    //AndroidLib
+    implementation "com.android.support:appcompat-v7:$rootProject.AndroidSupportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.AndroidSupportLibraryVersion"
+    implementation "com.android.support:design:$rootProject.AndroidSupportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.AndroidSupportLibraryVersion"
+    implementation "com.android.support:cardview-v7:$rootProject.AndroidSupportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.AndroidSupportConstraintVersion"
+
+    //AndroidArch
+    implementation "android.arch.lifecycle:extensions:$rootProject.LifecycleArchVersion"
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'com.android.support:support-v4:27.1.1'
+    annotationProcessor "android.arch.lifecycle:compiler:$rootProject.LifecycleArchVersion"
+    implementation "android.arch.persistence.room:runtime:$rootProject.RoomArchVersion"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.RoomArchVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.RoomArchVersion"
+
+    //PlayServices-FirebaseLib
+    implementation "com.google.android.gms:play-services-location:$rootProject.PlayServicesVersion"
+    implementation "com.google.firebase:firebase-core:$rootProject.FirebaseVersion"
+    implementation "com.google.firebase:firebase-messaging:$rootProject.FCMversion"
+    implementation "com.google.android.gms:play-services-maps:$rootProject.PlayServicesVersion"
+
+    //Dagger2
+    implementation "com.google.dagger:dagger:$rootProject.Dagger2Version"
+    implementation "com.google.dagger:dagger-android:$rootProject.Dagger2Version"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.Dagger2Version"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.Dagger2Version"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.Dagger2Version"
+
+    //Retrofit
+//    implementation "com.squareup.retrofit2:retrofit:$rootProject.RetrofitVersion"
+//    implementation "com.squareup.retrofit2:converter-gson:$rootProject.RetrofitVersion"
+//    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.RetrofitVersion"
+
+    //Rx2FastAndroidNetworking
+    implementation "com.amitshekhar.android:rx2-android-networking:$rootProject.FastNetworkVersion"
+
+    //Gson parser
+    implementation "com.google.code.gson:gson:$rootProject.GsonVersion"
+
+    //Rx
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+
+    //ButterKnife
+//    implementation "com.jakewharton:butterknife:$rootProject.ButterKnifeVersion"
+//    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.ButterKnifeVersion"
+
+    //Misc.
+    implementation "com.github.bumptech.glide:glide:$rootProject.GlideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.GlideVersion"
+//    implementation "de.hdodenhof:circleimageview:$rootProject.CircleImageVersion"
+//    implementation "com.github.smarteist:autoimageslider:$rootProject.SliderVersion"
+//    implementation "com.github.firdausmaulan:GlideSlider:$rootProject.SliderVersion"
+    implementation "com.crashlytics.sdk.android:crashlytics:$rootProject.CrashlyticsVersion"
+
+    //Test
+    testImplementation "junit:junit:$rootProject.JunitVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.RunnerVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.EspressoVersion"
+}
+apply plugin: 'com.google.gms.google-services'

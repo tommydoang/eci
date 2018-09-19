@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View" />
+        <variable
+            name="tab9"
+            type="com.example.tomz.electroniccity.page.bn_home_content.tab9.Tab9ViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--BANNER-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <ImageView
+                    android:id="@+id/iv_banner_failed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="158dp"
+                    android:contentDescription="@string/img_content_des"/>
+                <android.support.v4.view.ViewPager
+                    android:id="@+id/banner_view_pager"
+                    android:layout_width="match_parent"
+                    android:layout_height="152dp" />
+                <com.example.tomz.electroniccity.utils.indicator.CirclePageIndicator
+                    android:id="@+id/indicator"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:layout_gravity="start|bottom"/>
+                <android.support.v4.widget.ContentLoadingProgressBar
+                    android:id="@+id/loading"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="@{tab9.isLoading ? View.VISIBLE : View.GONE}" />
+            </FrameLayout>
+
+            <!--CATEGORY-->
+            <com.example.tomz.electroniccity.utils.ExpandableHeightGridView
+                android:id="@+id/gvSubCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:isScrollContainer="false"
+                android:numColumns="4"
+                android:stretchMode="columnWidth"
+                android:verticalSpacing="1dp"
+                android:horizontalSpacing="1dp" />
+
+            <!--BEST SELLER LAYOUT-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_best_seller2"
+                        android:contentDescription="@string/img_content_des"/>
+                    <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:paddingLeft="18dp"
+                        android:paddingRight="18dp"
+                        android:text="@string/cat_tab1_best_seller"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"/>
+                </LinearLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rvBestSellerTab6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    app:adapterprodtab9="@{tab9.tab9DataList}"
+                    tools:listitem="@layout/tab9_item_best_seller"/>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</layout>

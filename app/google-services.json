@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "982692429119",
+    "firebase_url": "https://ecity-d1e16.firebaseio.com",
+    "project_id": "ecity-d1e16",
+    "storage_bucket": "ecity-d1e16.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:982692429119:android:3841aa14596815da",
+        "android_client_info": {
+          "package_name": "com.example.tomz.electroniccity"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "982692429119-t0r1naftcf81crtqbmcmaofs5v2u84qm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tomz.electroniccity",
+            "certificate_hash": "780f753350e37151b6ef0ca7130423a82e43a2c6"
+          }
+        },
+        {
+          "client_id": "982692429119-uglk0g084ctcnof0du5efpg4j5qh6qge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCG4AxD5ctU3LMv8iprezuP-duqT--ttnQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "982692429119-uglk0g084ctcnof0du5efpg4j5qh6qge.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

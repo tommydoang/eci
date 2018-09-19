@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="address"
+            type="com.example.tomz.electroniccity.page.bn_tab_home.account.address.AddressItemViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="6dp"
+        android:onClick="@{address.onReadMoreClicked()}">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingRight="14dp"
+            android:paddingLeft="14dp">
+            <LinearLayout
+                android:id="@+id/layout_alamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="8dp"
+                android:orientation="vertical">
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvTitleAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:text="@{address.titleAddress}"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvNamaPenerima"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{address.nameReceiver}"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{address.addressName}"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvKecamatan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="INI TEST, Jakarta Berat, 1198261"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvKontak"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{address.phoneNumber}"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_alamat"
+                android:layout_marginTop="8dp"
+                android:gravity="end"
+                android:orientation="horizontal">
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvUbahAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:onClick="@{address.onUbahClicked()}"
+                    android:text="@string/text_alamat_ubah"
+                    android:textSize="14sp"
+                    android:textColor="@color/blue400"/>
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tvHapusAlamat"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:layout_marginLeft="40dp"
+                    android:layout_marginRight="0dp"
+                    android:onClick="@{address.onHapusClicked()}"
+                    android:text="@string/text_alamat_hapus"
+                    android:textSize="14sp"
+                    android:textColor="@color/red500"
+                    android:layout_marginStart="40dp"
+                    android:layout_marginEnd="0dp" />
+            </LinearLayout>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="transparent">#00FFFFFF</color>
+    <color name="grey">#808080</color>
+    <color name="grey200">#EEEEEE</color>
+    <color name="grey300">#E0E0E0</color>
+    <color name="grey400">#BDBDBD</color>
+    <color name="grey600">#757575</color>
+    <color name="grey700">#616161</color>
+    <color name="blue">#0000ff</color>
+    <color name="blue400">#42A5F5</color>
+    <color name="blue500">#2196F3</color>
+    <color name="blue800">#1565C0</color>
+    <color name="blue900">#0D47A1</color>
+    <color name="lightblue400">#29B6FC</color>
+    <color name="lightblue500">#03A9F4</color>
+    <color name="lightblue900">#01579B</color>
+    <color name="newlightblue">#0077C0</color>
+    <color name="orange400">#FFA726</color>
+    <color name="orange800">#EF6C00</color>
+    <color name="red500">#F44336</color>
+
+    <color name="darkBlue1">#00006A</color>
+    <color name="darkBlue2">#000099</color>
+    <color name="lightBlue1">#1976D2</color>
+
+    <!-- dots inactive colors -->
+    <color name="dot_dark_screen1">#d1395c</color>
+    <color name="dot_dark_screen2">#14a895</color>
+    <color name="dot_dark_screen3">#2278d4</color>
+    <color name="dot_dark_screen4">#a854d4</color>
+
+    <!-- dots active colors -->
+    <color name="dot_light_screen1">#f98da5</color>
+    <color name="dot_light_screen2">#8cf9eb</color>
+    <color name="dot_light_screen3">#93c6fd</color>
+    <color name="dot_light_screen4">#e4b5fc</color>
+
+    <array name="array_dot_active">
+        <item>@color/white</item>
+        <item>@color/white</item>
+        <item>@color/white</item>
+        <item>@color/white</item>
+    </array>
+
+    <array name="array_dot_inactive">
+        <item>@color/grey600</item>
+        <item>@color/grey600</item>
+        <item>@color/grey600</item>
+        <item>@color/grey600</item>
+    </array>
+
+
+</resources>

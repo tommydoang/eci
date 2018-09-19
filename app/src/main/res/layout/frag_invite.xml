@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="fraginvite"
+            type="com.example.tomz.electroniccity.page.bn_tab_home.account.invite.FragInviteViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="12dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
+                android:orientation="vertical">
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:gravity="center"
+                    android:text="@string/text_head_invite_member"
+                    android:textSize="14sp"
+                    android:textStyle="bold"/>
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="12dp"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingBottom="8dp"
+                    android:textColorHint="@color/blue900"
+                    app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
+                    <EditText
+                        android:id="@+id/et_user_handphone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="start"
+                        android:hint="@string/hint_nomor_hp"
+                        android:inputType="phone"
+                        android:textAlignment="viewStart"
+                        android:theme="@style/EditTextStyle"/>
+                </android.support.design.widget.TextInputLayout>
+                <LinearLayout
+                    android:id="@+id/btn_invite_member"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="8dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="12dp"
+                    android:background="@drawable/background_btn"
+                    android:onClick="@{()->fraginvite.onSendActivateLink()}"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:focusable="true">
+                    <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/text_btn_send_activate_link"
+                        android:textColor="@drawable/text_color_common"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <android.support.v4.widget.ContentLoadingProgressBar
+                    android:id="@+id/loading"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:visibility="@{fraginvite.isLoading ? View.VISIBLE : View.GONE}" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+</layout>

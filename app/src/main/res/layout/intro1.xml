@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/lightblue900">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="160dp"
+            android:layout_height="100dp"
+            android:src="@drawable/logo_ec_220x102"
+            android:contentDescription="@string/img_content_des"/>
+
+        <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/text_intro1"
+            android:textColor="@color/white"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="280dp"
+            android:layout_height="180dp"
+            android:src="@drawable/img_intro1"
+            android:background="@color/lightblue900"
+            android:backgroundTint="@color/lightblue900"
+            android:backgroundTintMode="src_over"
+            android:contentDescription="@string/img_content_des"/>
+    </LinearLayout>
+</RelativeLayout>

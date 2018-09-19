@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="tab1deal"
+            type="com.example.tomz.electroniccity.page.bn_home_content.tab1.Tab1ItemDealViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cvTab1"
+        android:layout_width="140dp"
+        android:layout_height="144dp"
+        android:background="@color/grey300"
+        app:cardElevation="3dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="2dp"
+        android:onClick="@{tab1deal.onReadMoreClicked}">
+        <ImageView
+            android:id="@+id/imageViewCover"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:imageViewDeal="@{tab1deal.imageDealUrl}"
+            android:contentDescription="@string/img_content_des"/>
+    </android.support.v7.widget.CardView>
+
+</layout>

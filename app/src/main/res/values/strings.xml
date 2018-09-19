@@ -1,0 +1,213 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">ElectronicCity</string>
+    <string name="map_api_key" tools:ignore="TypographyDashes">AIzaSyCG4AxD5ctU3LMv8iprezuP-duqT--ttnQ</string>
+    <!--Intro Text-->
+    <string name="text_intro1">To be Indonesia leading company in the electronic retailer business with wide scale modern store network and supportedly by excellent service and full range facilities</string>
+    <string name="text_intro2_title">Mengapa harus belanja di Electronic City B2B</string>
+    <string name="text_intro2_body11">Satu-satunya perusahaan retail elektronik yang <i>go public</i> di Indonesia</string>
+    <string name="text_intro2_body12">Jaringan toko terluas di Indonesia "lebih cepat &amp; terjangkau"</string>
+    <string name="text_intro2_body21">Pengalaman &amp; reputasi lebih dari 15 tahun di dalam bisnis elektronik</string>
+    <string name="text_intro2_body22">Kategori produk elektronik terbesar &amp; terlengkap di Indonesia</string>
+    <string name="text_intro2_body31">Hanya di B2B Electronic City yang memiliki Garansi Nasional</string>
+    <string name="text_intro2_body32">Transaksi aman &amp; nyaman yang memiliki banyak pilihan pembayaran</string>
+    <string name="text_intro2_body41">Corporate rate</string>
+    <string name="text_intro2_body42">Didukung lebih dari 200 brand</string>
+    <string name="text_intro3_title">Gratis Pengiriman*</string>
+    <string name="text_intro3_body">Nikmati pengiriman gratis di seluruh wilayah se-Indonesia*</string>
+    <string name="text_intro4_title">Respon cepat dari Customer Care</string>
+    <string name="text_intro4_body">Hubungi Customer Care kami untuk memberikan informasi apapun yang Anda butuhkan di:\nHotline 15000 32\nWhatsApp/SMS: 0811 85000 32\nBBM: ASKECI \nEmail: customer@electronic-city.co.id</string>
+    <!--Hamburger Menu-->
+    <string name="promo_nav">PROMO</string>
+    <string name="care_nav">CUSTOMER CARE</string>
+    <string name="value_nav">VALUE ADDED</string>
+    <string name="about_nav">TENTANG EC</string>
+    <string name="privacy_nav">KEBIJAKAN PRIVASI</string>
+    <!--Tab Menu-->
+    <string name="tab_welcome">SELAMAT DATANG</string>
+    <string name="tab_tv">TV</string>
+    <string name="tab_audio">AUDIO &amp; VIDEO</string>
+    <string name="tab_ert">ELEKTRONIK RUMAH TANGGA</string>
+    <string name="tab_kamera">KAMERA</string>
+    <string name="tab_laptop_pc">LAPTOP &amp; KOMPUTER PC</string>
+    <string name="tab_gadget">HANDPHONE &amp; TABLET</string>
+    <string name="tab_prt">PERALATAN RUMAH TANGGA</string>
+    <string name="tab_office">PERALATAN KANTOR</string>
+    <!--Bottom Navigation Menu-->
+    <string name="home_bot_nav">BERANDA</string>
+    <string name="fav_store_bot_nav">TOKO FAVORIT</string>
+    <string name="cart_bot_nav">KERANJANG</string>
+    <string name="my_acc_bot_nav">AKUN SAYA</string>
+    <!--My Account Menu (after login)-->
+    <string name="menu_user_profile">Profil Saya</string>
+    <string name="menu_user_address">Alamat Pengiriman</string>
+    <string name="menu_user_password">Ubah kata sandi</string>
+    <string name="menu_user_wishlist">Wishlist</string>
+    <string name="menu_user_history">Riwayat Pemesanan</string>
+    <string name="menu_user_history_redeem">Riwayat Tukar Point</string>
+    <string name="menu_tracking_order">Lacak Pesanan</string>
+    <string name="menu_user_logout">Keluar</string>
+    <!--Category Inside Tab1-->
+    <string name="cat_tab1_tv">TV</string>
+    <string name="cat_tab1_av">Audio &amp; Video</string>
+    <string name="cat_tab1_ert">Elektronik Rumah Tangga</string>
+    <string name="cat_tab1_kamera">Kamera</string>
+    <string name="cat_tab1_laptop_pc">Laptop &amp; Komputer PC</string>
+    <string name="cat_tab1_hp_tablet">Handphone &amp; Tablet</string>
+    <string name="cat_tab1_prt">Peralatan Rumah Tangga</string>
+    <string name="cat_tab1_kantor">Peralatan Kantor</string>
+    <string name="cat_tab1_best_deal">BEST DEAL</string>
+    <string name="cat_tab1_best_seller">BEST SELLER</string>
+    <!--SubCategory Tab2-->
+    <string name="sub_cat_tv_led">LED TV</string>
+    <string name="sub_cat_tv_uhd">UHD TV</string>
+    <string name="sub_cat_tv_oled">OLED TV</string>
+    <string name="sub_cat_tv_accesories">AKSESORIS</string>
+    <!--SubCategory Tab3-->
+    <string name="sub_cat_av_player">PLAYER</string>
+    <string name="sub_cat_av_ht">HOME THEATER</string>
+    <string name="sub_cat_av_htp">HOME THEATER PACKAGE</string>
+    <string name="sub_cat_av_hifi">HIFI/COMPO</string>
+    <string name="sub_cat_av_portable_speaker">PORTABLE SPEAKER</string>
+    <string name="sub_cat_av_earphone">EARPHONE &amp; HEADPHONE</string>
+    <string name="sub_cat_av_accesories">AKSESORIS</string>
+    <!--SubCategory Tab4-->
+    <string name="sub_cat_ert_ac">AC</string>
+    <string name="sub_cat_ert_kulkas">KULKAS</string>
+    <string name="sub_cat_ert_mesin_cuci">MESIN CUCI</string>
+    <string name="sub_cat_ert_air_purifier">AIR PURIFIER</string>
+    <string name="sub_cat_ert_water_pur">WATER PURIFIER</string>
+    <string name="sub_cat_ert_dish_washer">DISH WASHER</string>
+    <string name="sub_cat_ert_water_heater">PEMANAS AIR</string>
+    <string name="sub_cat_ert_kipas_angin">KIPAS ANGIN</string>
+    <string name="sub_cat_ert_penghisap_debu">PENGHISAP DEBU</string>
+    <string name="sub_cat_ert_aksesories">AKSESORIS</string>
+    <!--SubCategory Tab5-->
+    <string name="sub_cat_kamera_kamera">KAMERA</string>
+    <string name="sub_cat_kamera_video_kamera">VIDEO KAMERA</string>
+    <string name="sub_cat_kamera_photo_printer">PHOTO PRINTER</string>
+    <string name="sub_cat_kamera_aksesoris">AKSESORIS</string>
+    <!--SubCategory Tab6-->
+    <string name="sub_cat_pclaptop_laptop">LAPTOP</string>
+    <string name="sub_cat_pclaptop_router">PERANGKAT TAMBAHAN</string>
+    <string name="sub_cat_pclaptop_printer">PRINTER</string>
+    <string name="sub_cat_pclaptop_aksesoris">AKSESORIS</string>
+    <!--SubCategory Tab7-->
+    <string name="sub_cat_hp_smartphone">SMARTPHONE</string>
+    <string name="sub_cat_hp_tablet">TABLET</string>
+    <string name="sub_cat_hp_aksesoris">AKSESORIS</string>
+    <!--SubCategory Tab8-->
+    <string name="sub_cat_prt_small_appliance">SMALL APPLIANCES</string>
+    <string name="sub_cat_prt_dapur">PERLENGKAPAN DAPUR</string>
+    <string name="sub_cat_prt_olah_makanan">PENGOLAH MAKANAN</string>
+    <string name="sub_cat_prt_kesehatan">KESEHATAn &amp; KECANTIKAN</string>
+    <string name="sub_cat_prt_ibu_anak">IBU &amp; ANAK</string>
+    <!--SubCategory Tab9-->
+    <string name="sub_cat_office_phone_fax">Telephone &amp; Fax</string>
+    <string name="sub_cat_office_proyektor">PROYEKTOR</string>
+    <string name="sub_cat_office_rekam_suara">PEREKAM SUARA</string>
+    <string name="sub_cat_office_cctv">CCTV</string>
+    <!--Navigation Menu Customer Care-->
+    <string name="text_care_phone">Custome Care</string>
+    <string name="text_care_phone_number">1500032</string>
+    <string name="text_care_message">Message</string>
+    <string name="text_care_message_number">08118500032</string>
+    <string name="text_care_whatsapp">WhatsApp</string>
+    <string name="text_care_whatsapp_number">08118500032</string>
+    <string name="text_care_email">Email</string>
+    <string name="text_care_email_detail">customer@electronic-city.co.id</string>
+    <string name="text_care_waktu_operasional">Kami melayani Anda setiap hari: 10.00 – 22.00</string>
+
+    <!--Error Network-->
+    <string name="err_network_timeout">Mohon untuk aktifkan koneksi internet</string>
+    <string name="err_server">Server sedang pemeliharaan</string>
+    <string name="err_auth_failure">Authentication bermasalah</string>
+    <string name="err_network">Jaringan bermasalah</string>
+    <string name="err_no_network">Tidak koneksi internet</string>
+    <string name="err_internet_access">Tidak dapat terhubung dengan server</string>
+    <string name="err_back_online">Back Online</string>
+    <!--Hint Text-->
+    <string name="hint_email_username">Email/Username</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_old_pass">Kata Sandi Lama</string>
+    <string name="hint_new_pass">Kata Sandi Baru</string>
+    <string name="hint_confirm_new_pass">Ulangi Kata Sandi Baru</string>
+    <string name="hint_nama_lengkap">Nama Lengkap</string>
+    <string name="hint_email">Email</string>
+    <string name="hint_nomor_hp">Nomor HP</string>
+    <string name="hint_edit_name_profile">Nama</string>
+    <string name="hint_edit_birthday_profile">Tanggal Lahir</string>
+    <string name="hint_edit_email_profile">Email</string>
+    <string name="hint_edit_hp_profile">HP</string>
+    <!--Button Text-->
+    <string name="text_btn_login">MASUK</string>
+    <string name="text_btn_activate_member">AKTIFKAN SEBAGAI MEMBER</string>
+    <string name="text_btn_daftar">DAFTAR</string>
+    <string name="text_btn_send_activate_link">KIRIMKAN LINK AKTIVASI</string>
+    <string name="text_btn_next_forget_password">SELANJUTNYA</string>
+    <string name="text_btn_intro_next">LANJUT</string>
+    <string name="text_btn_intro_skip">LEWATI</string>
+    <string name="text_btn_intro_start">MENGERTI</string>
+    <string name="text_btn_change_pass">SIMPAN</string>
+    <!--Title Page-->
+    <string name="title_register">Daftar Member</string>
+    <string name="title_forget_password">Lupa Sandi</string>
+    <string name="title_profile_saya">Profil Saya</string>
+    <string name="title_alamat_saya">Alamat Pengiriman</string>
+    <string name="title_ubah_password">Ubah Kata Sandi</string>
+    <string name="title_wishlist">Wishlist</string>
+    <string name="title_history_order">Riwayat Pemesanan</string>
+    <string name="title_promo">Promo</string>
+    <string name="title_customer_care">Customer Care</string>
+    <!--Miscellaneous Text-->
+    <string name="text_yes">YA</string>
+    <string name="text_no">TIDAK</string>
+    <string name="text_forget_pass">Lupa sandi?</string>
+    <string name="text_have_account_yet">Sudah punya akun? Masuk disini</string>
+    <string name="text_no_account_yet">Belum punya akun? Daftar disini</string>
+    <string name="text_head_register">DAFTAR KE AKUN ANDA</string>
+    <string name="text_head_acc">MASUK KE AKUN ANDA</string>
+    <string name="text_already_checked">Sudah Dicek</string>
+    <string name="text_snackbar_action_retry">COBA LAGI</string>
+    <string name="text_b4_exit">Apakah anda yakin ingin keluar?</string>
+    <string name="text_ever_shop">Pernah belanja di Electronic City?</string>
+    <string name="drawer_open">open</string>
+    <string name="drawer_closed">closed</string>
+    <string name="txt_footer_nav">Copyright"\u00a9" 2018</string>
+    <string name="text_some_or_all_permit_denied">Salah satu PERMISSIONS utama gagal</string>
+    <string name="text_title_enabled_permission_manual">Enable Permissions</string>
+    <string name="text_enabled_permission_manual"><![CDATA[Go to Settings -> Apps -> ElectronicCity -> Permissions]]></string>
+    <string name="text_enabled_location_permission_manual"><![CDATA[Go to Settings -> Apps -> ElectronicCity -> Permissions and then enable Your Location]]></string>
+    <string name="text_enabled_phone_permission_manual"><![CDATA[Go to Settings -> Apps -> ElectronicCity -> Permissions and then enable Phone]]></string>
+    <string name="text_enabled_storage_permission_manual"><![CDATA[Go to Settings -> Apps -> ElectronicCity -> Permissions and then enable Storage]]></string>
+    <string name="text_kelola_akun_anda">Kelola akun Anda</string>
+    <string name="text_head_invite_member">Pernah belanja di Electronic City?\nSilahkan untuk masukkan nomor ponsel Anda yang pernah didaftarkan saat transaksi.\nTunggu notifikasi sms untuk mengaktifkan membership di Electronic City, dan nikmati beragam keuntungan sebagai member Electronic City.</string>
+    <string name="text_invite_member_failed">Maaf, nomor ponsel Anda belum terdaftar, silahkan kunjungi Electronic City store terdekat</string>
+    <string name="text_edit_profile">PROFIL</string>
+    <string name="text_edit_contact">KONTAK</string>
+    <string name="text_edit_save_change_profile">SIMPAN</string>
+    <string name="text_alamat_ubah">UBAH</string>
+    <string name="text_alamat_hapus">HAPUS</string>
+
+    <!--Miscellaneous Error Text-->
+    <string name="err_username_email_empty">Mohon isi nama/email Anda</string>
+    <string name="err_password_empty">Mohon isi kata sandi Anda</string>
+    <string name="err_reg_email_empty">Mohon isi Email Anda</string>
+    <string name="err_reg_fullname_empty">Mohon isi nama lengkap Anda</string>
+    <string name="err_reg_handphone_empty">Mohon isi nomor handphone Anda</string>
+    <string name="err_reg_email_invalid">Mohon isi Email Anda dengan benar</string>
+
+    <!--Image Content Description-->
+    <string name="img_content_des">image</string>
+
+
+    <string name="cat1">Category 1</string>
+    <string name="cat2">Category 2</string>
+    <string name="cat3">Category 3</string>
+    <string name="cat4">Cat 4</string>
+    <string name="cat5">Category 5</string>
+    <string name="cat6">Category 6</string>
+    <string name="cat7">Category 7</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

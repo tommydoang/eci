@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_promo"
+            android:icon="@drawable/ic_promo"
+            android:title="@string/promo_nav" />
+        <item
+            android:id="@+id/nav_care"
+            android:icon="@drawable/ic_customer_care"
+            android:title="@string/care_nav" />
+        <item
+            android:id="@+id/nav_value"
+            android:icon="@drawable/ic_value_add"
+            android:title="@string/value_nav" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_about_us"
+            android:title="@string/about_nav" />
+        <item
+            android:id="@+id/nav_privacy"
+            android:icon="@drawable/ic_privacy_policy"
+            android:title="@string/privacy_nav" />
+    </group>
+
+</menu>

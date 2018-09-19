@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="promo"
+            type="com.example.tomz.electroniccity.page.side_menu.promo.PromoItemViewModel" />
+    </data>
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/promo_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="3dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{promo.onReadMoreClicked}">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                app:imgPromo="@{promo.imageURL}"
+                android:contentDescription="@string/img_content_des"/>
+        </RelativeLayout>
+    </android.support.v7.widget.CardView>
+</layout>

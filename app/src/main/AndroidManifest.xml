@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.tomz.electroniccity">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+
+    <application
+        android:name=".MyApps"
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_api_key" />
+
+        <service
+            android:name=".utils.services.location.LocationService"
+            android:enabled="true" />
+        <service
+            android:name=".utils.services.date.DateService"
+            android:enabled="true" />
+
+        <receiver android:name=".utils.services.RestartService">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".page.splash.SplashActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".page.intro.IntroApps"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.main.MainActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".page.bn_tab_home.account.register_forget.RegForgAct"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".page.bn_tab_home.account.edit_profile.EditProfile"
+            android:label="@string/title_profile_saya"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".page.bn_tab_home.account.address.Address"
+            android:label="@string/title_alamat_saya"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".page.bn_tab_home.account.edit_pass.EditPass"
+            android:label="@string/title_ubah_password"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".page.side_menu.promo.Promo"
+            android:label="@string/title_promo"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+        <activity
+            android:name=".page.side_menu.care.CustomerCare"
+            android:label="@string/title_customer_care"
+            android:parentActivityName=".page.side_menu.care.CustomerCare"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+        <activity android:name=".page.bn_tab_home.account.history_order.HistoryOrder"></activity>
+    </application>
+
+</manifest>
