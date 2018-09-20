@@ -16,13 +16,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
             android:paddingRight="14dp"
             android:paddingLeft="14dp">
             <LinearLayout
                 android:id="@+id/layout_alamat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
                 android:orientation="vertical">
                 <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
                     android:id="@+id/tvTitleAddress"
@@ -61,6 +62,7 @@
                     android:id="@+id/tvKontak"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="6dp"
                     android:text="@{address.phoneNumber}"
                     android:textSize="18sp"
                     android:textColor="@color/black"
@@ -72,7 +74,8 @@
                 android:layout_below="@+id/layout_alamat"
                 android:layout_marginTop="8dp"
                 android:gravity="end"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:visibility="gone">
                 <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
                     android:id="@+id/tvUbahAlamat"
                     android:layout_width="wrap_content"

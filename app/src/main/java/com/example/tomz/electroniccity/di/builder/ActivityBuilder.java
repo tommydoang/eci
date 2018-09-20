@@ -25,6 +25,8 @@ import com.example.tomz.electroniccity.page.bn_tab_home.account.address.AddressM
 import com.example.tomz.electroniccity.page.bn_tab_home.account.edit_pass.EditPass;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.edit_pass.EditPassModule;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.edit_profile.EditProfile;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrder;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrderModule;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.invite.FragInvite;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.invite.FragInviteModule;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.register_forget.RegForgAct;
@@ -105,5 +107,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = PromoModule.class)
     abstract Promo bindPromo();
+
+    @ContributesAndroidInjector(modules = HistoryOrderModule.class)
+    abstract HistoryOrder bindHistoryOrder();
 
 }

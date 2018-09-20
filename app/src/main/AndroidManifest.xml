@@ -98,13 +98,21 @@
         <activity
             android:name=".page.side_menu.care.CustomerCare"
             android:label="@string/title_customer_care"
-            android:parentActivityName=".page.side_menu.care.CustomerCare"
+            android:parentActivityName=".page.main.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".page.main.MainActivity" />
         </activity>
-        <activity android:name=".page.bn_tab_home.account.history_order.HistoryOrder"></activity>
+        <activity
+            android:name=".page.bn_tab_home.account.history_order.HistoryOrder"
+            android:label="@string/title_history_order"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
     </application>
 
 </manifest>

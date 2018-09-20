@@ -26,6 +26,6 @@ public class ApiEndPoint {
 
     public static final String ENDPOINT_GET_ALL_ADDRESS = BuildConfig.BASE_URL + "/v1/getCustommerAddress/";
 
-    public static final String ENDPOINT_GET_ALL_HISTORY_ORDER = BuildConfig.BASE_URL + "v1/historybelanja";
+    public static final String ENDPOINT_GET_ALL_HISTORY_ORDER = BuildConfig.BASE_URL + "/v1/historybelanja";
 
 }

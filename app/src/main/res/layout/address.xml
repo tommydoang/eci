@@ -52,7 +52,8 @@
                     android:src="@drawable/ic_add_address"
                     android:contentDescription="@string/img_content_des"
                     android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp" />
+                    android:layout_marginRight="10dp"
+                    android:visibility="gone"/>
             </RelativeLayout>
         </android.support.v7.widget.Toolbar>
         <FrameLayout

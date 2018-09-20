@@ -2,7 +2,6 @@ package com.example.tomz.electroniccity.page.bn_tab_home.account.address;
 
 import android.annotation.TargetApi;
 import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Handler;

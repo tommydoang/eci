@@ -4,6 +4,7 @@ import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.tomz.electroniccity.adapter.AddressAdapter;
+import com.example.tomz.electroniccity.adapter.HistoryOrderAdapter;
 import com.example.tomz.electroniccity.adapter.PromoAdapter;
 import com.example.tomz.electroniccity.adapter.tab1.Tab1Adapter;
 import com.example.tomz.electroniccity.adapter.tab1.Tab1DealAdapter;
@@ -16,6 +17,7 @@ import com.example.tomz.electroniccity.adapter.tab7.Tab7Adapter;
 import com.example.tomz.electroniccity.adapter.tab8.Tab8Adapter;
 import com.example.tomz.electroniccity.adapter.tab9.Tab9Adapter;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
+import com.example.tomz.electroniccity.data.model.api.membership.DataHistoryOrderResponse;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataDealTab1Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataProductTab1Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab2.DataProductTab2Response;
@@ -139,6 +141,15 @@ public final class BindingUtils {
     @BindingAdapter({"adapterpromo"})
     public static void addPromoItem(RecyclerView recyclerView, List<DataPromoResponse> modelProdList){
         PromoAdapter adapter = (PromoAdapter)recyclerView.getAdapter();
+        if (adapter != null){
+            adapter.clearItems();
+            adapter.addItems(modelProdList);
+        }
+    }
+
+    @BindingAdapter({"adapterhistory"})
+    public static void addHistoryItem(RecyclerView recyclerView, List<DataHistoryOrderResponse> modelProdList){
+        HistoryOrderAdapter adapter = (HistoryOrderAdapter)recyclerView.getAdapter();
         if (adapter != null){
             adapter.clearItems();
             adapter.addItems(modelProdList);

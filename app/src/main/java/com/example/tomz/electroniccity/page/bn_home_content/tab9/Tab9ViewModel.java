@@ -100,7 +100,7 @@ public class Tab9ViewModel extends BaseViewModel<Tab9Navigator> {
                     Log.d("arrProdSize tes1", arrProdSize+"");
                     for (int idx2 = 0; idx2 < arrProdSize; idx2++) {
                         JSONObject objProd = arrProd.getJSONObject(idx2);
-                        Log.d("skuProd tes1 tab2", objProd.getString("sku"));
+//                        Log.d("skuProd tes1 tab2", objProd.getString("sku"));
 
                         DataProductTab9Response dpr = new DataProductTab9Response();
                         dpr.setId_category_head(object.getString("id_category_head"));
@@ -157,7 +157,7 @@ public class Tab9ViewModel extends BaseViewModel<Tab9Navigator> {
                         dpr.setStock_store_code(objStock.getString("store_code"));
                         dpr.setNumber_stock(objStock.getString("stock"));
                         dpr.setStock_item_bought(objStock.getString("useStock"));
-                        Log.d("numStock tes1 tab4", objStock.getString("stock"));
+                        //Log.d("numStock tes1 tab4", objStock.getString("stock"));
 
                         productsList.add(dpr);
                     }

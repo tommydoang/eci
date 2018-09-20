@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="order"
+            type="com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrderItemViewModel" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:weightSum="1"
+        android:baselineAligned="false"
+        android:onClick="@{order.onReadMoreClicked()}">
+        <LinearLayout
+            android:id="@+id/summary_history_order"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.9"
+            android:orientation="vertical">
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tv_invoice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.noInvoice}"
+                android:textColor="@color/black" />
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tv_tgl_beli"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.dop}"
+                android:textColor="@color/black"/>
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.price}"
+                android:textColor="@color/black"/>
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tv_transaction_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{order.transactionStatus}"
+                android:textColor="@color/black"/>
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0.1">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/ic_right_arrow"
+                android:layout_alignParentRight="true"
+                android:contentDescription="@string/img_content_des" />
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

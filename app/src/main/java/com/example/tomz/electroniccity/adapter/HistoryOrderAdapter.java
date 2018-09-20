@@ -8,25 +8,28 @@ import android.view.ViewGroup;
 
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
+import com.example.tomz.electroniccity.data.model.api.membership.DataHistoryOrderResponse;
 import com.example.tomz.electroniccity.databinding.AddressItemBinding;
+import com.example.tomz.electroniccity.databinding.HistoryOrderItemBinding;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.address.AddressItemViewModel;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrderItemViewModel;
 import com.example.tomz.electroniccity.utils.base.BaseViewHolder;
 
 import java.util.List;
 
-public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
+public class HistoryOrderAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
-    private List<DataAddressResponse> mAddressModel;
+    private List<DataHistoryOrderResponse> mHistoryOrderModel;
 
-    public AddressAdapter(List<DataAddressResponse> mAddressModel) {
-        this.mAddressModel = mAddressModel;
+    public HistoryOrderAdapter(List<DataHistoryOrderResponse> mHistoryOrderModel) {
+        this.mHistoryOrderModel = mHistoryOrderModel;
     }
 
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        AddressItemBinding mBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
-                R.layout.address_item, parent, false);
+        HistoryOrderItemBinding mBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()),
+                R.layout.history_order_item, parent, false);
         return new BindingHolder(mBinding);
     }
 
@@ -37,8 +40,8 @@ public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (mAddressModel.size() > 0) {
-            return mAddressModel.size();
+        if (mHistoryOrderModel.size() > 0) {
+            return mHistoryOrderModel.size();
         } else {
             return 0;
         }
@@ -46,30 +49,30 @@ public class AddressAdapter extends RecyclerView.Adapter<BaseViewHolder> {
 
     public class BindingHolder extends BaseViewHolder {
 
-        private AddressItemBinding binding;
-        private AddressItemViewModel addressItemViewModel;
+        private HistoryOrderItemBinding binding;
+        private HistoryOrderItemViewModel historyOrderItemViewModel;
 
-        BindingHolder(AddressItemBinding binding) {
+        BindingHolder(HistoryOrderItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
         @Override
         public void onBind(int position) {
-            DataAddressResponse dmi = mAddressModel.get(position);
-            addressItemViewModel = new AddressItemViewModel(dmi);
-            binding.setAddress(addressItemViewModel);
+            DataHistoryOrderResponse dmi = mHistoryOrderModel.get(position);
+            historyOrderItemViewModel = new HistoryOrderItemViewModel(dmi);
+            binding.setOrder(historyOrderItemViewModel);
             binding.executePendingBindings();
         }
     }
 
-    public void addItems(List<DataAddressResponse> blogList) {
-        mAddressModel.addAll(blogList);
+    public void addItems(List<DataHistoryOrderResponse> blogList) {
+        mHistoryOrderModel.addAll(blogList);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        mAddressModel.clear();
+        mHistoryOrderModel.clear();
     }
 
 }

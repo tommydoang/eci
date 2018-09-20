@@ -31,6 +31,7 @@ import com.example.tomz.electroniccity.helper.ToastHelper;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.address.Address;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.edit_pass.EditPass;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.edit_profile.EditProfile;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrder;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.invite.FragInvite;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.login.LoginNavigator;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.register_forget.RegForgAct;
@@ -234,6 +235,7 @@ public class FragAcc extends BaseFragment<FragAccBinding, FragAccViewModel> impl
             case R.id.user_wishlist:
                 break;
             case R.id.user_history_order:
+                mIntentHelper.createIntent(getBaseActivity(), HistoryOrder.class);
                 break;
 
         }

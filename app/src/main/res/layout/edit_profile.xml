@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:focusableInTouchMode="true"
-        android:background="@color/grey300"
+        android:background="@color/grey200"
         tools:context=".page.bn_tab_home.account.edit_profile.EditProfile">
 
         <android.support.v7.widget.Toolbar
