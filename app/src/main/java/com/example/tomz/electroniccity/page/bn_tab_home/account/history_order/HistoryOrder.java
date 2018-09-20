@@ -120,7 +120,8 @@ public class HistoryOrder extends BaseActivity<ActivityHistoryOrderBinding, Hist
         mRVHistoryOrder.setLayoutManager(mLinearLayoutManager);
         mRVHistoryOrder.setItemAnimator(new DefaultItemAnimator());
         mRVHistoryOrder.setAdapter(mHistoryOrderAdapter);
-        mRVHistoryOrder.addItemDecoration(new DividerItemDecoration(this,DividerItemDecoration.VERTICAL));
+        mRVHistoryOrder.addItemDecoration(new DividerItemDecoration(this,
+                DividerItemDecoration.VERTICAL));
     }
 
     private void callHistoryOrderApi(){
