@@ -182,11 +182,13 @@
     <string name="text_kelola_akun_anda">Kelola akun Anda</string>
     <string name="text_head_invite_member">Pernah belanja di Electronic City?\nSilahkan untuk masukkan nomor ponsel Anda yang pernah didaftarkan saat transaksi.\nTunggu notifikasi sms untuk mengaktifkan membership di Electronic City, dan nikmati beragam keuntungan sebagai member Electronic City.</string>
     <string name="text_invite_member_failed">Maaf, nomor ponsel Anda belum terdaftar, silahkan kunjungi Electronic City store terdekat</string>
-    <string name="text_edit_profile">PROFIL</string>
-    <string name="text_edit_contact">KONTAK</string>
+    <string name="text_edit_profile">UBAH PROFIL</string>
+    <string name="text_edit_contact">UBAH KONTAK</string>
     <string name="text_edit_save_change_profile">SIMPAN</string>
-    <string name="text_alamat_ubah">UBAH</string>
-    <string name="text_alamat_hapus">HAPUS</string>
+    <string name="text_ubah">UBAH</string>
+    <string name="text_hapus">HAPUS</string>
+    <string name="text_HP">HP</string>
+    <string name="text_nama">Nama</string>
 
     <!--Miscellaneous Error Text-->
     <string name="err_username_email_empty">Mohon isi nama/email Anda</string>

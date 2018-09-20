@@ -32,7 +32,7 @@ public class HistoryOrderViewModel extends BaseViewModel<HistoryOrderNavigator> 
     public void getAllHistoryOrder(String idCustomer){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .doGetAllHistoryOrder(new HistoryOrderRequest.req(idCustomer))
+                .doGetAllHistoryOrderApiCall(new HistoryOrderRequest.req(idCustomer))
                 .observeOn(getSchedulerProvider().ui())
                 .subscribeOn(getSchedulerProvider().io())
                 .subscribe(jsonObject -> {

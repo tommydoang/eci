@@ -1,26 +1,35 @@
 package com.example.tomz.electroniccity.page.bn_tab_home.account.edit_profile;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.graphics.PorterDuff;
 import android.os.Build;
+import android.os.Handler;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.MyApps;
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.databinding.EditProfileBinding;
+import com.example.tomz.electroniccity.helper.ToastHelper;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
+import com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,7 +38,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileViewModel>  implements
-        EditProfileNavigator, View.OnFocusChangeListener {
+        EditProfileNavigator, View.OnFocusChangeListener, View.OnClickListener {
 
     private Toolbar mToolbar;
     private Calendar mCalendar;
@@ -38,6 +47,9 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     private EditProfileViewModel mEditProfileViewModel;
     private EditText mEditProfileName, mEditProfileBirthday, mEditProfileEmail, mEditProfileHP;
     private TextInputLayout mTilNameProfile, mTilBirthdayProfile, mTilEmailProfile, mTilHPProfile;
+    private CustomTextViewLatoFont mTvName, mTvEmail, mTvHp;
+    private RelativeLayout mLayoutChangeEmail, mLayoutChangeHP;
+    private LinearLayout mLayoutBtnSaveProfile;
     @Inject DataManager mDataManager;
 
     @Override
@@ -77,14 +89,14 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
 
     private void setupView(){
         mToolbar = mEditProfileBinding.toolbar;
-        mEditProfileName = mEditProfileBinding.etEditNameProfile;
         mEditProfileBirthday = mEditProfileBinding.etEditBirthdayProfile;
-        mEditProfileEmail = mEditProfileBinding.etEditEmailProfile;
-        mEditProfileHP = mEditProfileBinding.etEditHpProfile;
-        mTilNameProfile = mEditProfileBinding.tilEditNameProfile;
         mTilBirthdayProfile = mEditProfileBinding.tilEditBirthdayProfile;
-        mTilEmailProfile = mEditProfileBinding.tilEditEmailProfile;
-        mTilHPProfile = mEditProfileBinding.tilEditHpProfile;
+        mTvEmail = mEditProfileBinding.textEmail;
+        mTvHp = mEditProfileBinding.textHandphone;
+        mTvName = mEditProfileBinding.textNamaUser;
+        mLayoutChangeEmail = mEditProfileBinding.btnChangeEmail;
+        mLayoutChangeHP = mEditProfileBinding.btnChangeHp;
+        mLayoutBtnSaveProfile = mEditProfileBinding.btnSaveEditProfile;
 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
@@ -96,13 +108,14 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
             mainStatusBarColor();
         }
 
-        mEditProfileName.setFocusable(false);
-        mEditProfileName.setText(mDataManager.getUserFullName());
         mEditProfileBirthday.setText(mDataManager.getUserBirthday());
-        mEditProfileEmail.setText(mDataManager.getUserEmail());
-        mEditProfileHP.setText(mDataManager.getUserHP());
+        mLayoutChangeEmail.setOnClickListener(this);
+        mLayoutChangeHP.setOnClickListener(this);
         mEditProfileBirthday.setOnFocusChangeListener(this);
-
+        mTvName.setText(mDataManager.getUserName());
+        mTvEmail.setText(mDataManager.getUserEmail());
+        mTvHp.setText(mDataManager.getUserHP());
+        mLayoutBtnSaveProfile.setOnClickListener(this);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -113,19 +126,24 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
         window.setStatusBarColor(ContextCompat.getColor(this, R.color.newlightblue));
     }
 
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.et_edit_birthday_profile:
-//                new DatePickerDialog(this, date, mCalendar.get(Calendar.YEAR),
-//                        mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
-//                break;
-//        }
-//    }
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btn_change_email:
+                ToastHelper.createToast(this, "CHANGE EMAIL!!!", Toast.LENGTH_LONG);
+                break;
+            case R.id.btn_change_hp:
+                ToastHelper.createToast(this, "CHANGE PHONE NUMBER!!!", Toast.LENGTH_LONG);
+                break;
+            case R.id.btn_save_edit_profile:
+                ToastHelper.createToast(this, "CHANGE SAVE", Toast.LENGTH_LONG);
+                break;
+        }
+    }
 
     @Override
     public void onChangeProfile() {
-
+        ToastHelper.createToast(this, "NEW PROFILE SAVED!!!", Toast.LENGTH_LONG);
     }
 
     @Override
@@ -136,6 +154,16 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     @Override
     public void onFailedEdit(String message) {
 
+    }
+
+    @Override
+    public void onChangeEmail() {
+        ToastHelper.createToast(this, "CHANGE EMAIL!!!", Toast.LENGTH_LONG);
+    }
+
+    @Override
+    public void onChangeHP() {
+        ToastHelper.createToast(this, "CHANGE PHONE NUMBER!!!", Toast.LENGTH_LONG);
     }
 
     private void dialogDatePicker(){
@@ -160,9 +188,19 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
         switch (view.getId()){
             case R.id.et_edit_birthday_profile:
                 if (b){
-                    new DatePickerDialog(this, date, mCalendar.get(Calendar.YEAR),
-                        mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                    Log.d("focusTRUE tes1", "MASUKK!!!");
+//                    hideKeyboard(view);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            new DatePickerDialog(EditProfile.this, date, mCalendar.get(Calendar.YEAR),
+                                    mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
+                        }
+                    }, 1280);
+
+                    new Handler().postDelayed(() -> hideKeyboard(view),700);
                 } else {
+                    Log.d("focusFALSE tes1", "MASUKK!!!");
                     new DatePickerDialog(this, date, mCalendar.get(Calendar.YEAR),
                             mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).dismiss();
                 }
@@ -179,6 +217,13 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     public boolean onSupportNavigateUp() {
         finish();
         return true;
+    }
+
+    public void hideKeyboard(View view) {
+        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null) {
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
     }
 
 }

@@ -4,4 +4,6 @@ public interface EditProfileNavigator {
     void onChangeProfile();
     void onSuccessEdit(String message);
     void onFailedEdit(String message);
+    void onChangeEmail();
+    void onChangeHP();
 }

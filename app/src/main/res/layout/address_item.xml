@@ -82,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:padding="12dp"
                     android:onClick="@{address.onUbahClicked()}"
-                    android:text="@string/text_alamat_ubah"
+                    android:text="@string/text_ubah"
                     android:textSize="14sp"
                     android:textColor="@color/blue400"/>
                 <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
@@ -93,7 +93,7 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="0dp"
                     android:onClick="@{address.onHapusClicked()}"
-                    android:text="@string/text_alamat_hapus"
+                    android:text="@string/text_hapus"
                     android:textSize="14sp"
                     android:textColor="@color/red500"
                     android:layout_marginStart="40dp"
