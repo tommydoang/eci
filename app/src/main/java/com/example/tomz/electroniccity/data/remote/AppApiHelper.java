@@ -84,7 +84,7 @@ public class AppApiHelper implements ApiHelper {
 
     @Override
     public Observable<JSONArray> doAllProductsApiCall() {
-        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_ALL_PRODUCTS)
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_ALL_PRODUCTS)
                 .addHeaders("Authorization", mPrefHelper.getAuthToken())
                 .setPriority(Priority.MEDIUM)
                 .build()
@@ -120,10 +120,19 @@ public class AppApiHelper implements ApiHelper {
     }
 
     @Override
-    public Observable<JSONObject> doGetAllHistoryOrder(HistoryOrderRequest.req request) {
+    public Observable<JSONObject> doGetAllHistoryOrderApiCall(HistoryOrderRequest.req request) {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_ALL_HISTORY_ORDER)
                 .addHeaders("Authorization", mPrefHelper.getAuthToken())
                 .addBodyParameter(request)
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getJSONObjectObservable();
+    }
+
+    @Override
+    public Observable<JSONObject> doGetAllValueAddedApiCall() {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_ALL_VALUE_ADD)
+                .addHeaders("Authorization", mPrefHelper.getAuthToken())
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getJSONObjectObservable();

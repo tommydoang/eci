@@ -437,8 +437,13 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<JSONObject> doGetAllHistoryOrder(HistoryOrderRequest.req request) {
-        return mApiHelper.doGetAllHistoryOrder(request);
+    public Observable<JSONObject> doGetAllHistoryOrderApiCall(HistoryOrderRequest.req request) {
+        return mApiHelper.doGetAllHistoryOrderApiCall(request);
+    }
+
+    @Override
+    public Observable<JSONObject> doGetAllValueAddedApiCall() {
+        return mApiHelper.doGetAllValueAddedApiCall();
     }
 
     @Override

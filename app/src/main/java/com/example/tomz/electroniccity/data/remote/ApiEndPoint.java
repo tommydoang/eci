@@ -18,7 +18,7 @@ public class ApiEndPoint {
 
     public static final String ENDPOINT_FORGET_PASSWORD = BuildConfig.BASE_URL + "/v1/forgotpass";
 
-    public static final String ENDPOINT_ALL_PRODUCTS = BuildConfig.BASE_URL + "/v1/homeproducts";
+    public static final String ENDPOINT_GET_ALL_PRODUCTS = BuildConfig.BASE_URL + "/v1/homeproducts";
 
     public static final String ENDPOINT_GET_BANNER = BuildConfig.BASE_URL + "/v1/getbanner";
 
@@ -27,5 +27,7 @@ public class ApiEndPoint {
     public static final String ENDPOINT_GET_ALL_ADDRESS = BuildConfig.BASE_URL + "/v1/getCustommerAddress/";
 
     public static final String ENDPOINT_GET_ALL_HISTORY_ORDER = BuildConfig.BASE_URL + "/v1/historybelanja";
+
+    public static final String ENDPOINT_GET_ALL_VALUE_ADD = BuildConfig.BASE_URL + "/v1/getvalueadded";
 
 }
