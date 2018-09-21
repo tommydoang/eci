@@ -1,5 +1,6 @@
 package com.example.tomz.electroniccity.page.bn_tab_home.account.edit_profile;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -12,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -31,14 +33,17 @@ import com.example.tomz.electroniccity.helper.ToastHelper;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
 import com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
 public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileViewModel>  implements
-        EditProfileNavigator, View.OnFocusChangeListener, View.OnClickListener {
+        EditProfileNavigator, View.OnClickListener, View.OnTouchListener{
 
     private Toolbar mToolbar;
     private Calendar mCalendar;
@@ -50,6 +55,7 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     private CustomTextViewLatoFont mTvName, mTvEmail, mTvHp;
     private RelativeLayout mLayoutChangeEmail, mLayoutChangeHP;
     private LinearLayout mLayoutBtnSaveProfile;
+    private int tahun, bulan, hari;
     @Inject DataManager mDataManager;
 
     @Override
@@ -87,10 +93,10 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
 
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void setupView(){
         mToolbar = mEditProfileBinding.toolbar;
         mEditProfileBirthday = mEditProfileBinding.etEditBirthdayProfile;
-        mTilBirthdayProfile = mEditProfileBinding.tilEditBirthdayProfile;
         mTvEmail = mEditProfileBinding.textEmail;
         mTvHp = mEditProfileBinding.textHandphone;
         mTvName = mEditProfileBinding.textNamaUser;
@@ -108,14 +114,16 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
             mainStatusBarColor();
         }
 
-        mEditProfileBirthday.setText(mDataManager.getUserBirthday());
+        parseUserDOB();
+        mEditProfileBirthday.setOnTouchListener(this);
+        mEditProfileBirthday.setText(setCustomDate(mDataManager.getUserBirthday()));
         mLayoutChangeEmail.setOnClickListener(this);
         mLayoutChangeHP.setOnClickListener(this);
-        mEditProfileBirthday.setOnFocusChangeListener(this);
         mTvName.setText(mDataManager.getUserName());
         mTvEmail.setText(mDataManager.getUserEmail());
         mTvHp.setText(mDataManager.getUserHP());
         mLayoutBtnSaveProfile.setOnClickListener(this);
+
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -167,11 +175,11 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     }
 
     private void dialogDatePicker(){
-        date = (view, year, monthOfYear, dayOfMonth) -> {
+        date = (view, tahun, bulan, hari) -> {
             // TODO Auto-generated method stub
-            mCalendar.set(Calendar.YEAR, year);
-            mCalendar.set(Calendar.MONTH, monthOfYear);
-            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+            mCalendar.set(Calendar.YEAR, tahun);
+            mCalendar.set(Calendar.MONTH, bulan);
+            mCalendar.set(Calendar.DAY_OF_MONTH, hari);
             updateLabel();
         };
     }
@@ -181,31 +189,6 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat,
                 new Locale("in", "ID"));
         mEditProfileBirthday.setText(sdf.format(mCalendar.getTime()));
-    }
-
-    @Override
-    public void onFocusChange(View view, boolean b) {
-        switch (view.getId()){
-            case R.id.et_edit_birthday_profile:
-                if (b){
-                    Log.d("focusTRUE tes1", "MASUKK!!!");
-//                    hideKeyboard(view);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            new DatePickerDialog(EditProfile.this, date, mCalendar.get(Calendar.YEAR),
-                                    mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).show();
-                        }
-                    }, 1280);
-
-                    new Handler().postDelayed(() -> hideKeyboard(view),700);
-                } else {
-                    Log.d("focusFALSE tes1", "MASUKK!!!");
-                    new DatePickerDialog(this, date, mCalendar.get(Calendar.YEAR),
-                            mCalendar.get(Calendar.MONTH), mCalendar.get(Calendar.DAY_OF_MONTH)).dismiss();
-                }
-                break;
-        }
     }
 
     @Override
@@ -222,8 +205,48 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         if (inputMethodManager != null) {
-            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+            inputMethodManager.hideSoftInputFromWindow(Objects
+                    .requireNonNull(getCurrentFocus()).getWindowToken(), 0);
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    private String setCustomDate(String date){
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd");
+        Date newDate;
+        String newDateString = null;
+        try {
+            newDate = spf.parse(date);
+            spf = new SimpleDateFormat("dd/MM/yyyy");
+            newDateString = spf.format(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDateString;
+    }
+
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (view.getId()){
+            case R.id.et_edit_birthday_profile:
+                if(motionEvent.getAction() == MotionEvent.ACTION_DOWN) {
+                    view.performClick();
+                    new DatePickerDialog(EditProfile.this, date, tahun,
+                            bulan-1, hari).show();
+                }
+                break;
+        }
+        return false;
+    }
+
+    private void parseUserDOB(){
+        String dob = setCustomDate(mDataManager.getUserBirthday());
+        StringBuilder sb = new StringBuilder();
+        hari = Integer.parseInt(new StringBuilder().append(dob.charAt(0)).append(dob.charAt(1)).toString());
+        bulan = Integer.parseInt(new StringBuilder().append(dob.charAt(3)).append(dob.charAt(4)).toString());
+        tahun = Integer.parseInt(new StringBuilder().append(dob.charAt(6)).append(dob.charAt(7))
+                .append(dob.charAt(8)).append(dob.charAt(9)).toString());
     }
 
 }

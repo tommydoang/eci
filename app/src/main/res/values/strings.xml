@@ -107,7 +107,7 @@
     <string name="sub_cat_office_rekam_suara">PEREKAM SUARA</string>
     <string name="sub_cat_office_cctv">CCTV</string>
     <!--Navigation Menu Customer Care-->
-    <string name="text_care_phone">Custome Care</string>
+    <string name="text_care_phone">Customer Care</string>
     <string name="text_care_phone_number">1500032</string>
     <string name="text_care_message">Message</string>
     <string name="text_care_message_number">08118500032</string>
@@ -189,6 +189,7 @@
     <string name="text_hapus">HAPUS</string>
     <string name="text_HP">HP</string>
     <string name="text_nama">Nama</string>
+    <string name="text_dob">Tanggal Lahir</string>
 
     <!--Miscellaneous Error Text-->
     <string name="err_username_email_empty">Mohon isi nama/email Anda</string>

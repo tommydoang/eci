@@ -237,7 +237,7 @@ public class RegForgAct extends BaseActivity<ActivityRegforgBinding, RegForgView
             mTilEmailForg.setError(null);
             mTilEmailForg.setErrorEnabled(false);
             new Handler().postDelayed(() -> mTilEmailForg
-                    .setError(getString(R.string.err_reg_email_empty)), 200);
+                    .setError(getString(R.string.err_reg_email_empty)), 180);
         } else {
             mTilEmailForg.setErrorEnabled(false);
         }

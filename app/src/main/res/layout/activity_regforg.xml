@@ -60,7 +60,7 @@
                     android:paddingEnd="12dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="8dp"
-                    android:textColorHint="@color/blue900"
+                    android:textColorHint="@color/grey600"
                     app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                     <EditText
                         android:id="@+id/et_nama_lengkap_register"
@@ -83,7 +83,7 @@
                     android:paddingEnd="12dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="8dp"
-                    android:textColorHint="@color/blue900"
+                    android:textColorHint="@color/grey600"
                     android:visibility="gone"
                     app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                     <EditText
@@ -107,7 +107,7 @@
                     android:paddingEnd="12dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="8dp"
-                    android:textColorHint="@color/blue900"
+                    android:textColorHint="@color/grey600"
                     app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                     <EditText
                         android:id="@+id/et_nomor_hp_register"
@@ -168,7 +168,7 @@
                     android:paddingEnd="12dp"
                     android:paddingRight="12dp"
                     android:paddingBottom="8dp"
-                    android:textColorHint="@color/blue900"
+                    android:textColorHint="@color/grey600"
                     app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                     <EditText
                         android:id="@+id/et_email_forget"

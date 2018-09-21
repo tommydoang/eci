@@ -59,7 +59,7 @@ public class HistoryOrder extends BaseActivity<ActivityHistoryOrderBinding, Hist
         mHistoryOrderBinding = getViewDataBinding();
         setupView();
         setupRVHistoryOrder();
-        new Handler().postDelayed(this::callHistoryOrderApi, 800);
+        callHistoryOrderApi();
     }
 
     @Override
@@ -127,7 +127,7 @@ public class HistoryOrder extends BaseActivity<ActivityHistoryOrderBinding, Hist
     private void callHistoryOrderApi(){
 //        Log.e("userID tes1", mDataManager.getUserId());
         mHistoryOrderViewModel.getAllHistoryOrder("15194");
-        new Handler().postDelayed(this::subscribeData, 1080);
+        new Handler().postDelayed(this::subscribeData, 880);
     }
 
     private void subscribeData(){
