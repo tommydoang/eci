@@ -25,7 +25,10 @@
     <color name="newlightblue">#0077C0</color>
     <color name="orange400">#FFA726</color>
     <color name="orange800">#EF6C00</color>
+    <color name="red300">#E57373</color>
+    <color name="red400">#EF5350</color>
     <color name="red500">#F44336</color>
+    <color name="red900">#B71C1C</color>
 
     <color name="darkBlue1">#00006A</color>
     <color name="darkBlue2">#000099</color>

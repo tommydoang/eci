@@ -190,6 +190,13 @@
     <string name="text_HP">HP</string>
     <string name="text_nama">Nama</string>
     <string name="text_dob">Tanggal Lahir</string>
+    <string name="text_registered_email">Email Terdaftar</string>
+    <string name="text_enter_new_email">Masukkan Email Baru Anda</string>
+    <string name="text_kata_sandi">Kata Sandi</string>
+    <string name="text_batal">BATAL</string>
+    <string name="text_ubah_email">UBAH EMAIL</string>
+    <string name="text_enter_new_hp">Masukkan No.HP Baru Anda</string>
+    <string name="text_ubah_hp">UBAH No.HP</string>
 
     <!--Miscellaneous Error Text-->
     <string name="err_username_email_empty">Mohon isi nama/email Anda</string>

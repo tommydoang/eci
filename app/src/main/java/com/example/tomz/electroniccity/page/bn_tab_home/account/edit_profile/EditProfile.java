@@ -2,30 +2,29 @@ package com.example.tomz.electroniccity.page.bn_tab_home.account.edit_profile;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.graphics.PorterDuff;
 import android.os.Build;
-import android.os.Handler;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.tomz.electroniccity.BR;
-import com.example.tomz.electroniccity.MyApps;
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.databinding.EditProfileBinding;
@@ -38,7 +37,6 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -55,6 +53,7 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     private CustomTextViewLatoFont mTvName, mTvEmail, mTvHp;
     private RelativeLayout mLayoutChangeEmail, mLayoutChangeHP;
     private LinearLayout mLayoutBtnSaveProfile;
+    private PopupWindow popupWindow;
     private int tahun, bulan, hari;
     @Inject DataManager mDataManager;
 
@@ -138,10 +137,10 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_change_email:
-                ToastHelper.createToast(this, "CHANGE EMAIL!!!", Toast.LENGTH_LONG);
+                createPopUpChangeEmail(view);
                 break;
             case R.id.btn_change_hp:
-                ToastHelper.createToast(this, "CHANGE PHONE NUMBER!!!", Toast.LENGTH_LONG);
+                createPopUpChangeHP(view);
                 break;
             case R.id.btn_save_edit_profile:
                 ToastHelper.createToast(this, "CHANGE SAVE", Toast.LENGTH_LONG);
@@ -176,7 +175,6 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
 
     private void dialogDatePicker(){
         date = (view, tahun, bulan, hari) -> {
-            // TODO Auto-generated method stub
             mCalendar.set(Calendar.YEAR, tahun);
             mCalendar.set(Calendar.MONTH, bulan);
             mCalendar.set(Calendar.DAY_OF_MONTH, hari);
@@ -200,14 +198,6 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
     public boolean onSupportNavigateUp() {
         finish();
         return true;
-    }
-
-    public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        if (inputMethodManager != null) {
-            inputMethodManager.hideSoftInputFromWindow(Objects
-                    .requireNonNull(getCurrentFocus()).getWindowToken(), 0);
-        }
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -236,6 +226,19 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
                             bulan-1, hari).show();
                 }
                 break;
+            case R.id.btn_cancel:
+                ToastHelper.createToast(this, "BATAL CLICKED", Toast.LENGTH_LONG);
+                if (motionEvent.getAction() == MotionEvent.ACTION_UP) {
+                    popupWindow.dismiss();
+                }
+                break;
+            case R.id.btn_ubah_email:
+                ToastHelper.createToast(this, "UBAH EMAIL CLICKED", Toast.LENGTH_LONG);
+                break;
+            case R.id.btn_ubah_hp:
+                ToastHelper.createToast(this, "UBAH HP CLICKED", Toast.LENGTH_LONG);
+                break;
+
         }
         return false;
     }
@@ -247,6 +250,96 @@ public class EditProfile extends BaseActivity<EditProfileBinding, EditProfileVie
         bulan = Integer.parseInt(new StringBuilder().append(dob.charAt(3)).append(dob.charAt(4)).toString());
         tahun = Integer.parseInt(new StringBuilder().append(dob.charAt(6)).append(dob.charAt(7))
                 .append(dob.charAt(8)).append(dob.charAt(9)).toString());
+    }
+
+    @SuppressLint({"ClickableViewAccessibility", "InflateParams"})
+    private void createPopUpChangeEmail(View view){
+        TextView mTvRegisteredEmail;
+        LinearLayout mBtnCancelChangeEmail, mBtnSubmitChangeEmail;
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = null;
+        if (inflater != null) {
+            popupView = inflater.inflate(R.layout.popup_edit_email, null);
+        }
+
+        if (popupView != null) {
+            mTvRegisteredEmail = popupView.findViewById(R.id.tvRegisteredEmail);
+            mBtnCancelChangeEmail = popupView.findViewById(R.id.btn_cancel);
+            mBtnSubmitChangeEmail = popupView.findViewById(R.id.btn_ubah_email);
+            mTvRegisteredEmail.setText(mDataManager.getUserEmail());
+            mBtnCancelChangeEmail.setOnTouchListener(this);
+            mBtnSubmitChangeEmail.setOnTouchListener(this);
+        }
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        Log.i("widthPopUP tes1", width+"");
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        Log.i("heightPopUP tes1", height+"");
+        popupWindow = new PopupWindow(popupView, 810, height, true);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        dimBehind(popupWindow);
+    }
+
+    @SuppressLint({"ClickableViewAccessibility", "InflateParams"})
+    private void createPopUpChangeHP(View view){
+        TextView mTvRegisteredHP;
+        LinearLayout mBtnCancelChangeEmail, mBtnSubmitChangeEmail;
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = null;
+        if (inflater != null) {
+            popupView = inflater.inflate(R.layout.popup_edit_hp, null);
+        }
+
+        if (popupView != null) {
+            mTvRegisteredHP = popupView.findViewById(R.id.tvRegisteredHP);
+            mBtnCancelChangeEmail = popupView.findViewById(R.id.btn_cancel);
+            mBtnSubmitChangeEmail = popupView.findViewById(R.id.btn_ubah_hp);
+            mTvRegisteredHP.setText(mDataManager.getUserHP());
+            mBtnCancelChangeEmail.setOnTouchListener(this);
+            mBtnSubmitChangeEmail.setOnTouchListener(this);
+        }
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        Log.i("widthPopUP tes1", width+"");
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        Log.i("heightPopUP tes1", height+"");
+        popupWindow = new PopupWindow(popupView, 820, height, true);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window token
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        dimBehind(popupWindow);
+    }
+
+
+    private static void dimBehind (PopupWindow popupWindow){
+        View container;
+        if (popupWindow.getBackground() == null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                container = (View) popupWindow.getContentView().getParent();
+            } else {
+                container = popupWindow.getContentView();
+            }
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                container = (View) popupWindow.getContentView().getParent().getParent();
+            } else {
+                container = (View) popupWindow.getContentView().getParent();
+            }
+        }
+        Context context = popupWindow.getContentView().getContext();
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        WindowManager.LayoutParams p = (WindowManager.LayoutParams) container.getLayoutParams();
+        p.flags = WindowManager.LayoutParams.FLAG_DIM_BEHIND;
+        p.dimAmount = 0.3f;
+        if (wm != null) {
+            wm.updateViewLayout(container, p);
+        }
     }
 
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:focusableInTouchMode="true">
+
+    <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/text_registered_email"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/tvRegisteredEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etNewEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="@string/text_enter_new_email"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="@string/text_kata_sandi"
+        android:inputType="textPassword"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:weightSum="1"
+        android:baselineAligned="false">
+        <LinearLayout
+            android:id="@+id/btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:layout_marginEnd="12dp"
+            android:layout_marginRight="12dp"
+            android:background="@drawable/background_btn"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:focusable="true">
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_batal"
+                android:textColor="@drawable/text_color_common"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_ubah_email"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="0.5"
+            android:layout_marginLeft="12dp"
+            android:layout_marginStart="12dp"
+            android:background="@drawable/background_btn_credential"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:focusable="true">
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_ubah_email"
+                android:textColor="@drawable/text_color_common"
+                android:textSize="14sp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>
