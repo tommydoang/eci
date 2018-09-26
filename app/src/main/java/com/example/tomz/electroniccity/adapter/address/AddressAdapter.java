@@ -1,4 +1,4 @@
-package com.example.tomz.electroniccity.adapter.Address;
+package com.example.tomz.electroniccity.adapter.address;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
