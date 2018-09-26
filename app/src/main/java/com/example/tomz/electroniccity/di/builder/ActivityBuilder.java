@@ -35,17 +35,18 @@ import com.example.tomz.electroniccity.page.bn_tab_home.home.FragHome;
 import com.example.tomz.electroniccity.page.bn_tab_home.home.FragHomeModule;
 import com.example.tomz.electroniccity.page.intro.IntroApps;
 import com.example.tomz.electroniccity.page.main.MainActivity;
-//import com.example.tomz.electroniccity.page.main.MainSubComp;
 import com.example.tomz.electroniccity.page.main.MainActivityModule;
 import com.example.tomz.electroniccity.page.side_menu.promo.Promo;
 import com.example.tomz.electroniccity.page.side_menu.promo.PromoModule;
+import com.example.tomz.electroniccity.page.side_menu.value.ValueAdd;
+import com.example.tomz.electroniccity.page.side_menu.value.ValueAddModule;
 import com.example.tomz.electroniccity.page.splash.SplashActivity;
 import com.example.tomz.electroniccity.page.splash.SplashActivityModule;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
-@Module/*(subcomponents = {MainSubComp.class})*/
+@Module
 public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = SplashActivityModule.class)
@@ -110,5 +111,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = HistoryOrderModule.class)
     abstract HistoryOrder bindHistoryOrder();
+
+    @ContributesAndroidInjector(modules = ValueAddModule.class)
+    abstract ValueAdd bindValueAdd();
 
 }

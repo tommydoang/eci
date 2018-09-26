@@ -158,6 +158,7 @@
     <string name="title_history_order">Riwayat Pemesanan</string>
     <string name="title_promo">Promo</string>
     <string name="title_customer_care">Customer Care</string>
+    <string name="title_value_added">Value Added</string>
     <!--Miscellaneous Text-->
     <string name="text_yes">YA</string>
     <string name="text_no">TIDAK</string>
@@ -197,6 +198,8 @@
     <string name="text_ubah_email">UBAH EMAIL</string>
     <string name="text_enter_new_hp">Masukkan No.HP Baru Anda</string>
     <string name="text_ubah_hp">UBAH No.HP</string>
+    <string name="text_head_value_add_1">PREMIUM SERVICE</string>
+    <string name="text_head_value_add_2">LAYANAN TERBAIK KAMI</string>
 
     <!--Miscellaneous Error Text-->
     <string name="err_username_email_empty">Mohon isi nama/email Anda</string>
