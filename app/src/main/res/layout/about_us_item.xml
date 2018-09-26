@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="about"
+            type="com.example.tomz.electroniccity.page.side_menu.about.AboutUsItemViewModel" />
+    </data>
+
+    <!--ABOUT ECI-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+            android:id="@+id/text_subhead_about_eci"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:text="@{about.title}"
+            android:textSize="16sp"
+            android:textColor="@color/newlightblue"/>
+        <ImageView
+            android:id="@+id/iv_about_eci"
+            android:layout_width="wrap_content"
+            android:layout_height="180dp"
+            android:adjustViewBounds="true"
+            app:ivAboutUs="@{about.image}"
+            android:contentDescription="@string/img_content_des"/>
+        <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+            android:id="@+id/text_description_about_eci"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{about.description}"
+            android:textColor="@color/black"/>
+    </LinearLayout>
+
+        <!--&lt;!&ndash;STORE ECI&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont-->
+                <!--android:id="@+id/text_subhead_store_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_store_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:contentDescription="@string/img_content_des"/>-->
+            <!--<com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont-->
+                <!--android:id="@+id/text_description_store_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash;TRANSAKSI ONLINE&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont-->
+                <!--android:id="@+id/text_subhead_online_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_transac_online_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:contentDescription="@string/img_content_des"/>-->
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash;STORE KELILING&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont-->
+                <!--android:id="@+id/text_subhead_store_keliling_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_store_keliling_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:contentDescription="@string/img_content_des"/>-->
+        <!--</LinearLayout>-->
+
+        <!--&lt;!&ndash;B2B & Direct Sales&ndash;&gt;-->
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="vertical">-->
+            <!--<com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont-->
+                <!--android:id="@+id/text_subhead_b2b_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+            <!--<ImageView-->
+                <!--android:id="@+id/iv_b2b_direct_eci"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content" />-->
+        <!--</LinearLayout>-->
+</layout>
