@@ -5,7 +5,6 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
@@ -13,6 +12,7 @@ import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.adapter.ValueAddAdapter;
 import com.example.tomz.electroniccity.data.model.api.valueadded.DataValueAddResponse;
@@ -44,7 +44,7 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
 
     @Override
     public int getBindingVariable() {
-        return 0;
+        return BR.value;
     }
 
     @Override
@@ -69,7 +69,7 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mainStatusBarColor();
         }
-        new Handler().postDelayed(() -> mValueAddViewModel.getDataValueAddMenu(),800);
+        mValueAddViewModel.getDataValueAddMenu();
     }
 
     private void prepareGridView(List<DataValueAddResponse> dataValueAddResponseList){
