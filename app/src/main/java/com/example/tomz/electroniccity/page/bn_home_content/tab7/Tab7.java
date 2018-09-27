@@ -23,13 +23,12 @@ import android.widget.ImageView;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.tab7.Tab7Adapter;
-import com.example.tomz.electroniccity.adapter.tab7.Tab7AllSubCategoryAdapter;
-import com.example.tomz.electroniccity.adapter.tab7.Tab7BannerAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab7.Tab7Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab7.Tab7AllSubCategoryAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab7.Tab7BannerAdapter;
 import com.example.tomz.electroniccity.data.model.api.products.tab7.DataProductTab7Response;
 import com.example.tomz.electroniccity.data.model.tabsubcategory.Tab7AllSubCategoryModel;
 import com.example.tomz.electroniccity.databinding.Tab7LayoutBinding;
-import com.example.tomz.electroniccity.page.bn_home_content.tab6.Tab6;
 import com.example.tomz.electroniccity.utils.ExpandableHeightGridView;
 import com.example.tomz.electroniccity.utils.base.BaseFragment;
 import com.example.tomz.electroniccity.utils.indicator.PageIndicator;

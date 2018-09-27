@@ -23,9 +23,9 @@ import android.widget.ImageView;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.tab2.Tab2Adapter;
-import com.example.tomz.electroniccity.adapter.tab2.Tab2AllSubCategoryAdapter;
-import com.example.tomz.electroniccity.adapter.tab2.Tab2BannerAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab2.Tab2Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab2.Tab2AllSubCategoryAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab2.Tab2BannerAdapter;
 import com.example.tomz.electroniccity.data.model.api.products.tab2.DataProductTab2Response;
 import com.example.tomz.electroniccity.data.model.tabsubcategory.Tab2AllSubCategoryModel;
 import com.example.tomz.electroniccity.databinding.Tab2LayoutBinding;

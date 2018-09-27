@@ -4,11 +4,8 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.tomz.electroniccity.ViewModelProviderFactory;
-import com.example.tomz.electroniccity.adapter.tab4.Tab4Adapter;
-import com.example.tomz.electroniccity.adapter.tab5.Tab5Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab5.Tab5Adapter;
 import com.example.tomz.electroniccity.data.DataManager;
-import com.example.tomz.electroniccity.page.bn_home_content.tab4.Tab4;
-import com.example.tomz.electroniccity.page.bn_home_content.tab4.Tab4ViewModel;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 
 import java.util.ArrayList;
