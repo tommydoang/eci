@@ -1,16 +1,21 @@
 package com.example.tomz.electroniccity.adapter.side_menu.value_add;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.model.api.valueadded.DataValueAddResponse;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 public class ValueAddAdapter extends BaseAdapter{
@@ -49,12 +54,28 @@ public class ValueAddAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        Glide.with(mCtx).asBitmap().load(mValueModel.get(position).getImage_value()).into(holder.imageView);
+        holder.imageView.setImageBitmap(getBitmapFromURL(mValueModel.get(position).getImage_value()));
         return convertView;
     }
 
     static class ViewHolder{
         ImageView imageView;
+    }
+
+    private Bitmap getBitmapFromURL(String src) {
+        try {
+            URL url = new URL(src);
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoInput(true);
+            connection.connect();
+            InputStream input = connection.getInputStream();
+            Bitmap myBitmap = BitmapFactory.decodeStream(input);
+            return Bitmap.createScaledBitmap(myBitmap,
+                    (int)(myBitmap.getWidth()*2.4), (int)(myBitmap.getHeight()*2.4), true);
+        } catch (IOException e) {
+            // Log exception
+            return null;
+        }
     }
 
 }
