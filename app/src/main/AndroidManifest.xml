@@ -114,6 +114,16 @@
                 android:value=".page.main.MainActivity" />
         </activity>
         <activity
+            android:name=".page.side_menu.about.About"
+            android:label="@string/title_about_us"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+
+        <activity
             android:name=".page.bn_tab_home.account.history_order.HistoryOrder"
             android:label="@string/title_history_order"
             android:parentActivityName=".page.main.MainActivity"
