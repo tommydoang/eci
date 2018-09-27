@@ -4,7 +4,7 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.example.tomz.electroniccity.ViewModelProviderFactory;
-import com.example.tomz.electroniccity.adapter.AboutAdapter;
+import com.example.tomz.electroniccity.adapter.side_menu.about.AboutAdapter;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 

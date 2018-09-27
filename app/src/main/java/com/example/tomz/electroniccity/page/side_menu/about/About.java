@@ -16,7 +16,7 @@ import android.view.WindowManager;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.AboutAdapter;
+import com.example.tomz.electroniccity.adapter.side_menu.about.AboutAdapter;
 import com.example.tomz.electroniccity.data.model.api.about.DataAboutUsResponse;
 import com.example.tomz.electroniccity.databinding.ActivityAboutUsBinding;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
