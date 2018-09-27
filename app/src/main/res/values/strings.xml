@@ -159,6 +159,8 @@
     <string name="title_promo">Promo</string>
     <string name="title_customer_care">Customer Care</string>
     <string name="title_value_added">Value Added</string>
+    <string name="title_about_us">Tentang Kami</string>
+    <string name="title_privacy_policy">Kebijakan Privasi</string>
     <!--Miscellaneous Text-->
     <string name="text_yes">YA</string>
     <string name="text_no">TIDAK</string>
