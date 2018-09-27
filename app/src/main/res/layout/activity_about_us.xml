@@ -26,14 +26,25 @@
             app:contentInsetStartWithNavigation="0dp"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"/>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rvAboutUs"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="6dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            app:adapterabout="@{about.aboutDataList}"
-            tools:listitem="@layout/about_us_item"/>
+            android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvAboutUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="6dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                app:adapterabout="@{about.aboutDataList}"
+                tools:listitem="@layout/about_us_item"/>
+            <android.support.v4.widget.ContentLoadingProgressBar
+                android:id="@+id/loading1"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="@{about.isLoading ? View.VISIBLE : View.GONE}" />
+        </FrameLayout>
     </LinearLayout>
 </layout>
