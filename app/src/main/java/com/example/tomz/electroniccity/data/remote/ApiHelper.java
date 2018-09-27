@@ -26,5 +26,6 @@ public interface ApiHelper {
     Observable<JSONObject> doGetAllAddressApiCall(AllAddressRequest.req request);
     Observable<JSONObject> doGetAllHistoryOrderApiCall(HistoryOrderRequest.req request);
     Observable<JSONObject> doGetAllValueAddedApiCall();
+    Observable<JSONObject> doGetAboutUsApiCall();
 
 }

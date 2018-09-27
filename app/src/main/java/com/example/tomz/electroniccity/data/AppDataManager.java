@@ -447,6 +447,14 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
+    public Observable<JSONObject> doGetAboutUsApiCall() {
+        return mApiHelper.doGetAboutUsApiCall();
+    }
+
+    /**
+     *  DataModel
+     */
+    @Override
     public void authInfo(String deviceId, String authKey) {
         setDeviceId(deviceId);
         setAuthToken(authKey);

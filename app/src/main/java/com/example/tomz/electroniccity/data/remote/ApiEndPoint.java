@@ -30,4 +30,6 @@ public class ApiEndPoint {
 
     public static final String ENDPOINT_GET_ALL_VALUE_ADD = BuildConfig.BASE_URL + "/v1/getvalueadded";
 
+    public static final String ENDPOINT_ABOUT_US = BuildConfig.BASE_URL + "/v1/getcontentstatics";
+
 }
