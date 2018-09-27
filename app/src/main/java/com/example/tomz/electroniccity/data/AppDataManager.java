@@ -451,6 +451,11 @@ public class AppDataManager implements DataManager {
         return mApiHelper.doGetAboutUsApiCall();
     }
 
+    @Override
+    public Observable<JSONObject> doGetPolicyApiCall() {
+        return mApiHelper.doGetPolicyApiCall();
+    }
+
     /**
      *  DataModel
      */

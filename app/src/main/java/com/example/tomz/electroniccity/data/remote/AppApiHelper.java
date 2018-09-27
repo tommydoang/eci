@@ -147,5 +147,14 @@ public class AppApiHelper implements ApiHelper {
                 .getJSONObjectObservable();
     }
 
+    @Override
+    public Observable<JSONObject> doGetPolicyApiCall() {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_POLICY)
+                .addHeaders("Authorization", mPrefHelper.getAuthToken())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getJSONObjectObservable();
+    }
+
 
 }

@@ -32,4 +32,6 @@ public class ApiEndPoint {
 
     public static final String ENDPOINT_ABOUT_US = BuildConfig.BASE_URL + "/v1/getcontentstatics";
 
+    public static final String ENDPOINT_POLICY = BuildConfig.BASE_URL + "/v1/gettermscondition";
+
 }
