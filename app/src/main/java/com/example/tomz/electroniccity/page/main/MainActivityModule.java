@@ -1,11 +1,8 @@
 package com.example.tomz.electroniccity.page.main;
 
 import android.arch.lifecycle.ViewModelProvider;
-import android.support.v4.app.FragmentManager;
-import android.util.Log;
 
 import com.example.tomz.electroniccity.ViewModelProviderFactory;
-import com.example.tomz.electroniccity.adapter.ViewPagerTabAdapter;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 
