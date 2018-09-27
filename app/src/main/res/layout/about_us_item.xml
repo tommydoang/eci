@@ -27,6 +27,7 @@
             android:id="@+id/iv_about_eci"
             android:layout_width="wrap_content"
             android:layout_height="180dp"
+            android:layout_gravity="center"
             android:adjustViewBounds="true"
             app:ivAboutUs="@{about.image}"
             android:contentDescription="@string/img_content_des"/>
