@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="policy"
+            type="com.example.tomz.electroniccity.page.side_menu.policy.PolicyItemViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="6dp"
+        android:orientation="vertical">
+        <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{policy.descPolicy}"/>
+
+    </LinearLayout>
+</layout>
