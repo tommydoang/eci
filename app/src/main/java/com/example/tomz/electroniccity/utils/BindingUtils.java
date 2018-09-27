@@ -3,19 +3,21 @@ package com.example.tomz.electroniccity.utils;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.tomz.electroniccity.adapter.AddressAdapter;
-import com.example.tomz.electroniccity.adapter.HistoryOrderAdapter;
-import com.example.tomz.electroniccity.adapter.PromoAdapter;
-import com.example.tomz.electroniccity.adapter.tab1.Tab1Adapter;
-import com.example.tomz.electroniccity.adapter.tab1.Tab1DealAdapter;
-import com.example.tomz.electroniccity.adapter.tab2.Tab2Adapter;
-import com.example.tomz.electroniccity.adapter.tab3.Tab3Adapter;
-import com.example.tomz.electroniccity.adapter.tab4.Tab4Adapter;
-import com.example.tomz.electroniccity.adapter.tab5.Tab5Adapter;
-import com.example.tomz.electroniccity.adapter.tab6.Tab6Adapter;
-import com.example.tomz.electroniccity.adapter.tab7.Tab7Adapter;
-import com.example.tomz.electroniccity.adapter.tab8.Tab8Adapter;
-import com.example.tomz.electroniccity.adapter.tab9.Tab9Adapter;
+import com.example.tomz.electroniccity.adapter.side_menu.about.AboutAdapter;
+import com.example.tomz.electroniccity.adapter.address.AddressAdapter;
+import com.example.tomz.electroniccity.adapter.history_order.HistoryOrderAdapter;
+import com.example.tomz.electroniccity.adapter.side_menu.promo.PromoAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab1.Tab1Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab1.Tab1DealAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab2.Tab2Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab3.Tab3Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab4.Tab4Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab5.Tab5Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab6.Tab6Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab7.Tab7Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab8.Tab8Adapter;
+import com.example.tomz.electroniccity.adapter.home_tab.tab9.Tab9Adapter;
+import com.example.tomz.electroniccity.data.model.api.about.DataAboutUsResponse;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
 import com.example.tomz.electroniccity.data.model.api.membership.DataHistoryOrderResponse;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataDealTab1Response;
@@ -155,6 +157,16 @@ public final class BindingUtils {
             adapter.addItems(modelProdList);
         }
     }
+
+    @BindingAdapter({"adapterabout"})
+    public static void addAboutItem(RecyclerView recyclerView, List<DataAboutUsResponse> modelProdList){
+        AboutAdapter adapter = (AboutAdapter)recyclerView.getAdapter();
+        if (adapter != null){
+            adapter.clearItems();
+            adapter.addItems(modelProdList);
+        }
+    }
+
 
 
     //added here adapter
