@@ -254,12 +254,12 @@ public class RegForgAct extends BaseActivity<ActivityRegforgBinding, RegForgView
     }
 
     @Override
-    public void onSuccessResetPass(String status) {
-        ToastHelper.createToast(this, status, Toast.LENGTH_LONG);
+    public void onSuccessResetPass(String message) {
+        Log.d("onSuccesRESET tes1", message);
     }
 
     @Override
     public void onFailedResetPass(String message) {
-        ToastHelper.createToast(this, message,Toast.LENGTH_LONG);
+        Log.d("onFailedRESET tes1", message);
     }
 }

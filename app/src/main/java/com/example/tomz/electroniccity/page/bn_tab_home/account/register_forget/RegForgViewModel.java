@@ -3,34 +3,42 @@ package com.example.tomz.electroniccity.page.bn_tab_home.account.register_forget
 import android.util.Log;
 
 import com.example.tomz.electroniccity.data.DataManager;
+import com.example.tomz.electroniccity.helper.ToastHelper;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.ForgetPassRequest;
 import com.example.tomz.electroniccity.utils.base.BaseViewModel;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 
 public class RegForgViewModel extends BaseViewModel<RegForgNavigator> {
 
-    public RegForgViewModel(DataManager dataManager,
-                            SchedulerProvider schedulerProvider) {
+    private RegForgNavigator mRegForgNavigator = new RegForgAct() ;
+
+    RegForgViewModel(DataManager dataManager,
+                     SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
 
-    public void registerRequest(/*String email,*/ String fullname, String handphone){
+    public void registerRequest(String fullname, String handphone){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
-                .doRegisterApiCall(new RegisterRequest.req(/*email,*/ fullname, handphone))
+                .doRegisterApiCall(new RegisterRequest.req(fullname, handphone))
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(jsonObject -> {
-                    if (jsonObject.getString("status").equals("SUCCESS")) {
+                    if (jsonObject.getString("status").equals("SUCCESS") ||
+                            jsonObject.getString("status").equals("SUCCSESS")) {
                         setIsLoading(false);
-                        getNavigator().onSuccessRegister(jsonObject.getString("result"));
+//                        getNavigator().onSuccessRegister(jsonObject.getString("response"));
+                        Log.d("REG SUCCESS tes1", "MASUKK!!!");
                     } else {
                         setIsLoading(false);
-                        getNavigator().onFailedRegister(jsonObject.getString("result"));
+//                        mRegForgNavigator.onFailedRegister("Maaf server sedang tidak dapat memproses permintaan Anda");
+                        Log.d("REG FAILED tes1", "MASUKK!!!");
                     }
                 }, throwable -> {
                     setIsLoading(false);
-                    getNavigator().handleError(throwable);
+//                    getNavigator().handleError(throwable);
+//                    mRegForgNavigator.handleError(throwable);
+                    Log.d("REG THROW tes1", "MASUKK!!!");
                 })
         );
     }
@@ -42,25 +50,20 @@ public class RegForgViewModel extends BaseViewModel<RegForgNavigator> {
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(jsonObject -> {
-                    if (jsonObject.getString("status").equals("SUCCESS")){
+                    if (jsonObject.getString("status").equals("SUCCESS") ||
+                            jsonObject.getString("status").equals("SUCCSESS")){
                         setIsLoading(false);
-                        getNavigator().onSuccessResetPass(jsonObject.getString("result"));
+//                        getNavigator().onSuccessResetPass(jsonObject.getString("response"));
                     } else {
                         setIsLoading(false);
-                        getNavigator().onFailedResetPass(jsonObject.getString("result"));
+//                        getNavigator().onFailedResetPass(jsonObject.getJSONObject("response").getString("msg"));
                     }
                 },throwable -> {
                     setIsLoading(false);
-                    getNavigator().handleError(throwable);
+//                    getNavigator().handleError(throwable);
                 })
         );
     }
 
-    public void onRegisterClicked(){
-        Log.d("viewModel tes1", "CLICKED MASUKK!!!!");
-        getNavigator().onRegister();
-    }
-
-    public void onForgotPassClicked() { getNavigator().onResetPass();}
 
 }

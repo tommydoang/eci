@@ -10,10 +10,6 @@ public class RegisterRequest {
     }
 
     public static class req {
-//        @Expose
-//        @SerializedName("Customer[email]")
-//        private String userEmail;
-
         @Expose
         @SerializedName("Customer[fullname]")
         private String userFullName;
@@ -22,15 +18,10 @@ public class RegisterRequest {
         @SerializedName("Customer[handphone]")
         private String userHP;
 
-        public req(/*String userEmail,*/ String userFullName, String userHP) {
-//            this.userEmail = userEmail;
+        public req(String userFullName, String userHP) {
             this.userFullName = userFullName;
             this.userHP = userHP;
         }
-
-//        public String getUserEmail() {
-//            return userEmail;
-//        }
 
         public String getUserFullName() {
             return userFullName;
