@@ -14,7 +14,7 @@ import android.view.WindowManager;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.ValueAddAdapter;
+import com.example.tomz.electroniccity.adapter.side_menu.value_add.ValueAddAdapter;
 import com.example.tomz.electroniccity.data.model.api.valueadded.DataValueAddResponse;
 import com.example.tomz.electroniccity.databinding.ActivityValueAddBinding;
 import com.example.tomz.electroniccity.utils.ExpandableHeightGridView;
