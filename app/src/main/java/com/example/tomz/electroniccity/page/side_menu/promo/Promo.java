@@ -17,7 +17,7 @@ import android.view.WindowManager;
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
 
-import com.example.tomz.electroniccity.adapter.PromoAdapter;
+import com.example.tomz.electroniccity.adapter.side_menu.promo.PromoAdapter;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.model.api.promo.DataPromoResponse;
 import com.example.tomz.electroniccity.databinding.ActivityPromoBinding;
