@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:padding="8dp"
+            android:padding="6dp"
             android:orientation="vertical"
             tools:ignore="UselessParent">
             <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
@@ -43,10 +43,9 @@
                 android:textSize="16sp"
                 android:textColor="@color/newlightblue"
                 android:visibility="gone"/>
-            <!--<FrameLayout-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:paddingTop="8dp">-->
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
                 <com.example.tomz.electroniccity.utils.ExpandableHeightGridView
                     android:id="@+id/gvPremiumService"
                     android:layout_width="match_parent"
@@ -57,14 +56,14 @@
                     android:stretchMode="columnWidth"
                     android:verticalSpacing="1dp"
                     android:horizontalSpacing="1dp" />
-                <!--<android.support.v4.widget.ContentLoadingProgressBar-->
-                    <!--android:id="@+id/loading1"-->
-                    <!--style="?android:attr/progressBarStyleLarge"-->
-                    <!--android:layout_width="60dp"-->
-                    <!--android:layout_height="60dp"-->
-                    <!--android:layout_gravity="center"-->
-                    <!--android:visibility="@{value.isLoading ? View.VISIBLE : View.GONE}" />-->
-            <!--</FrameLayout>-->
+                <android.support.v4.widget.ContentLoadingProgressBar
+                    android:id="@+id/loading1"
+                    style="?android:attr/progressBarStyleLarge"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center"
+                    android:visibility="@{value.isLoading ? View.VISIBLE : View.GONE}" />
+            </FrameLayout>
         </LinearLayout>
 
         <!--<LinearLayout-->
