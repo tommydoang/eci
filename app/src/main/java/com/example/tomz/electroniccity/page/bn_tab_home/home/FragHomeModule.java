@@ -3,9 +3,8 @@ package com.example.tomz.electroniccity.page.bn_tab_home.home;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 
-import com.example.tomz.electroniccity.adapter.ViewPagerTabAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.ViewPagerTabAdapter;
 import com.example.tomz.electroniccity.data.DataManager;
-import com.example.tomz.electroniccity.page.bn_home_content.tab1.Tab1Module;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 
 import dagger.Module;

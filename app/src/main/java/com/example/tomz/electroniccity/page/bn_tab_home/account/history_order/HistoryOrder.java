@@ -17,7 +17,7 @@ import android.view.WindowManager;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.HistoryOrderAdapter;
+import com.example.tomz.electroniccity.adapter.history_order.HistoryOrderAdapter;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.model.api.membership.DataHistoryOrderResponse;
 import com.example.tomz.electroniccity.databinding.ActivityHistoryOrderBinding;

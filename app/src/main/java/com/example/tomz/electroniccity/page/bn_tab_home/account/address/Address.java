@@ -17,7 +17,7 @@ import android.view.WindowManager;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.AddressAdapter;
+import com.example.tomz.electroniccity.adapter.address.AddressAdapter;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
 import com.example.tomz.electroniccity.databinding.AddressBinding;

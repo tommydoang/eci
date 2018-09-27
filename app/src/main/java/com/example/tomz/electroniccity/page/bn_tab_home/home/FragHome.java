@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.adapter.ViewPagerTabAdapter;
+import com.example.tomz.electroniccity.adapter.home_tab.ViewPagerTabAdapter;
 import com.example.tomz.electroniccity.data.model.tabsubcategory.Tab1AllSubCategoryModel;
 import com.example.tomz.electroniccity.data.model.tabsubcategory.Tab2AllSubCategoryModel;
 import com.example.tomz.electroniccity.data.model.tabsubcategory.Tab3AllSubCategoryModel;
