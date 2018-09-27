@@ -3,6 +3,7 @@ package com.example.tomz.electroniccity;
 import android.app.Activity;
 import android.app.Application;
 import android.app.Service;
+import android.os.StrictMode;
 
 import com.androidnetworking.AndroidNetworking;
 import com.example.tomz.electroniccity.di.component.DaggerAppComponent;
@@ -25,6 +26,13 @@ public class MyApps extends Application implements HasActivityInjector, HasServi
         super.onCreate();
         mInstance = this;
         initializeComponent();
+        strictPermitNetwork();
+    }
+
+    private void strictPermitNetwork(){
+        StrictMode.ThreadPolicy policy = new StrictMode
+                .ThreadPolicy.Builder().permitNetwork().build();
+        StrictMode.setThreadPolicy(policy);
     }
 
     private void initializeComponent() {
