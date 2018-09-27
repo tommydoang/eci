@@ -1,4 +1,4 @@
-package com.example.tomz.electroniccity.adapter;
+package com.example.tomz.electroniccity.adapter.intro;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;

@@ -1,4 +1,4 @@
-package com.example.tomz.electroniccity.adapter;
+package com.example.tomz.electroniccity.adapter.side_menu.value_add;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,4 +1,4 @@
-package com.example.tomz.electroniccity.adapter;
+package com.example.tomz.electroniccity.adapter.history_order;
 
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;

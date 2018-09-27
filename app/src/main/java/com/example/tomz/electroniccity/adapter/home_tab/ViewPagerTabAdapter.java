@@ -1,4 +1,4 @@
-package com.example.tomz.electroniccity.adapter;
+package com.example.tomz.electroniccity.adapter.home_tab;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
