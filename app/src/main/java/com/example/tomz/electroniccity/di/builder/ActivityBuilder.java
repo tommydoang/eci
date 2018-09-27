@@ -36,6 +36,8 @@ import com.example.tomz.electroniccity.page.bn_tab_home.home.FragHomeModule;
 import com.example.tomz.electroniccity.page.intro.IntroApps;
 import com.example.tomz.electroniccity.page.main.MainActivity;
 import com.example.tomz.electroniccity.page.main.MainActivityModule;
+import com.example.tomz.electroniccity.page.side_menu.about.About;
+import com.example.tomz.electroniccity.page.side_menu.about.AboutModule;
 import com.example.tomz.electroniccity.page.side_menu.promo.Promo;
 import com.example.tomz.electroniccity.page.side_menu.promo.PromoModule;
 import com.example.tomz.electroniccity.page.side_menu.value.ValueAdd;
@@ -114,5 +116,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = ValueAddModule.class)
     abstract ValueAdd bindValueAdd();
+
+    @ContributesAndroidInjector(modules = AboutModule.class)
+    abstract About bindAboutUs();
 
 }
