@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.tomz.electroniccity.adapter.side_menu.about.AboutAdapter;
 import com.example.tomz.electroniccity.adapter.address.AddressAdapter;
 import com.example.tomz.electroniccity.adapter.history_order.HistoryOrderAdapter;
+import com.example.tomz.electroniccity.adapter.side_menu.policy.PolicyAdapter;
 import com.example.tomz.electroniccity.adapter.side_menu.promo.PromoAdapter;
 import com.example.tomz.electroniccity.adapter.home_tab.tab1.Tab1Adapter;
 import com.example.tomz.electroniccity.adapter.home_tab.tab1.Tab1DealAdapter;
@@ -20,6 +21,7 @@ import com.example.tomz.electroniccity.adapter.home_tab.tab9.Tab9Adapter;
 import com.example.tomz.electroniccity.data.model.api.about.DataAboutUsResponse;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
 import com.example.tomz.electroniccity.data.model.api.membership.DataHistoryOrderResponse;
+import com.example.tomz.electroniccity.data.model.api.policy.DataPolicyResponse;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataDealTab1Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataProductTab1Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab2.DataProductTab2Response;
@@ -167,6 +169,14 @@ public final class BindingUtils {
         }
     }
 
+    @BindingAdapter({"adapterpolicy"})
+    public static void addPolicyItem(RecyclerView recyclerView, List<DataPolicyResponse> modelProdList){
+        PolicyAdapter adapter = (PolicyAdapter)recyclerView.getAdapter();
+        if (adapter != null){
+            adapter.clearItems();
+            adapter.addItems(modelProdList);
+        }
+    }
 
 
     //added here adapter
