@@ -38,6 +38,8 @@ import com.example.tomz.electroniccity.page.main.MainActivity;
 import com.example.tomz.electroniccity.page.main.MainActivityModule;
 import com.example.tomz.electroniccity.page.side_menu.about.About;
 import com.example.tomz.electroniccity.page.side_menu.about.AboutModule;
+import com.example.tomz.electroniccity.page.side_menu.policy.Policy;
+import com.example.tomz.electroniccity.page.side_menu.policy.PolicyModule;
 import com.example.tomz.electroniccity.page.side_menu.promo.Promo;
 import com.example.tomz.electroniccity.page.side_menu.promo.PromoModule;
 import com.example.tomz.electroniccity.page.side_menu.value.ValueAdd;
@@ -119,5 +121,8 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = AboutModule.class)
     abstract About bindAboutUs();
+
+    @ContributesAndroidInjector(modules = PolicyModule.class)
+    abstract Policy bindPolicy();
 
 }
