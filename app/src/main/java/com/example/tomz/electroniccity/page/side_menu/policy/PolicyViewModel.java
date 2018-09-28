@@ -8,6 +8,7 @@ import android.util.Log;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.model.api.about.DataAboutUsResponse;
 import com.example.tomz.electroniccity.data.model.api.policy.DataPolicyResponse;
+import com.example.tomz.electroniccity.data.model.api.promo.DataPromoResponse;
 import com.example.tomz.electroniccity.utils.base.BaseViewModel;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 
@@ -49,6 +50,19 @@ public class PolicyViewModel extends BaseViewModel<PolicyNavigator> {
                     getNavigator().handleError(throwable);
                 })
         );
+    }
+
+    public MutableLiveData<List<DataPolicyResponse>> getPolicyLiveDataList() {
+        return policyData;
+    }
+
+    public ObservableList<DataPolicyResponse> getPolicyDataList() {
+        return policyDataList;
+    }
+
+    public void setDataToList(List<DataPolicyResponse> dataListApi){
+        policyDataList.clear();
+        policyDataList.addAll(dataListApi);
     }
 
     private void setPolicyModel(JSONObject jsonObject){
