@@ -15,6 +15,7 @@
         android:padding="6dp"
         android:orientation="vertical">
         <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+            android:id="@+id/text_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@{policy.descPolicy}"/>

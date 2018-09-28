@@ -39,13 +39,14 @@
                 <!--app:adapterabout="@{about.aboutDataList}"-->
                 <!--tools:listitem="@layout/about_us_item"/>-->
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvAboutUs"
+                android:id="@+id/rvPolicy"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingTop="6dp"
                 android:paddingLeft="12dp"
                 android:paddingRight="12dp"
-                />
+                app:adapterpolicy="@{policy.policyDataList}"
+                tools:listitem="@layout/policy_item"/>
             <android.support.v4.widget.ContentLoadingProgressBar
                 android:id="@+id/loading1"
                 style="?android:attr/progressBarStyleLarge"
