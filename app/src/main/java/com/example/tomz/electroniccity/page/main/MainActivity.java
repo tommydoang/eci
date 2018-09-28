@@ -45,6 +45,7 @@ import com.example.tomz.electroniccity.page.bn_tab_home.store.FragStore;
 import com.example.tomz.electroniccity.page.bn_tab_home.home.FragHome;
 import com.example.tomz.electroniccity.page.side_menu.about.About;
 import com.example.tomz.electroniccity.page.side_menu.care.CustomerCare;
+import com.example.tomz.electroniccity.page.side_menu.policy.Policy;
 import com.example.tomz.electroniccity.page.side_menu.promo.Promo;
 import com.example.tomz.electroniccity.page.side_menu.value.ValueAdd;
 import com.example.tomz.electroniccity.utils.connection.ConnectionDetector;
@@ -163,6 +164,7 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 mIntentHelper.createIntent(this, About.class);
                 break;
             case R.id.nav_privacy:
+                mIntentHelper.createIntent(this, Policy.class);
                 break;
         }
         return true;
