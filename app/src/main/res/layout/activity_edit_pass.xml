@@ -37,7 +37,7 @@
                 android:paddingEnd="12dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="8dp"
-                android:textColorHint="@color/blue900"
+                android:textColorHint="@color/grey600"
                 app:passwordToggleEnabled="true"
                 app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                 <android.support.design.widget.TextInputEditText
@@ -61,7 +61,7 @@
                 android:paddingEnd="12dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="8dp"
-                android:textColorHint="@color/blue900"
+                android:textColorHint="@color/grey600"
                 app:passwordToggleEnabled="true"
                 app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                 <android.support.design.widget.TextInputEditText
@@ -85,7 +85,7 @@
                 android:paddingEnd="12dp"
                 android:paddingRight="12dp"
                 android:paddingBottom="8dp"
-                android:textColorHint="@color/blue900"
+                android:textColorHint="@color/grey600"
                 app:passwordToggleEnabled="true"
                 app:hintTextAppearance="@style/TextAppearence.App.TextInputLayout">
                 <android.support.design.widget.TextInputEditText
