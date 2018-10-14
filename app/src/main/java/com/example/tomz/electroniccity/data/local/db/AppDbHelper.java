@@ -1,5 +1,7 @@
 package com.example.tomz.electroniccity.data.local.db;
 
+import android.util.Log;
+
 import com.example.tomz.electroniccity.data.model.db.CartMdl;
 import com.example.tomz.electroniccity.data.model.db.WishesMdl;
 
@@ -44,6 +46,35 @@ public class AppDbHelper implements DbHelper {
             mAppDatabase.wishDao().insert(wish);
             return true;
         });
+    }
+
+    @Override
+    public Observable<Boolean> updateQtyItem(int qtyProd, int idProd) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.cartDao().updateQtyItem(qtyProd,idProd);
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<Boolean> deleteAllCart() {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.cartDao().deleteAll();
+            return true;
+        });
+    }
+
+    @Override
+    public Observable<Boolean> deleteItemCart(int idProd) {
+        return Observable.fromCallable(() -> {
+            mAppDatabase.cartDao().deleteCartItem(idProd);
+            return true;
+        });
+    }
+
+    @Override
+    public int countAllItem() {
+        return mAppDatabase.cartDao().countItem();
     }
 
 }
