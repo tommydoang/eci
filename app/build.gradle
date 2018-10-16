@@ -9,6 +9,7 @@ android {
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -55,6 +56,7 @@ dependencies {
     implementation "com.google.firebase:firebase-core:$rootProject.FirebaseVersion"
     implementation "com.google.firebase:firebase-messaging:$rootProject.FCMversion"
     implementation "com.google.android.gms:play-services-maps:$rootProject.PlayServicesVersion"
+    implementation "com.google.firebase:firebase-database:$rootProject.FDBversion"
 
     //Dagger2
     implementation "com.google.dagger:dagger:$rootProject.Dagger2Version"
@@ -89,6 +91,7 @@ dependencies {
 //    implementation "com.github.smarteist:autoimageslider:$rootProject.SliderVersion"
 //    implementation "com.github.firdausmaulan:GlideSlider:$rootProject.SliderVersion"
     implementation "com.crashlytics.sdk.android:crashlytics:$rootProject.CrashlyticsVersion"
+    implementation "com.android.support:multidex:$rootProject.DexVersion"
 
     //Test
     testImplementation "junit:junit:$rootProject.JunitVersion"
