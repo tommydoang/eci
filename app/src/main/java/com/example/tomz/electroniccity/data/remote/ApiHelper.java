@@ -3,6 +3,7 @@ package com.example.tomz.electroniccity.data.remote;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.AuthRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.ForgetPassRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.address.AllAddressRequest;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.address.DefaultAddressRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrderRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.invite.InviteMemberRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.login.LoginRequest;
@@ -28,5 +29,6 @@ public interface ApiHelper {
     Observable<JSONObject> doGetAllValueAddedApiCall();
     Observable<JSONObject> doGetAboutUsApiCall();
     Observable<JSONObject> doGetPolicyApiCall();
+    Observable<JSONObject> doGetDefaultAddressApiCall(DefaultAddressRequest.req request);
 
 }

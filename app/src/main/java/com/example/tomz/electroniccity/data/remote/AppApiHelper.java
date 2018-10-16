@@ -7,6 +7,7 @@ import com.example.tomz.electroniccity.data.local.pref.PreferencesHelper;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.AuthRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.ForgetPassRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.address.AllAddressRequest;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.address.DefaultAddressRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrderRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.invite.InviteMemberRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.login.LoginRequest;
@@ -151,6 +152,16 @@ public class AppApiHelper implements ApiHelper {
     public Observable<JSONObject> doGetPolicyApiCall() {
         return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_POLICY)
                 .addHeaders("Authorization", mPrefHelper.getAuthToken())
+                .setPriority(Priority.MEDIUM)
+                .build()
+                .getJSONObjectObservable();
+    }
+
+    @Override
+    public Observable<JSONObject> doGetDefaultAddressApiCall(DefaultAddressRequest.req request) {
+        return Rx2AndroidNetworking.post(ApiEndPoint.ENDPOINT_GET_ALL_ADDRESS)
+                .addHeaders("Authorization", mPrefHelper.getAuthToken())
+                .addBodyParameter(request)
                 .setPriority(Priority.MEDIUM)
                 .build()
                 .getJSONObjectObservable();
