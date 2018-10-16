@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:background="@color/white"
+    android:padding="8dp"
+    android:orientation="vertical"
+    android:focusableInTouchMode="true">
+    <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_sukses_add_to_cart"
+        android:textSize="14sp"
+        android:textColor="@color/black"/>
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:padding="8dp"
+        android:layout_gravity="end">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            tools:ignore="UselessParent">
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tvBelanjaLagi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="22dp"
+                android:layout_marginEnd="22dp"
+                android:padding="4dp"
+                android:text="@string/text_belanja_lagi"
+                android:textColor="@color/newlightblue" />
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tvBayar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_bayar_segera"
+                android:textColor="@color/red500"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
