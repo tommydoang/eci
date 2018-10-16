@@ -5,4 +5,9 @@
         <attr name="LatoFont" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="DropDownView">
+        <attr name="containerBackgroundColor" format="color" />
+        <attr name="overlayColor" format="color"/>
+    </declare-styleable>
+
 </resources>
