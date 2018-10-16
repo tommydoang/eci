@@ -10,6 +10,7 @@ import com.example.tomz.electroniccity.data.remote.ApiHelper;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.AuthRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.ForgetPassRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.address.AllAddressRequest;
+import com.example.tomz.electroniccity.page.bn_tab_home.account.address.DefaultAddressRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.history_order.HistoryOrderRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.invite.InviteMemberRequest;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.login.LoginRequest;
@@ -47,7 +48,7 @@ public class AppDataManager implements DataManager {
     }
 
     /**
-     * for database
+     * for Database
      */
     @Override
     public Observable<List<CartMdl>> getAllCart() {
@@ -69,10 +70,29 @@ public class AppDataManager implements DataManager {
         return mDbHelper.insertWish(wish);
     }
 
-    /**
-     * for preferences
-     */
+    @Override
+    public Observable<Boolean> updateQtyItem(int qtyProd, int idProd) {
+        return mDbHelper.updateQtyItem(qtyProd, idProd);
+    }
 
+    @Override
+    public Observable<Boolean> deleteAllCart() {
+        return mDbHelper.deleteAllCart();
+    }
+
+    @Override
+    public Observable<Boolean> deleteItemCart(int idProd) {
+        return mDbHelper.deleteItemCart(idProd);
+    }
+
+    @Override
+    public int countAllItem() {
+        return mDbHelper.countAllItem();
+    }
+
+    /**
+     * for Preferences
+     */
     @Override
     public int getIntroFlag() {
         return mPreferencesHelper.getIntroFlag();
@@ -456,6 +476,11 @@ public class AppDataManager implements DataManager {
         return mApiHelper.doGetPolicyApiCall();
     }
 
+    @Override
+    public Observable<JSONObject> doGetDefaultAddressApiCall(DefaultAddressRequest.req request) {
+        return mApiHelper.doGetDefaultAddressApiCall(request);
+    }
+
     /**
      *  DataModel
      */
@@ -495,25 +520,5 @@ public class AppDataManager implements DataManager {
         setUserActivateDate(userActivateDate);
         setUserChannel(userChannel);
     }
-
-//    @Override
-//    public void allProducts(String id_category_head, String id_prod,
-//                            String sku, String name_prod, String tags,
-//                            String model, String size, String id_brand,
-//                            String id_cat, String id_cat_new, String product_description,
-//                            String long_description, String real_price, String spc_price,
-//                            String video_link, String isPublish, String userCreated,
-//                            String dateCreated, String userModified, String dateModified,
-//                            String publisher, String publisher_time, String publisher_user,
-//                            String type_prod, String delivery_type, String city_free_shipping,
-//                            String city_free_shipping_all, String viewed, String turun_harga,
-//                            String naik_harga, String img_best, String img_thumb,
-//                            String merk_name_brand, String attr_id_prod, String stock_store_code,
-//                            String number_stock, String stock_item_bought) {
-//
-//
-//
-//
-//    }
 
 }
