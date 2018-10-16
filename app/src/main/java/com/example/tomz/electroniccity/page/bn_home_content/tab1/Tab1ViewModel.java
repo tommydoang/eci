@@ -1,11 +1,9 @@
 package com.example.tomz.electroniccity.page.bn_home_content.tab1;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.content.Intent;
 import android.databinding.ObservableArrayList;
 import android.databinding.ObservableList;
 import android.os.Build;
-import android.support.v4.content.LocalBroadcastManager;
 import android.text.Html;
 import android.util.Log;
 
@@ -13,6 +11,7 @@ import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataBannerTab1Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataDealTab1Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab1.DataProductTab1Response;
+import com.example.tomz.electroniccity.utils.CommonUtils;
 import com.example.tomz.electroniccity.utils.base.BaseViewModel;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
 
@@ -161,15 +160,21 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                         dpr.setId_cat_new(objProd.getString("id_cat_new"));
                         dpr.setProduct_description(objProd.getString("prod_desc"));
 
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                            dpr.setLong_description(String.valueOf(Html.fromHtml(objProd.getString("long_desc"), Html.FROM_HTML_MODE_LEGACY)));
+                        if (CommonUtils.hasHTMLTags(objProd.getString("long_desc"))) {
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                                dpr.setLong_description(String.valueOf(Html
+                                        .fromHtml(objProd.getString("long_desc"), Html.FROM_HTML_MODE_LEGACY)));
+                            } else {
+                                dpr.setLong_description(String.valueOf(Html
+                                        .fromHtml(objProd.getString("long_desc"))));
+                            }
                         } else {
-                            dpr.setLong_description(String.valueOf(Html.fromHtml(objProd.getString("long_desc"))));
+                            dpr.setLong_description(objProd.getString("long_desc"));
                         }
 
-//                        Log.d("longDesc tes1 1", String.valueOf(Html.fromHtml(objProd.
-//                                getString("long_desc"))));
-//                        Log.d("longDesc tes1 2", objProd.getString("long_desc"));
+                        Log.d("longDesc tes1 1", String.valueOf(Html.fromHtml(objProd.
+                                getString("long_desc"))));
+                        Log.d("longDesc tes1 2", objProd.getString("long_desc"));
 
                         if (objProd.isNull("spc_price")) {
                             dpr.setSpc_price("");
