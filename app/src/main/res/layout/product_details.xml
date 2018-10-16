@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="detailprod"
+            type="com.example.tomz.electroniccity.page.details.checkout.ProductDetailViewModel" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/layout_product_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="?attr/actionBarSize"
+            android:background="@color/newlightblue"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:titleTextColor="#FFFFFF"
+            app:titleTextAppearance="@style/Toolbar.TitleText"
+            app:contentInsetStartWithNavigation="0dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <include
+                android:id="@+id/produk_detail"
+                layout="@layout/product_details_item"/>
+
+            <android.support.v4.widget.ContentLoadingProgressBar
+                android:id="@+id/loadDetail"
+                style="?android:attr/progressBarStyleLarge"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:visibility="gone" />
+            <LinearLayout
+                android:id="@+id/btn_buy_now"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="@drawable/background_btn_buy"
+                android:onClick="@{()->detailprod.onBuyClicked()}"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:focusable="true">
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_btn_beli_item_now"
+                    android:textColor="@drawable/text_color_common"
+                    android:textSize="18sp" />
+            </LinearLayout>
+        </FrameLayout>
+    </LinearLayout>
+</layout>
