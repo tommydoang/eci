@@ -18,7 +18,8 @@
             android:id="@+id/text_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{policy.descPolicy}"/>
+            android:text="@{policy.descPolicy}"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 </layout>
