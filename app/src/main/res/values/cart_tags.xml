@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <integer name="btn_plus_view">1</integer>
+    <integer name="btn_minus_view">2</integer>
+    <integer name="iv_delete_view">3</integer>
+
+</resources>
