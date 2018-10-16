@@ -1,9 +1,9 @@
 package com.example.tomz.electroniccity;
 
 import android.app.Activity;
-import android.app.Application;
 import android.app.Service;
 import android.os.StrictMode;
+import android.support.multidex.MultiDexApplication;
 
 import com.androidnetworking.AndroidNetworking;
 import com.example.tomz.electroniccity.di.component.DaggerAppComponent;
@@ -15,7 +15,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasServiceInjector;
 
-public class MyApps extends Application implements HasActivityInjector, HasServiceInjector {
+public class MyApps extends MultiDexApplication implements HasActivityInjector, HasServiceInjector {
 
     @Inject DispatchingAndroidInjector<Activity> activityInjector;
     @Inject DispatchingAndroidInjector<Service> serviceInjector;
