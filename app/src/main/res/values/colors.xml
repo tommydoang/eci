@@ -21,6 +21,7 @@
     <color name="blue900">#0D47A1</color>
     <color name="lightblue400">#29B6FC</color>
     <color name="lightblue500">#03A9F4</color>
+    <color name="lightblue800">#0277BD</color>
     <color name="lightblue900">#01579B</color>
     <color name="newlightblue">#0077C0</color>
     <color name="orange400">#FFA726</color>
@@ -33,6 +34,10 @@
     <color name="darkBlue1">#00006A</color>
     <color name="darkBlue2">#000099</color>
     <color name="lightBlue1">#1976D2</color>
+
+    <color name="dDVTransparentGray">#99000000</color>
+    <color name="dDVColorPrimary">@color/colorPrimary</color>
+    <color name="transparentGray">#99000000</color>
 
     <!-- dots inactive colors -->
     <color name="dot_dark_screen1">#d1395c</color>
