@@ -105,7 +105,6 @@ public class Policy extends BaseActivity<ActivityPolicyBinding, PolicyViewModel>
                 dataPolicyResponses -> mPolicyViewModel.setDataToList(dataPolicyResponses));
     }
 
-
     @Override
     public void onSuccess() {
 
