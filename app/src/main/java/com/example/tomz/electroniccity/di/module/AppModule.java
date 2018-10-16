@@ -12,6 +12,7 @@ import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.local.db.AppDatabase;
 import com.example.tomz.electroniccity.data.local.db.AppDbHelper;
 import com.example.tomz.electroniccity.data.local.db.DbHelper;
+import com.example.tomz.electroniccity.data.local.db.dao.CartDao;
 import com.example.tomz.electroniccity.data.local.pref.AppPreferencesHelper;
 import com.example.tomz.electroniccity.data.local.pref.PreferencesHelper;
 import com.example.tomz.electroniccity.data.remote.ApiClient;
@@ -101,6 +102,7 @@ public class AppModule {
     @Singleton
     AppDatabase provideAppDatabase(@DatabaseInfo String dbName, Context context) {
         return Room.databaseBuilder(context, AppDatabase.class, dbName)
+                .fallbackToDestructiveMigration()
                 .build();
     }
 
@@ -135,6 +137,12 @@ public class AppModule {
 
     @Provides
     LoadFragmentHelper provideFragmentLoader() { return new LoadFragmentHelper(); }
+
+    @Singleton
+    @Provides
+    CartDao provideCartDao(AppDatabase appDatabase){
+        return appDatabase.cartDao();
+    }
 
 //    @Provides
 //    LocalBroadcastManager provideBroadcastManager(@PerActivity Context ctx) {
