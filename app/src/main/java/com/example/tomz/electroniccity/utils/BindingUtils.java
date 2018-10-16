@@ -3,6 +3,8 @@ package com.example.tomz.electroniccity.utils;
 import android.databinding.BindingAdapter;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.tomz.electroniccity.adapter.cart.CartAddressAdapter;
+import com.example.tomz.electroniccity.adapter.cart.CartShopListAdapter;
 import com.example.tomz.electroniccity.adapter.side_menu.about.AboutAdapter;
 import com.example.tomz.electroniccity.adapter.address.AddressAdapter;
 import com.example.tomz.electroniccity.adapter.history_order.HistoryOrderAdapter;
@@ -33,6 +35,7 @@ import com.example.tomz.electroniccity.data.model.api.products.tab7.DataProductT
 import com.example.tomz.electroniccity.data.model.api.products.tab8.DataProductTab8Response;
 import com.example.tomz.electroniccity.data.model.api.products.tab9.DataProductTab9Response;
 import com.example.tomz.electroniccity.data.model.api.promo.DataPromoResponse;
+import com.example.tomz.electroniccity.data.model.db.shop.DBShopListResponse;
 
 import java.util.List;
 
@@ -178,7 +181,23 @@ public final class BindingUtils {
         }
     }
 
+    @BindingAdapter({"adaptercart"})
+    public static void addCartItem(RecyclerView recyclerView, List<DBShopListResponse> modelProdList){
+        CartShopListAdapter adapter = (CartShopListAdapter) recyclerView.getAdapter();
+        if (adapter != null){
+            adapter.clearItems();
+            adapter.addItems(modelProdList);
+        }
+    }
 
+    @BindingAdapter({"adaptercartaddr"})
+    public static void addCartAddrItem(RecyclerView recyclerView, List<DataAddressResponse> modelProdList){
+        CartAddressAdapter adapter = (CartAddressAdapter) recyclerView.getAdapter();
+        if (adapter != null){
+            adapter.clearItems();
+            adapter.addItems(modelProdList);
+        }
+    }
     //added here adapter
 
 }
