@@ -148,6 +148,10 @@
     <string name="text_btn_intro_skip">LEWATI</string>
     <string name="text_btn_intro_start">MENGERTI</string>
     <string name="text_btn_change_pass">SIMPAN</string>
+    <string name="text_btn_beli_item">BELI</string>
+    <string name="text_btn_beli_item_now">BELI SEKARANG</string>
+    <string name="text_btn_decrease_item">-</string>
+    <string name="text_btn_increase_item">+</string>
     <!--Title Page-->
     <string name="title_register">Daftar Member</string>
     <string name="title_forget_password">Lupa Sandi</string>
@@ -161,6 +165,7 @@
     <string name="title_value_added">Value Added</string>
     <string name="title_about_us">Tentang Kami</string>
     <string name="title_privacy_policy">Kebijakan Privasi</string>
+    <string name="title_detail_produk">Detail Produk</string>
     <!--Miscellaneous Text-->
     <string name="text_yes">YA</string>
     <string name="text_no">TIDAK</string>
@@ -202,6 +207,15 @@
     <string name="text_ubah_hp">UBAH No.HP</string>
     <string name="text_head_value_add_1">PREMIUM SERVICE</string>
     <string name="text_head_value_add_2">LAYANAN TERBAIK KAMI</string>
+    <string name="text_spek_detail_produk">SPESIFIKASI PRODUK</string>
+    <string name="text_desc_detail_produk">DESKRIPSI PRODUK</string>
+    <string name="text_total_price">Total Pembayaran : </string>"
+    <string name="text_qty_minimum_item">1</string>
+    <string name="text_belanja_lagi">BELANJA LAGI</string>
+    <string name="text_bayar_segera">BAYAR</string>
+    <string name="text_sukses_add_to_cart">Barang telah masuk keranjang Anda</string>
+    <string name="text_item_in_cart_already">Barang sudah ada di keranjang</string>
+    <string name="text_login_add_to_cart">Silahkan login terlebih dahulu</string>
 
     <!--Miscellaneous Error Text-->
     <string name="err_username_email_empty">Mohon isi nama/email Anda</string>
