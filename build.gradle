@@ -49,11 +49,12 @@ ext {
 
     //PlayServices-Firebase
     PlayServicesVersion = '15.0.1'
-    FirebaseVersion = '16.0.3'
-    FCMversion = '17.3.0'
+    FirebaseVersion = '16.0.4'
+    FCMversion = '17.3.3'
+    FDBversion = '16.0.3'
 
     //Dagger2
-    Dagger2Version = '2.14.1'
+    Dagger2Version = '2.15'
 
     //Retrofit
     RetrofitVersion = '2.4.0'
@@ -81,6 +82,7 @@ ext {
     //Gson
     GsonVersion = ' 2.8.5'
 
+    DexVersion = '1.0.3'
     JunitVersion = '4.12'
     RunnerVersion = '1.0.2'
     EspressoVersion = '3.0.2'
