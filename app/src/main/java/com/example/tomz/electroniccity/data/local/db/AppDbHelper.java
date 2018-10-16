@@ -1,7 +1,5 @@
 package com.example.tomz.electroniccity.data.local.db;
 
-import android.util.Log;
-
 import com.example.tomz.electroniccity.data.model.db.CartMdl;
 import com.example.tomz.electroniccity.data.model.db.WishesMdl;
 
