@@ -33,6 +33,10 @@ import com.example.tomz.electroniccity.page.bn_tab_home.account.register_forget.
 import com.example.tomz.electroniccity.page.bn_tab_home.account.register_forget.RegForgModule;
 import com.example.tomz.electroniccity.page.bn_tab_home.home.FragHome;
 import com.example.tomz.electroniccity.page.bn_tab_home.home.FragHomeModule;
+import com.example.tomz.electroniccity.page.details.cart.Cart;
+import com.example.tomz.electroniccity.page.details.checkout.ProductDetail;
+import com.example.tomz.electroniccity.page.details.checkout.ProductDetailModule;
+import com.example.tomz.electroniccity.page.details.cart.CartModule;
 import com.example.tomz.electroniccity.page.intro.IntroApps;
 import com.example.tomz.electroniccity.page.main.MainActivity;
 import com.example.tomz.electroniccity.page.main.MainActivityModule;
@@ -124,5 +128,11 @@ public abstract class ActivityBuilder {
 
     @ContributesAndroidInjector(modules = PolicyModule.class)
     abstract Policy bindPolicy();
+
+    @ContributesAndroidInjector(modules = CartModule.class)
+    abstract Cart bindCart();
+
+    @ContributesAndroidInjector(modules = ProductDetailModule.class)
+    abstract ProductDetail bindProductDetail();
 
 }
