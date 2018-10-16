@@ -22,7 +22,8 @@
         android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/map_api_key" />
@@ -64,6 +65,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".page.main.MainActivity" />
         </activity>
+
+        <!-- AKUN SAYA -->
         <activity
             android:name=".page.bn_tab_home.account.edit_profile.EditProfile"
             android:label="@string/title_profile_saya"
@@ -95,6 +98,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".page.main.MainActivity" />
         </activity>
+        <activity
+            android:name=".page.bn_tab_home.account.history_order.HistoryOrder"
+            android:label="@string/title_history_order"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+
+        <!-- Side Nav Menu -->
         <activity
             android:name=".page.side_menu.care.CustomerCare"
             android:label="@string/title_customer_care"
@@ -131,15 +145,18 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".page.main.MainActivity" />
         </activity>
+
+        <!-- Detail Produk Best Seller -->
         <activity
-            android:name=".page.bn_tab_home.account.history_order.HistoryOrder"
-            android:label="@string/title_history_order"
+            android:name=".page.details.checkout.ProductDetail"
+            android:label="@string/title_detail_produk"
             android:parentActivityName=".page.main.MainActivity"
             android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".page.main.MainActivity" />
         </activity>
+        <activity android:name=".page.details.cart.Cart"></activity>
     </application>
 
 </manifest>
