@@ -3,8 +3,12 @@ package com.example.tomz.electroniccity.page.main;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.CoordinatorLayout;
@@ -12,6 +16,7 @@ import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -28,7 +33,6 @@ import android.widget.Toast;
 import com.example.tomz.electroniccity.BR;
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.DataManager;
-import com.example.tomz.electroniccity.data.model._testdoang.DataModelIdeas;
 import com.example.tomz.electroniccity.databinding.ActivityMainBinding;
 import com.example.tomz.electroniccity.helper.IntentHelper;
 import com.example.tomz.electroniccity.helper.LoadFragmentHelper;
@@ -51,8 +55,6 @@ import com.example.tomz.electroniccity.page.side_menu.value.ValueAdd;
 import com.example.tomz.electroniccity.utils.connection.ConnectionDetector;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -74,13 +76,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     @Inject DispatchingAndroidInjector<Fragment> mSupportFragmentDispatchingAndroidInjector;
     @Inject DispatchingAndroidInjector<android.app.Fragment> mFragmentDispatchingAndroidInjector;
     private Fragment mFragment;
-    private Toolbar mToolbar;
     private NavigationView mNavigationView;
     private DrawerLayout mDrawerLayout;
     private CoordinatorLayout mHomeCoorLayout;
     private BottomNavigationView mBottomNavigationView;
     private ActivityMainBinding mHomeBinding;
-    private ImageView mDrawerIcon, mSearchIcon;
     private int countFragBackStack;
 
     @Override
@@ -96,11 +96,11 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     private void setupView(){
         mDrawerLayout = mHomeBinding.drawerLayout;
         mNavigationView = mHomeBinding.headNavView;
-        mToolbar = mHomeBinding.mainContentLayout.toolbar;
+        Toolbar mToolbar = mHomeBinding.mainContentLayout.toolbar;
         mHomeCoorLayout = mHomeBinding.mainContentLayout.mainCoorLayout;
         mBottomNavigationView = mHomeBinding.mainContentLayout.bottomNavView;
-        mDrawerIcon = mHomeBinding.mainContentLayout.icHamburgerMenu;
-        mSearchIcon = mHomeBinding.mainContentLayout.icSearch;
+        ImageView mDrawerIcon = mHomeBinding.mainContentLayout.icHamburgerMenu;
+        ImageView mSearchIcon = mHomeBinding.mainContentLayout.icSearch;
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mainStatusBarColor();
@@ -117,6 +117,9 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
         mBottomNavigationView.setOnNavigationItemSelectedListener(this);
         mDrawerIcon.setOnClickListener(this);
         mSearchIcon.setOnClickListener(this);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(BReceiver,
+                new IntentFilter("credit_session"));
     }
 
     private void showAsDefault(){
@@ -326,20 +329,10 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
     }
 
     @Override
-    public void onSuccessGetAuthKey(String statusResponse) {
-        if (statusResponse.equals("SUCCSESS") || statusResponse.equals("SUCCESS")){
-            //get all products disini
-        }
-    }
-
-    @Override
     public void handleError(Throwable throwable) {
-
-    }
-
-    @Override
-    public void updateBlog(List<DataModelIdeas> dataModelIdeasList) {
-
+        Log.e("errMainAuth tes1", throwable.getMessage());
+        ToastHelper.createToast(this, getString(R.string.err_auth_failure), Toast.LENGTH_LONG);
+        finish();
     }
 
     @Override
@@ -353,4 +346,44 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
                 break;
         }
     }
+
+    private BroadcastReceiver BReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String action = intent.getAction();
+            Log.d("action tes1", action);
+            if (action != null) {
+                if (action.equals("credit_session")){
+                    String messageFrom = intent.getStringExtra("credit_session");
+                    Log.d("receiveFrom tes1", messageFrom);
+                    switch (messageFrom) {
+                        case "beda_tgl":
+                            getAuthKey();
+                            Log.d("mainDiffDate tes1", "MASUKKK!!");
+                            break;
+                        case "tgl_sama":
+                            Log.d("mainSameDate tes1", "MASUKKK!!");
+                            break;
+                    }
+                }
+            }
+        }
+    };
+
+    private void getAuthKey(){
+        new Handler().postDelayed(() -> {
+            try {
+                if (mDataManager.getIntFlag() != 0) {
+                    mMainViewModel.getAuthApiCall(getResultCipher());
+                }  else {
+                    ToastHelper.createToast(this, getString(R.string.err_auth_failure),
+                            Toast.LENGTH_LONG);
+                    moveTaskToBack(true);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }, 1000);
+    }
+
 }
