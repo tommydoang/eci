@@ -14,9 +14,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.example.tomz.electroniccity.data.DataManager;
-import com.example.tomz.electroniccity.data.local.pref.AppPreferencesHelper;
-import com.example.tomz.electroniccity.page.bn_tab_home.account.AuthRequest;
-import com.example.tomz.electroniccity.utils.MaskProcess;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -32,26 +29,26 @@ import dagger.android.AndroidInjection;
 
 public class DateService extends Service {
 
-    private AlarmManager alarmMgr;
     private Intent intent2;
-    private Calendar mCalendar;
-    private String dateFormat, timeFormat, dateTime;
     private SimpleDateFormat sdfDate;
     @Inject DataManager mDataManager;
-//    @Inject AppPreferencesHelper mAppPreferencesHelper;
 
+    @SuppressLint("SimpleDateFormat")
     @TargetApi(Build.VERSION_CODES.M)
     @Override
     public void onCreate(){
-        mCalendar = Calendar.getInstance();
+        Calendar mCalendar = Calendar.getInstance();
         mCalendar.setTimeInMillis(System.currentTimeMillis());
+        sdfDate = new SimpleDateFormat("dd-MM-yyyy");
 
         Intent intent = new Intent(this, DateService.class);
         PendingIntent pIntent = PendingIntent.getService(this, 0, intent, 0);
 
-        alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(),
-                600 * 60 * 1000, pIntent);
+        AlarmManager alarmMgr = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        if (alarmMgr != null) {
+            alarmMgr.setRepeating(AlarmManager.RTC_WAKEUP, mCalendar.getTimeInMillis(),
+                    600 * 60 * 1000, pIntent);
+        }
         Log.i("date service tes1", "masukk");
         AndroidInjection.inject(this);
     }
@@ -64,7 +61,6 @@ public class DateService extends Service {
     }
 
     private void customSendBroadcast(String str){
-        Log.d("sendBroadServ tes1", "MASUKK!!!");
         Intent intent = new Intent("credit_session");
         intent.putExtra("credit_session", str);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
