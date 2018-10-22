@@ -8,11 +8,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.Settings;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -29,8 +27,6 @@ import android.view.Window;
 import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.helper.IntentHelper;
-import com.example.tomz.electroniccity.helper.alertdialog.AlertDialogHelper;
-import com.example.tomz.electroniccity.helper.alertdialog.AlertDialogHelpers;
 import com.example.tomz.electroniccity.utils.AppConstants;
 import com.example.tomz.electroniccity.utils.MaskProcess;
 import com.example.tomz.electroniccity.utils.NewEnableGPS;
@@ -183,28 +179,8 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
                     } else {
                         customSendBroadcast("denied");
                     }
-                } /*else {
-                    Log.d("permit length tes1", permissions.length+"");
-                    AlertDialogHelper.createGeneralDialog(this,
-                            getString(R.string.text_title_enabled_permission_manual),
-                            getString(R.string.text_enabled_location_permission_manual),
-                            "GO TO PERMISSIONS", "CANCEL", new AlertDialogHelpers() {
-                                @Override
-                                public void onPositiveClicked() {
-                                    Uri uri = Uri.fromParts("package",
-                                            getPackageName(), null);
-                                    mIntentHelper.createIntent2Permissions(BaseActivity.this,
-                                            Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
-                                            uri);
-                                }
-                                @Override
-                                public void onNegativeClicked() {
-                                    //other logic
-                                }
-                            });
-                    customSendBroadcast("denied");
                 }
-                break;*/
+                break;
         }
     }
 
@@ -277,7 +253,6 @@ public abstract class BaseActivity<B extends ViewDataBinding, V extends BaseView
     }
 
     private void customSendBroadcast(String str){
-        Log.d("sendBroadServ tes1", "MASUKK!!!");
         Intent intent = new Intent("permit_allowed");
         intent.putExtra("permit_allowed", str);
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
