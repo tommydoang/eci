@@ -1,7 +1,6 @@
 package com.example.tomz.electroniccity.page.splash;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -12,8 +11,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.LocalBroadcastManager;
-import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -23,7 +20,7 @@ import com.example.tomz.electroniccity.R;
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.databinding.ActivitySplashScreenBinding;
 import com.example.tomz.electroniccity.helper.IntentHelper;
-import com.example.tomz.electroniccity.helper.ToastHelper;;
+import com.example.tomz.electroniccity.helper.ToastHelper;
 import com.example.tomz.electroniccity.helper.alertdialog.AlertDialogHelper;
 import com.example.tomz.electroniccity.helper.alertdialog.AlertDialogHelpers;
 import com.example.tomz.electroniccity.helper.firebase.AnalyticsClient;
@@ -35,22 +32,15 @@ import com.example.tomz.electroniccity.page.main.MainActivity;
 import com.example.tomz.electroniccity.utils.MaskProcess;
 import com.example.tomz.electroniccity.utils.connection.ConnectionDetector;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
-import com.example.tomz.electroniccity.data.local.pref.AppPreferencesHelper;
 import com.example.tomz.electroniccity.utils.services.CheckServices;
-import com.example.tomz.electroniccity.utils.services.date.DateService;
-import com.example.tomz.electroniccity.utils.services.location.LocationService;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
-
 public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, SplashViewModel> implements
-        /*HasActivityInjector,*/ SplashNavigator {
+        SplashNavigator {
 
     @Inject AnalyticsClient mAnalyticsClient;
     @Inject IntentHelper mIntentHelper;
@@ -59,7 +49,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
     @Inject SplashViewModel mSplashViewModel;
     @Inject DataManager mDataManager;
     @Inject CheckServices mCheckServices;
-    private IntentFilter filter;
+    private int flagConn = 0;
 
     @Override
     public int getLayoutId() {
@@ -88,15 +78,20 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
         if (mDataManager.getIntFlag() != 0) {
             new Handler().postDelayed(() -> {
                 Log.d("delaySplash tes1", "MASUKK!!!");
-                if (isPermissionAllowed())
-                    getAuthKey();
+                if (isPermissionAllowed()) {
+                    if (flagConn == 1){
+                        getAuthKey();
+                    } else {
+                        ToastHelper.createToast(this, getString(R.string.err_internet_access),
+                                Toast.LENGTH_LONG);
+                        finish();
+                    }
+                }
             }, 5000);
         }
     }
 
     private void registerBroadcast(){
-        LocalBroadcastManager.getInstance(SplashActivity.this)
-                .registerReceiver(BReceiver, new IntentFilter("credit_session"));
         LocalBroadcastManager.getInstance(SplashActivity.this)
                 .registerReceiver(BReceiver, new IntentFilter("permit_allowed"));
     }
@@ -106,6 +101,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
             SnackBarHelper.createWithoutAction(findViewById(R.id.splashCoorLayout),
                     getString(R.string.err_no_network),
                     Snackbar.LENGTH_SHORT);
+            flagConn = -1;
         } else {
             CheckInternetHelper.startPing(false, new CheckInternetHelpers() {
                 @Override
@@ -113,6 +109,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
                     SnackBarHelper.createWithoutAction(findViewById(R.id.splashCoorLayout),
                             getString(R.string.err_internet_access),
                             Snackbar.LENGTH_SHORT);
+                    flagConn = -2;
                 }
                 @Override
                 public void onOtherResult() {
@@ -120,6 +117,7 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
                             getString(R.string.err_back_online),
                             Toast.LENGTH_LONG);
                     mAnalyticsClient.init(SplashActivity.this);
+                    flagConn = 1;
                 }
             });
         }
@@ -170,10 +168,9 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
 
     @Override
     public void handleError(Throwable throwable) {
-        Log.e("errSplash tes1", ""+throwable.getMessage());
+        Log.e("errSplashAuth tes1", ""+throwable.getMessage());
         ToastHelper.createToast(this, getString(R.string.err_server),
                 Toast.LENGTH_LONG);
-//        isLoginAlready();
         finish();
     }
 
@@ -236,13 +233,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashScreenBinding, Sp
         SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
         String format = sdf.format(new Date());
         mDataManager.setNewAuthDate(format);
-        Log.d("dateStamp tes1", mDataManager.getNewAuthDate());
-    }
-
-    private void createFilter(){
-        filter = new IntentFilter();
-        filter.addAction("credit_session");
-        filter.addAction("permit_allowed");
+        Log.d("dateStamp tes1 1", mDataManager.getLastAuthDate());
+        Log.d("dateStamp tes1 2", mDataManager.getNewAuthDate());
     }
 
     @Override
