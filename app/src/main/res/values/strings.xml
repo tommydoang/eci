@@ -216,6 +216,7 @@
     <string name="text_sukses_add_to_cart">Barang telah masuk keranjang Anda</string>
     <string name="text_item_in_cart_already">Barang sudah ada di keranjang</string>
     <string name="text_login_add_to_cart">Silahkan login terlebih dahulu</string>
+    <string name="text_list_item_cart">Keranjang Anda</string>
 
     <!--Miscellaneous Error Text-->
     <string name="err_username_email_empty">Mohon isi nama/email Anda</string>
