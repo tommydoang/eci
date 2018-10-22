@@ -11,7 +11,7 @@
 
     <android.support.v7.widget.CardView
         android:id="@+id/cvTab1"
-        android:layout_width="140dp"
+        android:layout_width="160dp"
         android:layout_height="220dp"
         android:background="@color/grey300"
         app:cardElevation="3dp"
@@ -38,16 +38,33 @@
                 android:layout_marginTop="8dp"
                 android:text="@{tab1.nameProd}"
                 android:textColor="@color/black" />
-            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+            <RelativeLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@{tab1.realPrice}" />
+                android:layout_height="wrap_content">
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tv_normal_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@{tab1.realPrice}" />
+                <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                    android:id="@+id/tv_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_toEndOf="@+id/tv_normal_price"
+                    android:layout_toRightOf="@+id/tv_normal_price"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/red500"/>
+            </RelativeLayout>
             <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:id="@+id/tv_spc_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="@{tab1.realPrice}" />
+                android:text="@{tab1.spcPrice}" />
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>
