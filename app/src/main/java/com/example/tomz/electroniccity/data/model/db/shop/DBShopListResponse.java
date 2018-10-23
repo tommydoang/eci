@@ -5,14 +5,14 @@ import android.support.annotation.NonNull;
 public class DBShopListResponse {
 
     private String id_prod, skuProduk, nameProduk, hargaNormalProduk,
-            hargaPromoProduk, deskripsiProd, speksifikasiProd, imageProduk;
+            hargaPromoProduk, deskripsiProd, speksifikasiProd, imageProduk, totalHargaPerItem;
     private int qtyItem;
 
     public DBShopListResponse(){}
 
     public DBShopListResponse(String id_prod, String skuProduk, String nameProduk,
                    String hargaNormalProduk, String hargaPromoProduk, String deskripsiProd,
-                   String speksifikasiProd, String imageProduk, int qtyItem) {
+                   String speksifikasiProd, String imageProduk, int qtyItem, String totalHargaPerItem) {
         this.id_prod = id_prod;
         this.skuProduk = skuProduk;
         this.nameProduk = nameProduk;
@@ -22,6 +22,7 @@ public class DBShopListResponse {
         this.speksifikasiProd = speksifikasiProd;
         this.imageProduk = imageProduk;
         this.qtyItem = qtyItem;
+        this.totalHargaPerItem = totalHargaPerItem;
     }
 
     public String getId_prod() {
@@ -96,4 +97,11 @@ public class DBShopListResponse {
         this.qtyItem = qtyItem;
     }
 
+    public String getTotalHargaPerItem() {
+        return totalHargaPerItem;
+    }
+
+    public void setTotalHargaPerItem(String totalHargaPerItem) {
+        this.totalHargaPerItem = totalHargaPerItem;
+    }
 }
