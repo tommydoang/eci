@@ -16,6 +16,7 @@ public class Tab1ItemViewModel {
     public final ObservableField<String> imageUrl;
     public final ObservableField<String> nameProd;
     public final ObservableField<String> realPrice;
+    public ObservableField<String> spcPrice;
     private DataProductTab1Response productTab1Response;
 
     public Tab1ItemViewModel(DataProductTab1Response dataModelProd) {
@@ -23,6 +24,9 @@ public class Tab1ItemViewModel {
         imageUrl = new ObservableField<>(dataModelProd.getImg_thumb());
         nameProd = new ObservableField<>(dataModelProd.getName_prod());
         realPrice = new ObservableField<>(CommonUtils.setCustomCurrency(dataModelProd.getReal_price()));
+        if (!dataModelProd.getSpc_price().isEmpty()) {
+            spcPrice = new ObservableField<>(CommonUtils.setCustomCurrency(dataModelProd.getSpc_price()));
+        }
     }
 
     @BindingAdapter({"imageViewBerak"})
