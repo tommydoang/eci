@@ -37,9 +37,9 @@ public class AppDataManager implements DataManager {
     private final PreferencesHelper mPreferencesHelper;
 
     @Inject
-    public AppDataManager(Context ctx, DbHelper dbHelper,
-                          PreferencesHelper preferencesHelper,
-                          ApiHelper apiHelper, Gson gson) {
+    AppDataManager(Context ctx, DbHelper dbHelper,
+                   PreferencesHelper preferencesHelper,
+                   ApiHelper apiHelper, Gson gson) {
         mContext = ctx;
         mDbHelper = dbHelper;
         mPreferencesHelper = preferencesHelper;
@@ -71,8 +71,8 @@ public class AppDataManager implements DataManager {
     }
 
     @Override
-    public Observable<Boolean> updateQtyItem(int qtyProd, int idProd) {
-        return mDbHelper.updateQtyItem(qtyProd, idProd);
+    public Observable<Boolean> updateQtyItem(int qtyProd, int total_hpi, int idProd) {
+        return mDbHelper.updateQtyItem(qtyProd, total_hpi, idProd);
     }
 
     @Override
