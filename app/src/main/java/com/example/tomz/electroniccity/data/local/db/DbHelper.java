@@ -13,7 +13,7 @@ public interface DbHelper {
     Observable<List<WishesMdl>> getAllWishes();
     Observable<Boolean> insertCart(final CartMdl cart);
     Observable<Boolean> insertWish(final WishesMdl wish);
-    Observable<Boolean> updateQtyItem(int qtyProd, int idProd);
+    Observable<Boolean> updateQtyItem(int qtyProd, int total_hpi, int idProd);
     Observable<Boolean> deleteAllCart();
     Observable<Boolean> deleteItemCart(int idProd);
     int countAllItem();
