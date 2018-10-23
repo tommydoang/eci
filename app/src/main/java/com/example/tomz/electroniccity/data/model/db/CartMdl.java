@@ -41,11 +41,14 @@ public class CartMdl {
     @ColumnInfo(name = "qty")
     private int qtyItem;
 
+    @ColumnInfo(name = "total_harga_per_item")
+    private String totalHargaPerItem;
+
     public CartMdl(){}
 
     public CartMdl(@NonNull String id_prod, String skuProduk, String nameProduk,
                    String hargaNormalProduk, String hargaPromoProduk, String deskripsiProd,
-                   String speksifikasiProd, String imageProduk, int qtyItem) {
+                   String speksifikasiProd, String imageProduk, int qtyItem, String totalHargaPerItem) {
         this.id_prod = id_prod;
         this.skuProduk = skuProduk;
         this.nameProduk = nameProduk;
@@ -55,6 +58,7 @@ public class CartMdl {
         this.speksifikasiProd = speksifikasiProd;
         this.imageProduk = imageProduk;
         this.qtyItem = qtyItem;
+        this.totalHargaPerItem = totalHargaPerItem;
     }
 
     @NonNull
@@ -128,5 +132,13 @@ public class CartMdl {
 
     public void setQtyItem(int qtyItem) {
         this.qtyItem = qtyItem;
+    }
+
+    public String getTotalHargaPerItem() {
+        return totalHargaPerItem;
+    }
+
+    public void setTotalHargaPerItem(String totalHargaPerItem) {
+        this.totalHargaPerItem = totalHargaPerItem;
     }
 }
