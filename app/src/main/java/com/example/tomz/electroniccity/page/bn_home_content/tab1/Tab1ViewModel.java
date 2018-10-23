@@ -146,7 +146,7 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                         DataProductTab1Response dpr = new DataProductTab1Response();
                         dpr.setId_category_head(object.getString("id_category_head"));
                         dpr.setId_prod(objProd.getString("id_prod"));
-                        dpr.setSku(objProd.getString("sku"));
+                        dpr.setSku(objProd.getString("model"));
                         dpr.setName_prod(objProd.getString("name_prod"));
                         if (!objProd.isNull("tags")) {
                             dpr.setTags(objProd.getString("tags"));
@@ -177,7 +177,7 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                         Log.d("longDesc tes1 2", objProd.getString("long_desc"));
 
                         if (objProd.isNull("spc_price")) {
-                            dpr.setSpc_price("");
+                            dpr.setSpc_price("201980"); //TODO FOR TESTING PURPOSE ONLY
                         } else {
                             dpr.setSpc_price(objProd.getString("spc_price"));
                         }
