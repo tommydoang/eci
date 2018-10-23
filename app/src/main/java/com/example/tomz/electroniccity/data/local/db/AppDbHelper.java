@@ -47,9 +47,9 @@ public class AppDbHelper implements DbHelper {
     }
 
     @Override
-    public Observable<Boolean> updateQtyItem(int qtyProd, int idProd) {
+    public Observable<Boolean> updateQtyItem(int qtyProd, int idProd, int total_hpi) {
         return Observable.fromCallable(() -> {
-            mAppDatabase.cartDao().updateQtyItem(qtyProd,idProd);
+            mAppDatabase.cartDao().updateQtyItem(qtyProd,total_hpi,idProd);
             return true;
         });
     }
