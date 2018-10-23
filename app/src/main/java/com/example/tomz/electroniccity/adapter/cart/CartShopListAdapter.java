@@ -1,7 +1,9 @@
 package com.example.tomz.electroniccity.adapter.cart;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,36 +11,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.tomz.electroniccity.R;
-import com.example.tomz.electroniccity.data.local.db.dao.CartDao;
 import com.example.tomz.electroniccity.data.model.db.shop.DBShopListResponse;
-//import com.example.tomz.electroniccity.databinding.CartShopListItemBinding;
 import com.example.tomz.electroniccity.utils.CommonUtils;
-import com.example.tomz.electroniccity.utils.base.BaseViewHolder;
 import com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapter.MyViewHolder>{
 
     private List<DBShopListResponse> mDbShopModel;
-    private CustomTextViewLatoFont mTvQtyItem, mTvHargaNormal, mTvHargaPromo;
-    private int hargaNormalTemp = 0, hargaPromoTemp = 0, layoutPosition;
-    private String hargaNormal, hargaPromo;
-    private ArrayList<String> listHargaNormal = new ArrayList<>();
-    private ArrayList<String> listHargaPromo = new ArrayList<>();
-    private Button mBtnIncr, mBtnDecr;
-    private String text;
-    @Inject CartDao cartDao;
     private UpdateQty mUpdateQtyListener;
-//    private CartShopListItemBinding mBinding;
     private Context mCtx;
+    private int hargaTotal;
     private LayoutInflater inflater;
 
     public CartShopListAdapter(Context ctx, UpdateQty updateQty,
@@ -52,10 +39,6 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
     @NonNull
     @Override
     public CartShopListAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-//        /*CartShopListItemBinding*/ mBinding = DataBindingUtil
-//                .inflate(LayoutInflater.from(parent.getContext()),
-//                        R.layout.cart_shop_list_item, parent, false);
-//        return new BindingHolder(mBinding);
         View view = inflater.inflate(R.layout.cart_shop_list_item, parent, false);
         return new MyViewHolder(view);
     }
@@ -66,14 +49,18 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
         Glide.with(mCtx).load(mDbShopModel.get(position).getImageProduk()).into(holder.ivImgProd);
         holder.tvNameProd.setText(mDbShopModel.get(position).getNameProduk());
         holder.tvSkuProd.setText(mDbShopModel.get(position).getSkuProduk());
-        holder.tvHargaNormalProduk.setText(CommonUtils.setCustomCurrency(mDbShopModel.get(position).getHargaNormalProduk()));
-        holder.tvHargaPromoProduk.setText(mDbShopModel.get(position).getHargaPromoProduk());
+        if (mDbShopModel.get(position).getQtyItem() > 1){
+            holder.tvHargaNormalProduk.setText(CommonUtils.setCustomCurrency(mDbShopModel.get(position).getTotalHargaPerItem()));
+            holder.tvHargaPromoProduk.setText(mDbShopModel.get(position).getHargaPromoProduk());
+            hargaTotal += Integer.parseInt(mDbShopModel.get(position).getTotalHargaPerItem());
+            getTotalHargaPerItem();
+        } else {
+            holder.tvHargaNormalProduk.setText(CommonUtils.setCustomCurrency(mDbShopModel.get(position).getHargaNormalProduk()));
+            holder.tvHargaPromoProduk.setText(mDbShopModel.get(position).getHargaPromoProduk());
+            hargaTotal += Integer.parseInt(mDbShopModel.get(position).getTotalHargaPerItem());
+            getTotalHargaPerItem();
+        }
     }
-
-//    @Override
-//    public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-//        holder.onBind(position);
-//    }
 
     @Override
     public int getItemCount() {
@@ -84,107 +71,13 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
         }
     }
 
-//    public class BindingHolder extends BaseViewHolder implements
-//            CartItemViewModel.CartItemViewModelNavigatorListener, View.OnClickListener {
-//
-//        private CartShopListItemBinding binding;
-//        private CartItemViewModel cartItemViewModel;
-//        private DBShopListResponse dmi;
-//        public TextView mTvHargaNorm;
-//
-//        public BindingHolder(CartShopListItemBinding binding) {
-//            super(binding.getRoot());
-//            this.binding = binding;
-//        }
-//
-//        @Override
-//        public void onBind(int position) {
-//            mTvHargaNormal = binding.tvHargaProduk;
-//            mTvHargaPromo = binding.tvPromoProduk;
-//            mTvQtyItem = binding.tvItemQty;
-//            mBtnIncr = binding.increase;
-//            mBtnDecr = binding.decrease;
-//
-//            mBtnIncr.setTag(R.integer.btn_plus_view,itemView);
-//            mBtnDecr.setTag(R.integer.btn_minus_view,itemView);
-//            mTvQtyItem.setText(String.valueOf(mDbShopModel.get(position).getQtyItem()));
-//            Log.d("onBind tes1", String.valueOf(mDbShopModel.get(position).getQtyItem()));
-//
-//            dmi = mDbShopModel.get(position);
-//            cartItemViewModel = new CartItemViewModel(dmi,this);
-//            binding.setCart(cartItemViewModel);
-//            binding.executePendingBindings();
-//
-//            mBtnIncr.setOnClickListener(this);
-//            mBtnDecr.setOnClickListener(this);
-//
-//            Log.d("aPos tes1", getAdapterPosition()+"");
-//            Log.d("lPos tes1", getLayoutPosition()+"");
-//        }
-//
-//        @Override
-//        public void onIncrClick(int qty, String harga) {
-//            int qtyTemp = qty + 1;
-////            if (qtyTemp <= 2) {
-//                Log.d("qtyItem tes1", qtyTemp + "");
-//                mTvQtyItem.setText(String.valueOf(qtyTemp));
-//                mDbShopModel.get(getAdapterPosition()).setQtyItem(qtyTemp);
-//
-//                Log.d("onIncrClick tes1", harga);
-//                hargaNormalTemp = Integer.parseInt(harga) * qtyTemp;
-//                mTvHargaNormal.setText(CommonUtils.setCustomCurrency(String.valueOf(hargaNormalTemp)));
-////                mUpdateQtyListener.updateQtyItem(qtyTemp, Integer.parseInt(dmi.getId_prod()));
-//            Log.d("onIncr tes1", getAdapterPosition()+"");
-////            }
-//        }
-//
-//        @Override
-//        public void onDecrClick(int qty, String harga) {
-//            Log.d("onDecrClick tes1 1", qty+"");
-//
-////            if (qty > 1) {
-//                int qtyTemp = qty - 1;
-//                Log.d("onBtnClick tes1", qtyTemp + "");
-//                mTvQtyItem.setText(String.valueOf(qtyTemp));
-//
-//                Log.d("onDecrClick tes1 2", harga);
-//                hargaNormalTemp = Integer.parseInt(harga)*qtyTemp;
-//                mTvHargaNormal.setText(CommonUtils.setCustomCurrency(String.valueOf(hargaNormalTemp)));
-////                mUpdateQtyListener.updateQtyItem(qtyTemp, Integer.parseInt(dmi.getId_prod()));
-////            }
-//        }
-//
-//        @Override
-//        public void onDelClick(int id_prod) {
-//            Log.d("onDelClick tes1", id_prod+"");
-//            Log.d("onDEL tes1", getAdapterPosition()+"");
-//            mDbShopModel.remove(getAdapterPosition());
-//            notifyItemRemoved(getAdapterPosition());
-//            mUpdateQtyListener.deleteCartItem(id_prod);
-//        }
-//
-//        @Override
-//        public void onClick(View view) {
-//            if (view.getId() == mBtnIncr.getId()){
-//                View tmpView = (View) mBtnIncr.getTag(R.integer.btn_plus_view);
-//                CustomTextViewLatoFont tvQtyItem = tmpView.findViewById(R.id.tv_item_qty);
-//                int qtyTemp = Integer.parseInt(tvQtyItem.getText().toString()) + 1;
-////                tvQtyItem.setText(String.valueOf(qtyTemp));
-//                mDbShopModel.get(getAdapterPosition()).setQtyItem(qtyTemp);
-//                tvQtyItem.setText(mDbShopModel.get(getAdapterPosition()).getQtyItem());
-//                Log.d("aPos tes1", getAdapterPosition()+"");
-//                Log.d("qtyTemp tes1", String.valueOf(qtyTemp));
-//            }
-//        }
-//    }
-
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         private ImageView ivImgProd, ivDelete;
         private Button btn_plus, btn_minus;
         private CustomTextViewLatoFont tvNameProd, tvSkuProd, tvHargaNormalProduk, tvHargaPromoProduk, tvQtyItem;
 
-        public MyViewHolder(View itemView) {
+        MyViewHolder(View itemView) {
             super(itemView);
 
             tvNameProd =itemView.findViewById(R.id.tvNamaProduk);
@@ -212,7 +105,6 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
             if (v.getId() == btn_plus.getId()){
 
                 Log.d("INCR tes1", getAdapterPosition()+"");
-
                 if (mDbShopModel.get(getAdapterPosition()).getQtyItem() < 2) {
                     View tempview = (View) btn_plus.getTag(R.integer.btn_plus_view);
                     CustomTextViewLatoFont tv = tempview.findViewById(R.id.tv_item_qty);
@@ -220,13 +112,18 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
                     tv.setText(String.valueOf(number));
                     mDbShopModel.get(getAdapterPosition()).setQtyItem(number);
 
-                    CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvHargaProduk);
-                    int harga = Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk()) * number;
-                    tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
-                    mDbShopModel.get(getAdapterPosition()).setHargaPromoProduk(String.valueOf(harga));
+//                    if (mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk().isEmpty()) {
+                        CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvHargaProduk);
+                        int harga = Integer.parseInt(mDbShopModel
+                                .get(getAdapterPosition()).getHargaNormalProduk()) * number;
+                        tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
+                        mDbShopModel.get(getAdapterPosition()).setTotalHargaPerItem(String.valueOf(harga));
 
-                    mUpdateQtyListener.updateQtyItem(number, Integer.parseInt(mDbShopModel
-                            .get(getAdapterPosition()).getId_prod()));
+                        Log.d("hargaAdapINCR tes1", harga+"");
+                        Log.d("idProdAdap tes1", mDbShopModel.get(getAdapterPosition()).getId_prod());
+                        mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
+                                .get(getAdapterPosition()).getId_prod()));
+//                    }
                 }
 
             } else if(v.getId() == btn_minus.getId()) {
@@ -244,18 +141,19 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
                     tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
                     mDbShopModel.get(getAdapterPosition()).setHargaPromoProduk(String.valueOf(harga));
 
-                    mUpdateQtyListener.updateQtyItem(number, Integer.parseInt(mDbShopModel
+                    Log.d("hargaAdapDECR tes1", harga+"");
+                    mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
                             .get(getAdapterPosition()).getId_prod()));
                 }
+
             } else if (v.getId() == ivDelete.getId()){
-//                mDbShopModel.remove(getAdapterPosition());
-//                notifyItemRemoved(getAdapterPosition());
-//                mUpdateQtyListener.deleteCartItem(Integer.parseInt(mDbShopModel
-//                        .get(getAdapterPosition()).getId_prod()));
-                Log.d("ivDel tes1", getAdapterPosition()+"");
+                int idProd = Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getId_prod());
+                int position = getAdapterPosition();
+                mDbShopModel.remove(position);
+                notifyItemRemoved(position);
+                mUpdateQtyListener.deleteCartItem(idProd);
             }
         }
-
     }
 
     public void addItems(List<DBShopListResponse> blogList) {
@@ -267,20 +165,14 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
         mDbShopModel.clear();
     }
 
-    public int getHargaNormalTemp(){
-        return hargaNormalTemp;
+    private void getTotalHargaPerItem(){
+        Intent intent = new Intent("cart_shop_list_adapter");
+        intent.putExtra("harga_total_shop",hargaTotal);
+        LocalBroadcastManager.getInstance(mCtx).sendBroadcast(intent);
     }
-
-    public int getHargaPromoTemp() {
-        return hargaPromoTemp;
-    }
-
-//    public int getQtyItem(){
-//        return qtyItem;
-//    }
 
     public interface UpdateQty {
-        void updateQtyItem(int mQty, int mId_prod);
+        void updateQtyItem(int mQty, int mTotal_Harga_Per_Item, int mId_prod);
         void deleteCartItem(int mId_prod);
     }
 }
