@@ -1,14 +1,19 @@
 package com.example.tomz.electroniccity.page.side_menu.value;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.arch.lifecycle.ViewModelProvider;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
@@ -20,7 +25,12 @@ import com.example.tomz.electroniccity.databinding.ActivityValueAddBinding;
 import com.example.tomz.electroniccity.utils.ExpandableHeightGridView;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
 
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -30,7 +40,9 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
     @Inject ViewModelProvider.Factory mViewModelFactory;
     @Inject ValueAddViewModel mValueAddViewModel;
     private ActivityValueAddBinding mValueBinding;
-    private ExpandableHeightGridView mGvPremiumService/*, mGvLayananTerbaik*/;
+    private ExpandableHeightGridView mGvPremiumService;
+    private int idx = 0;
+    private ArrayList<Bitmap> strImg = new ArrayList<>();
 
     @Override
     public int getLayoutId() {
@@ -58,12 +70,12 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
     private void setupView(){
         Toolbar mToolbar = mValueBinding.toolbar;
         mGvPremiumService = mValueBinding.gvPremiumService;
-//        mGvLayananTerbaik = mValueBinding.gvLayananTerbaik;
 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white),
+            Objects.requireNonNull(mToolbar.getNavigationIcon())
+                    .setColorFilter(getResources().getColor(R.color.white),
                     PorterDuff.Mode.SRC_ATOP);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -73,7 +85,17 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
     }
 
     private void prepareGridView(List<DataValueAddResponse> dataValueAddResponseList){
-        mGvPremiumService.setAdapter(new ValueAddAdapter(this, dataValueAddResponseList));
+        ArrayList<String> imgValueAdd = new ArrayList<>();
+        for (int idx = 0; idx < dataValueAddResponseList.size(); idx++){
+            imgValueAdd.add(dataValueAddResponseList.get(idx).getImage_value());
+        }
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            mGvPremiumService.setAdapter(new ValueAddAdapter(this, dataValueAddResponseList));
+        } else {
+            //noinspection unchecked
+            new getImgValueAdded().execute(imgValueAdd);
+        }
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
@@ -97,8 +119,8 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
 
     @Override
     public void onSuccess(List<DataValueAddResponse> dataValueAddResponseList) {
+        mGvPremiumService.setVisibility(View.VISIBLE);
         prepareGridView(dataValueAddResponseList);
-        Log.d("onValueSuccess tes1", "MASUKKK!!!");
     }
 
     @Override
@@ -126,5 +148,38 @@ public class ValueAdd extends BaseActivity<ActivityValueAddBinding, ValueAddView
         finish();
         return true;
     }
+
+    @SuppressLint("StaticFieldLeak")
+    private class getImgValueAdded extends AsyncTask<ArrayList<String>,Void,ArrayList<Bitmap>> {
+        @SafeVarargs
+        @Override
+        protected final ArrayList<Bitmap> doInBackground(ArrayList<String>... imgParams) {
+            if (idx == 0 || idx < 12) {
+                for (int ipk = 0; ipk < 12; ipk++) {
+                    idx+=1;
+                    try {
+                        URL url = new URL(imgParams[0].get(ipk));
+                        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                        connection.setDoInput(true);
+                        connection.connect();
+                        InputStream input = connection.getInputStream();
+                        strImg.add(BitmapFactory.decodeStream(input));
+                    } catch (Exception e) {
+                        Log.e("errDIB tes1", e.getMessage());
+                    }
+                }
+                if (idx == 12) {
+                    return strImg;
+                }
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(ArrayList<Bitmap> bitmap) {
+            mGvPremiumService.setAdapter(new ValueAddAdapter(ValueAdd.this, bitmap));
+        }
+    }
+
 
 }
