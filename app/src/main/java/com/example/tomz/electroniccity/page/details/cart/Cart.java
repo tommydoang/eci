@@ -2,6 +2,10 @@ package com.example.tomz.electroniccity.page.details.cart;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -9,11 +13,13 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,10 +34,13 @@ import com.example.tomz.electroniccity.data.local.db.dao.CartDao;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
 import com.example.tomz.electroniccity.data.model.db.shop.DBShopListResponse;
 import com.example.tomz.electroniccity.databinding.ActivityCartBinding;
+import com.example.tomz.electroniccity.utils.CommonUtils;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
+import com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -48,6 +57,7 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
     private RecyclerView mCartShopListRV, mCartAddrListRV;
     private LinearLayout mLayoutBodyCart;
     private int sizeDB = 0;
+    private CustomTextViewLatoFont mTvTotalNominalBelanja;
     private List<DBShopListResponse> dbShopListResponseList;
 
     @Override
@@ -73,34 +83,62 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
         dbShopListResponseList = new ArrayList<>();
         setupView();
         new pullDataFromDB().execute();
-        new Handler().postDelayed(this::setupCartRV, 900);
-        new Handler().postDelayed(this::setupCartAddr, 900);
+        new Handler().postDelayed(this::setupCartRV, 1000);
+        new Handler().postDelayed(this::setupCartAddr, 800);
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                new IntentFilter("cart_shop_list_adapter"));
+
     }
 
     private void parseDataFromDB(){
         if (sizeDB >= 1){
+            Log.d("cartSizeDB >= 1 tes1", "MASUKK!!");
             if (Looper.myLooper() == null) {
-                Looper.prepare();
-                for (int idx = 0; idx < sizeDB; idx++) {
-                    DBShopListResponse dbShopList = new DBShopListResponse();
-                    dbShopList.setId_prod(mCartDao.loadAll().get(idx).getId_prod());
-                    dbShopList.setImageProduk(mCartDao.loadAll().get(idx).getImageProduk());
-                    dbShopList.setNameProduk(mCartDao.loadAll().get(idx).getNameProduk());
-                    dbShopList.setSkuProduk(mCartDao.loadAll().get(idx).getSkuProduk());
-                    dbShopList.setHargaNormalProduk(mCartDao.loadAll().get(idx).getHargaNormalProduk());
-                    dbShopList.setHargaPromoProduk(mCartDao.loadAll().get(idx).getHargaPromoProduk());
-                    dbShopList.setDeskripsiProd(mCartDao.loadAll().get(idx).getDeskripsiProd());
-                    dbShopList.setSpeksifikasiProd(mCartDao.loadAll().get(idx).getSpeksifikasiProd());
-                    dbShopList.setQtyItem(mCartDao.loadAll().get(idx).getQtyItem());
-//                    Log.d("sizeDB >=1 tes1 " + idx + "", mCartDao.loadAll().get(idx).getQtyItem() + "");
-                    dbShopListResponseList.add(dbShopList);
-                }
-                Looper.myLooper().quit();
+                Log.d("looper tes1", "NULL!!!!");
+                loadDataFromDB();
             } else {
-                Looper.myLooper().quit();
+                Log.d("looper tes1", "NOT NULL!!!!");
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2){
+                    Log.d(">= JELLY_BEAN_MR2 tes1", "MASUKK!!!");
+                    if (Objects.requireNonNull(Looper.myLooper()).getThread().isAlive()) {
+                        Log.d("ALIVE tes1", "MASUKKK!!!");
+                        Objects.requireNonNull(Looper.myLooper()).quitSafely();
+                    }
+                    new Handler().postDelayed(this::loadDataFromDB,2000);
+                } else {
+                    Log.d("< JELLY_BEAN_MR2 tes1", "MASUKKK!!!");
+                    Objects.requireNonNull(Looper.myLooper()).quit();
+                    new Handler().postDelayed(this::loadDataFromDB,1800);
+                }
             }
         } else {
             Log.d("db_kosong tes1", "KOSONG!!!!");
+        }
+    }
+
+    private void loadDataFromDB(){
+        Looper.prepare();
+        for (int idx = 0; idx < sizeDB; idx++) {
+            DBShopListResponse dbShopList = new DBShopListResponse();
+            dbShopList.setId_prod(mCartDao.loadAll().get(idx).getId_prod());
+            dbShopList.setImageProduk(mCartDao.loadAll().get(idx).getImageProduk());
+            dbShopList.setNameProduk(mCartDao.loadAll().get(idx).getNameProduk());
+            dbShopList.setSkuProduk(mCartDao.loadAll().get(idx).getSkuProduk());
+            dbShopList.setHargaNormalProduk(mCartDao.loadAll().get(idx).getHargaNormalProduk());
+            dbShopList.setHargaPromoProduk(mCartDao.loadAll().get(idx).getHargaPromoProduk());
+            dbShopList.setDeskripsiProd(mCartDao.loadAll().get(idx).getDeskripsiProd());
+            dbShopList.setSpeksifikasiProd(mCartDao.loadAll().get(idx).getSpeksifikasiProd());
+            dbShopList.setQtyItem(mCartDao.loadAll().get(idx).getQtyItem());
+            dbShopList.setTotalHargaPerItem(mCartDao.loadAll().get(idx).getTotalHargaPerItem());
+            dbShopListResponseList.add(dbShopList);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            Log.d("myLooper tes1","CART QUIT SAFELY!!");
+            Objects.requireNonNull(Looper.myLooper()).quitSafely();
+        } else {
+            Log.d("myLooper tes1","CART QUIT!!");
+            Objects.requireNonNull(Looper.myLooper()).quit();
         }
     }
 
@@ -109,11 +147,14 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
         mCartShopListRV = mPaymentBinding.rvShopList;
         mCartAddrListRV = mPaymentBinding.rvAddressCart;
         mLayoutBodyCart = mPaymentBinding.layoutBodyCart;
+        mTvTotalNominalBelanja = mPaymentBinding.totalNominalBelanja;
+        mTvTotalNominalBelanja.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
 
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white),
+            Objects.requireNonNull(mToolbar.getNavigationIcon())
+                    .setColorFilter(getResources().getColor(R.color.white),
                     PorterDuff.Mode.SRC_ATOP);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -135,6 +176,10 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
         mCartShopListRV.setLayoutManager(mLinearLayoutManager);
         mCartShopListRV.setItemAnimator(new DefaultItemAnimator());
         mCartShopListRV.setAdapter(new CartShopListAdapter(this,this, dbShopListResponseList));
+        mCartShopListRV.setNestedScrollingEnabled(false);
+
+
+
     }
 
     private void setupCartAddr(){
@@ -184,9 +229,10 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
 
     }
 
+    @SuppressLint("StaticFieldLeak")
     @Override
-    public void updateQtyItem(int mQty, int mId_prod) {
-        updateParam param = new updateParam(mQty, mId_prod);
+    public void updateQtyItem(int mQty, int totalHargaPerItem, int mId_prod) {
+        updateParam param = new updateParam(mQty, totalHargaPerItem, mId_prod);
         new updateDataQty().execute(param);
     }
 
@@ -202,7 +248,7 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
         @Override
         protected List<DBShopListResponse> doInBackground(Void... voids) {
             if (mCartDao.countItem()>=0){
-                Log.d("sizeDBPay tes1", mCartDao.countItem()+"");
+                Log.d("sizeCartDB tes1", mCartDao.countItem()+"");
                 sizeDB = mCartDao.countItem();
                 parseDataFromDB();
             }
@@ -214,23 +260,40 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
     private class updateDataQty extends AsyncTask<updateParam,Void,List<DBShopListResponse>> {
         @Override
         protected List<DBShopListResponse> doInBackground(updateParam... updateParams) {
-            prepareToUpdate(updateParams[0].qty, updateParams[0].id_prod);
+            prepareToUpdate(updateParams[0].qty, updateParams[0].total_hpi, updateParams[0].id_prod);
             return null;
         }
     }
 
-    private void prepareToUpdate(int qty, int id_prod){
+    private void prepareToUpdate(int qty, int total_hpi, int id_prod){
         Log.d("prepareUpd tes1 1", qty+"");
         Log.d("prepareUpd tes1 2", id_prod+"" );
-        mCartDao.updateQtyItem(qty, id_prod);
+        Log.d("prepareUpd tes1 3", total_hpi+"" );
+
+        if (Looper.myLooper() == null) {
+            Log.d("prepareUpd tes1", "NULL!!!");
+            mCartDao.updateQtyItem(qty, total_hpi, id_prod);
+
+        } else {
+            Log.d("prepareUpd tes1", "NOT NULL!!!");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
+                Objects.requireNonNull(Looper.myLooper()).quitSafely();
+            } else {
+                Objects.requireNonNull(Looper.myLooper()).quit();
+            }
+//            new Handler().postDelayed(() ->
+//                    mCartDao.updateQtyItem(qty, total_hpi, id_prod),900);
+            mCartDao.updateQtyItem(qty, total_hpi, id_prod);
+        }
     }
 
     private static class updateParam{
-        int qty, id_prod;
+        int qty, id_prod, total_hpi;
 
-        updateParam(int qty, int id_prod) {
+        updateParam(int qty, int total_hpi, int id_prod) {
             this.qty = qty;
             this.id_prod = id_prod;
+            this.total_hpi = total_hpi;
         }
     }
 
@@ -259,7 +322,14 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
 
     @Override
     public void onBackPressed() {
-        finish();
+        if (Looper.myLooper()== null) {
+            finish();
+            Log.d("onBackClick tes1", "LOOPER NULL!!!!");
+        } else {
+            Log.d("onBackClick tes1", "LOOPER NOT NULL!!!!");
+
+            finish();
+        }
     }
 
     @Override
@@ -267,5 +337,17 @@ public class Cart extends BaseActivity<ActivityCartBinding,CartViewModel> implem
         finish();
         return true;
     }
+
+    public BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            int hargaTotalAdap = intent.getIntExtra("harga_total_shop", 0);
+            Log.d("onReceive tes1", "HARGA TOTAL ADAPTER " + hargaTotalAdap);
+            mTvTotalNominalBelanja.setText(CommonUtils.setCustomCurrency(String.valueOf(hargaTotalAdap)));
+        }
+    };
+
+
 
 }
