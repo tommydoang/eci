@@ -17,11 +17,11 @@ public class ValueAddViewModel extends BaseViewModel<ValueAddNavigator> {
 
     private List<DataValueAddResponse> valueList = new ArrayList<>();
 
-    public ValueAddViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+    ValueAddViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
     }
 
-    public void getDataValueAddMenu(){
+    void getDataValueAddMenu(){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .doGetAllValueAddedApiCall()
@@ -60,8 +60,6 @@ public class ValueAddViewModel extends BaseViewModel<ValueAddNavigator> {
                     dvar.setSortTo(objResponseIdx.getString("sort"));
 
                     valueList.add(dvar);
-
-                    Log.d("titleValue tes1", objResponseIdx.getString("title"));
                 }
                 getNavigator().onSuccess(valueList);
             }
