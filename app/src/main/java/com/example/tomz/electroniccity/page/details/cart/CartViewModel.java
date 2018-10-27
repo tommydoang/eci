@@ -7,7 +7,6 @@ import android.util.Log;
 
 import com.example.tomz.electroniccity.data.DataManager;
 import com.example.tomz.electroniccity.data.model.api.membership.DataAddressResponse;
-import com.example.tomz.electroniccity.data.model.db.shop.DBShopListResponse;
 import com.example.tomz.electroniccity.page.bn_tab_home.account.address.DefaultAddressRequest;
 import com.example.tomz.electroniccity.utils.base.BaseViewModel;
 import com.example.tomz.electroniccity.utils.rx.SchedulerProvider;
@@ -24,16 +23,12 @@ public class CartViewModel extends BaseViewModel<CartNavigator> {
     private final MutableLiveData<List<DataAddressResponse>> cartData;
     private final ObservableList<DataAddressResponse> cartDataList = new ObservableArrayList<>();
 
-    private final MutableLiveData<List<DBShopListResponse>> cartShopData;
-    private final ObservableList<DBShopListResponse> cartShopDataList = new ObservableArrayList<>();
-
-    public CartViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
+    CartViewModel(DataManager dataManager, SchedulerProvider schedulerProvider) {
         super(dataManager, schedulerProvider);
         cartData = new MutableLiveData<>();
-        cartShopData = new MutableLiveData<>();
     }
 
-    public void addressRequest(String idCustomer, String isDefault){
+    void addressRequest(String idCustomer, String isDefault){
         setIsLoading(true);
         getCompositeDisposable().add(getDataManager()
                 .doGetDefaultAddressApiCall(new DefaultAddressRequest.req(idCustomer, isDefault))
@@ -54,7 +49,7 @@ public class CartViewModel extends BaseViewModel<CartNavigator> {
         );
     }
 
-    public MutableLiveData<List<DataAddressResponse>> getLiveCartAddrDataList() {
+    MutableLiveData<List<DataAddressResponse>> getLiveCartAddrDataList() {
         return cartData;
     }
 
@@ -62,23 +57,9 @@ public class CartViewModel extends BaseViewModel<CartNavigator> {
         return cartDataList;
     }
 
-    public void setDataToCartAddrList(List<DataAddressResponse> dataListApi){
+    void setDataToCartAddrList(List<DataAddressResponse> dataListApi){
         cartDataList.clear();
         cartDataList.addAll(dataListApi);
-    }
-
-    public MutableLiveData<List<DBShopListResponse>> getLiveCartShopDataList() {
-        return cartShopData;
-    }
-
-    public ObservableList<DBShopListResponse> getCartShopDataList() {
-        return cartShopDataList;
-    }
-
-    public void setDataToCartShopList(List<DBShopListResponse> dataListApi){
-        Log.d("data2cart tes1", dataListApi.get(0).getId_prod());
-        cartShopDataList.clear();
-        cartShopDataList.addAll(dataListApi);
     }
 
     private void setAddressModel(JSONObject jsonObject){
@@ -111,6 +92,5 @@ public class CartViewModel extends BaseViewModel<CartNavigator> {
             getNavigator().handleError(e.fillInStackTrace());
         }
     }
-
 
 }
