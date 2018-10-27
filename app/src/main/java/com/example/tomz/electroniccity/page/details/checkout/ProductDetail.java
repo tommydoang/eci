@@ -187,6 +187,7 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
             mTvNormalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
             mTvNormalPrice.setTextColor(Color.BLACK);
             mTvSpcPrice.setVisibility(GONE);
+            mTvBesarDiskon.setVisibility(GONE);
         } else {
             mLayoutDiskon.setVisibility(VISIBLE);
             mTvSpcPrice.setText(spcHargaProdFormatCurr);
