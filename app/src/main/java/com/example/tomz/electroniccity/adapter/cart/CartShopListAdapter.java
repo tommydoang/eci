@@ -2,10 +2,13 @@ package com.example.tomz.electroniccity.adapter.cart;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,16 +52,45 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
         Glide.with(mCtx).load(mDbShopModel.get(position).getImageProduk()).into(holder.ivImgProd);
         holder.tvNameProd.setText(mDbShopModel.get(position).getNameProduk());
         holder.tvSkuProd.setText(mDbShopModel.get(position).getSkuProduk());
-        if (mDbShopModel.get(position).getQtyItem() > 1){
-            holder.tvHargaNormalProduk.setText(CommonUtils.setCustomCurrency(mDbShopModel.get(position).getTotalHargaPerItem()));
-            holder.tvHargaPromoProduk.setText(mDbShopModel.get(position).getHargaPromoProduk());
-            hargaTotal += Integer.parseInt(mDbShopModel.get(position).getTotalHargaPerItem());
-            getTotalHargaPerItem();
+
+        if (mDbShopModel.get(position).getQtyItem() > 1 ){
+            if (mDbShopModel.get(position).getHargaPromoProduk().isEmpty()){
+                holder.tvHargaNormalProduk.setText(CommonUtils
+                        .setCustomCurrency(mDbShopModel.get(position).getTotalHargaPerItem()));
+                holder.tvHargaPromoProduk.setVisibility(View.GONE);
+                hargaTotal += Integer.parseInt(mDbShopModel.get(position).getTotalHargaPerItem());
+                getTotalHargaPerItem();
+            } else {
+                holder.tvHargaNormalProduk.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+                holder.tvHargaNormalProduk.setTextColor(Color.RED);
+                holder.tvHargaNormalProduk.setText(CommonUtils.
+                        setCustomCurrency(mDbShopModel.get(position).getHargaNormalProduk()));
+                holder.tvHargaNormalProduk.setPaintFlags(holder.tvHargaNormalProduk.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.tvHargaPromoProduk.setTextColor(Color.BLACK);
+                holder.tvHargaPromoProduk.setText(CommonUtils
+                        .setCustomCurrency(mDbShopModel.get(position).getTotalHargaPerItem()));
+                hargaTotal += Integer.parseInt(mDbShopModel.get(position).getTotalHargaPerItem());
+                getTotalHargaPerItem();
+            }
         } else {
-            holder.tvHargaNormalProduk.setText(CommonUtils.setCustomCurrency(mDbShopModel.get(position).getHargaNormalProduk()));
-            holder.tvHargaPromoProduk.setText(mDbShopModel.get(position).getHargaPromoProduk());
-            hargaTotal += Integer.parseInt(mDbShopModel.get(position).getTotalHargaPerItem());
-            getTotalHargaPerItem();
+            if (mDbShopModel.get(position).getHargaPromoProduk().isEmpty()){
+                holder.tvHargaNormalProduk.setText(CommonUtils
+                        .setCustomCurrency(mDbShopModel.get(position).getTotalHargaPerItem()));
+                holder.tvHargaPromoProduk.setVisibility(View.GONE);
+                hargaTotal += Integer.parseInt(mDbShopModel.get(position).getHargaNormalProduk());
+                getTotalHargaPerItem();
+            } else {
+                holder.tvHargaNormalProduk.setTextSize(TypedValue.COMPLEX_UNIT_SP, 11);
+                holder.tvHargaNormalProduk.setTextColor(Color.RED);
+                holder.tvHargaNormalProduk.setText(CommonUtils
+                        .setCustomCurrency(mDbShopModel.get(position).getHargaNormalProduk()));
+                holder.tvHargaNormalProduk.setPaintFlags(holder.tvHargaNormalProduk.getPaintFlags()|Paint.STRIKE_THRU_TEXT_FLAG);
+                holder.tvHargaPromoProduk.setTextColor(Color.BLACK);
+                holder.tvHargaPromoProduk.setText(CommonUtils
+                        .setCustomCurrency(mDbShopModel.get(position).getHargaPromoProduk()));
+                hargaTotal += Integer.parseInt(mDbShopModel.get(position).getHargaPromoProduk());
+                getTotalHargaPerItem();
+            }
         }
     }
 
@@ -75,7 +107,8 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
 
         private ImageView ivImgProd, ivDelete;
         private Button btn_plus, btn_minus;
-        private CustomTextViewLatoFont tvNameProd, tvSkuProd, tvHargaNormalProduk, tvHargaPromoProduk, tvQtyItem;
+        private CustomTextViewLatoFont tvNameProd, tvSkuProd, tvHargaNormalProduk,
+                tvHargaPromoProduk, tvQtyItem;
 
         MyViewHolder(View itemView) {
             super(itemView);
@@ -101,10 +134,7 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
 
         @Override
         public void onClick(View v) {
-
             if (v.getId() == btn_plus.getId()){
-
-                Log.d("INCR tes1", getAdapterPosition()+"");
                 if (mDbShopModel.get(getAdapterPosition()).getQtyItem() < 2) {
                     View tempview = (View) btn_plus.getTag(R.integer.btn_plus_view);
                     CustomTextViewLatoFont tv = tempview.findViewById(R.id.tv_item_qty);
@@ -112,43 +142,89 @@ public class CartShopListAdapter extends RecyclerView.Adapter<CartShopListAdapte
                     tv.setText(String.valueOf(number));
                     mDbShopModel.get(getAdapterPosition()).setQtyItem(number);
 
-//                    if (mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk().isEmpty()) {
+                    if (mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk().isEmpty()) {
                         CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvHargaProduk);
                         int harga = Integer.parseInt(mDbShopModel
                                 .get(getAdapterPosition()).getHargaNormalProduk()) * number;
                         tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
                         mDbShopModel.get(getAdapterPosition()).setTotalHargaPerItem(String.valueOf(harga));
 
-                        Log.d("hargaAdapINCR tes1", harga+"");
-                        Log.d("idProdAdap tes1", mDbShopModel.get(getAdapterPosition()).getId_prod());
                         mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
                                 .get(getAdapterPosition()).getId_prod()));
-//                    }
+
+                        hargaTotal += Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk());
+                        getTotalHargaPerItem();
+                    } else {
+                        CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvPromoProduk);
+                        int harga = Integer.parseInt(mDbShopModel
+                                .get(getAdapterPosition()).getHargaPromoProduk()) * number;
+                        tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
+                        mDbShopModel.get(getAdapterPosition()).setTotalHargaPerItem(String.valueOf(harga));
+
+                        mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
+                                .get(getAdapterPosition()).getId_prod()));
+
+                        hargaTotal += Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk());
+                        getTotalHargaPerItem();
+                    }
                 }
 
             } else if(v.getId() == btn_minus.getId()) {
 
                 if (mDbShopModel.get(getAdapterPosition()).getQtyItem() > 1) {
-
                     View tempview = (View) btn_minus.getTag(R.integer.btn_minus_view);
                     CustomTextViewLatoFont tv = tempview.findViewById(R.id.tv_item_qty);
                     int number = Integer.parseInt(tv.getText().toString()) - 1;
                     tv.setText(String.valueOf(number));
                     mDbShopModel.get(getAdapterPosition()).setQtyItem(number);
 
-                    CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvHargaProduk);
-                    int harga = Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk()) * number;
-                    tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
-                    mDbShopModel.get(getAdapterPosition()).setHargaPromoProduk(String.valueOf(harga));
+                    if (mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk().isEmpty()){
+                        CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvHargaProduk);
+                        int harga = Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk()) * number;
+                        tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
+                        mDbShopModel.get(getAdapterPosition()).setTotalHargaPerItem(String.valueOf(harga));
 
-                    Log.d("hargaAdapDECR tes1", harga+"");
-                    mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
-                            .get(getAdapterPosition()).getId_prod()));
+                        mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
+                                .get(getAdapterPosition()).getId_prod()));
+
+                        hargaTotal -= Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk());
+                        getTotalHargaPerItem();
+                    } else {
+                        CustomTextViewLatoFont tvHarga = tempview.findViewById(R.id.tvPromoProduk);
+                        int harga = Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk()) * number;
+                        tvHarga.setText(CommonUtils.setCustomCurrency(String.valueOf(harga)));
+                        mDbShopModel.get(getAdapterPosition()).setTotalHargaPerItem(String.valueOf(harga));
+
+                        mUpdateQtyListener.updateQtyItem(number, harga, Integer.parseInt(mDbShopModel
+                                .get(getAdapterPosition()).getId_prod()));
+
+                        hargaTotal -= Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk());
+                        getTotalHargaPerItem();
+                    }
                 }
+            }
 
-            } else if (v.getId() == ivDelete.getId()){
+            if (v.getId() == ivDelete.getId()){
                 int idProd = Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getId_prod());
                 int position = getAdapterPosition();
+
+                if (mDbShopModel.get(position).getQtyItem() > 1) {
+                    if (mDbShopModel.get(position).getHargaPromoProduk().isEmpty()) {
+                        hargaTotal -= Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk()) * 2;
+                        getTotalHargaPerItem();
+                    } else {
+                        hargaTotal -= Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk()) * 2;
+                        getTotalHargaPerItem();
+                    }
+                } else {
+                    if (mDbShopModel.get(position).getHargaPromoProduk().isEmpty()) {
+                        hargaTotal -= Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaNormalProduk());
+                        getTotalHargaPerItem();
+                    } else {
+                        hargaTotal -= Integer.parseInt(mDbShopModel.get(getAdapterPosition()).getHargaPromoProduk());
+                        getTotalHargaPerItem();
+                    }
+                }
                 mDbShopModel.remove(position);
                 notifyItemRemoved(position);
                 mUpdateQtyListener.deleteCartItem(idProd);
