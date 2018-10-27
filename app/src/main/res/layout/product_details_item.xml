@@ -40,7 +40,7 @@
                 android:id="@+id/tvSkuArtikel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="8dp"
                 android:textColor="@color/black"/>
             <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
                 android:id="@+id/tvNormalPrice"
@@ -71,8 +71,7 @@
                     android:layout_marginStart="12dp"
                     android:textColor="@color/red500"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:visibility="gone"/>
+                    android:textStyle="bold" />
             </RelativeLayout>
 
             <!--DESKRIPSI PRODUK-->
