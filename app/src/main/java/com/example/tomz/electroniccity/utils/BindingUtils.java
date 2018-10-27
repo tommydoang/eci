@@ -181,15 +181,6 @@ public final class BindingUtils {
         }
     }
 
-    @BindingAdapter({"adaptercart"})
-    public static void addCartItem(RecyclerView recyclerView, List<DBShopListResponse> modelProdList){
-        CartShopListAdapter adapter = (CartShopListAdapter) recyclerView.getAdapter();
-        if (adapter != null){
-            adapter.clearItems();
-            adapter.addItems(modelProdList);
-        }
-    }
-
     @BindingAdapter({"adaptercartaddr"})
     public static void addCartAddrItem(RecyclerView recyclerView, List<DataAddressResponse> modelProdList){
         CartAddressAdapter adapter = (CartAddressAdapter) recyclerView.getAdapter();
