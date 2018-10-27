@@ -108,7 +108,7 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
         return tab1DataList;
     }
 
-    public MutableLiveData<List<DataDealTab1Response>> getImageLiveDataDealList() {
+    MutableLiveData<List<DataDealTab1Response>> getImageLiveDataDealList() {
         return tab1DataDeal;
     }
 
@@ -121,7 +121,7 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
         tab1DataList.addAll(dataListApi);
     }
 
-    public void setDataDealToList(List<DataDealTab1Response> dataListApi){
+    void setDataDealToList(List<DataDealTab1Response> dataListApi){
         tab1DataDealList.clear();
         tab1DataDealList.addAll(dataListApi);
     }
@@ -141,7 +141,6 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                     int arrProdSize = arrProd.length();
                     for (int idx2 = 0; idx2 < arrProdSize; idx2++) {
                         JSONObject objProd = arrProd.getJSONObject(idx2);
-//                        Log.d("skuProd tes1", objProd.getString("sku"));
 
                         DataProductTab1Response dpr = new DataProductTab1Response();
                         dpr.setId_category_head(object.getString("id_category_head"));
@@ -172,10 +171,6 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                             dpr.setLong_description(objProd.getString("long_desc"));
                         }
 
-                        Log.d("longDesc tes1 1", String.valueOf(Html.fromHtml(objProd.
-                                getString("long_desc"))));
-                        Log.d("longDesc tes1 2", objProd.getString("long_desc"));
-
                         if (objProd.isNull("spc_price")) {
                             dpr.setSpc_price("201980"); //TODO FOR TESTING PURPOSE ONLY
                         } else {
@@ -204,7 +199,6 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                         dpr.setStock_store_code(objStock.getString("store_code"));
                         dpr.setNumber_stock(objStock.getString("stock"));
                         dpr.setStock_item_bought(objStock.getString("useStock"));
-//                        Log.d("numStock tes1", objStock.getString("stock"));
 
                         productsList.add(dpr);
                     }
@@ -241,8 +235,6 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
                         dbr.setEndDateTime(subObjResponse.getString("endDateTime"));
                         dbr.setIsPublish(subObjResponse.getString("isPublish"));
                         bannerList.add(dbr);
-                    } else {
-                        continue;
                     }
                 }
                 getNavigator().onSuccessBanner(jsonObject.getString("status"));
@@ -279,7 +271,5 @@ public class Tab1ViewModel extends BaseViewModel<Tab1Navigator> {
             Log.e("errJSONBanner tes1", e.getMessage()+"");
             getNavigator().handleErrorBanner(e.fillInStackTrace());
         }
-
     }
-
 }
