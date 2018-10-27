@@ -3,6 +3,7 @@ package com.example.tomz.electroniccity.adapter.side_menu.value_add;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,21 +17,34 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ValueAddAdapter extends BaseAdapter{
 
     private Context mCtx;
+    private ArrayList<Bitmap> bitmapArrayList;
     private List<DataValueAddResponse> mValueModel;
 
     public ValueAddAdapter(Context ctx, List<DataValueAddResponse> mValueModel) {
         this.mCtx = ctx;
         this.mValueModel = mValueModel;
+        bitmapArrayList = new ArrayList<>();
+    }
+
+    public ValueAddAdapter(Context ctx, ArrayList<Bitmap> arrBmp){
+        this.mCtx = ctx;
+        this.bitmapArrayList = arrBmp;
+        mValueModel = new ArrayList<>();
     }
 
     @Override
     public int getCount() {
-        return mValueModel.size();
+        if (mValueModel.size() > 0) {
+            return mValueModel.size();
+        } else {
+            return bitmapArrayList.size();
+        }
     }
 
     @Override
@@ -54,7 +68,13 @@ public class ValueAddAdapter extends BaseAdapter{
             holder = (ViewHolder) convertView.getTag();
         }
 
-        holder.imageView.setImageBitmap(getBitmapFromURL(mValueModel.get(position).getImage_value()));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            holder.imageView.setImageBitmap(getBitmapFromURL(mValueModel.get(position).getImage_value()));
+        } else {
+            holder.imageView.setImageBitmap(Bitmap.createScaledBitmap(bitmapArrayList.get(position),
+                    (int)(bitmapArrayList.get(position).getWidth()*2.4),
+                    (int)(bitmapArrayList.get(position).getHeight()*2.4), true));
+        }
         return convertView;
     }
 
@@ -77,5 +97,4 @@ public class ValueAddAdapter extends BaseAdapter{
             return null;
         }
     }
-
 }
