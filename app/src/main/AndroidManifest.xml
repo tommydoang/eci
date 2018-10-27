@@ -156,7 +156,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".page.main.MainActivity" />
         </activity>
-        <activity android:name=".page.details.cart.Cart"></activity>
+
+        <!-- Page Keranjang -->
+        <activity android:name=".page.details.cart.Cart"
+            android:label="@string/title_cart"
+            android:parentActivityName=".page.main.MainActivity"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".page.main.MainActivity" />
+        </activity>
+        <activity android:name=".page.search.SearchPage"/>
     </application>
 
 </manifest>
