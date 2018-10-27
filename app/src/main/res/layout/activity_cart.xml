@@ -13,33 +13,37 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:scrollbars="none">
-            <LinearLayout
+            android:orientation="vertical">
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <android.support.v7.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="?attr/actionBarSize"
-                    android:background="@color/newlightblue"
-                    app:layout_scrollFlags="scroll|enterAlways"
-                    app:titleTextColor="#FFFFFF"
-                    app:titleTextAppearance="@style/Toolbar.TitleText"
-                    app:contentInsetStartWithNavigation="0dp"
-                    app:contentInsetLeft="0dp"
-                    app:contentInsetStart="0dp"/>
+                android:minHeight="?attr/actionBarSize"
+                android:background="@color/newlightblue"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:titleTextColor="#FFFFFF"
+                app:titleTextAppearance="@style/Toolbar.TitleText"
+                app:contentInsetStartWithNavigation="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetStart="0dp"/>
 
-                <!--BODY-->
+            <!--BODY-->
+            <android.support.v4.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
                 <LinearLayout
                     android:id="@+id/layout_body_cart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
+                    android:paddingTop="8dp"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:paddingBottom="52dp"
+                    android:layout_marginBottom="?attr/actionBarSize"
                     android:orientation="vertical"
                     android:visibility="visible">
                     <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
@@ -64,6 +68,18 @@
                         app:adaptercartaddr="@{cart.cartDataList}"
                         tools:listitem="@layout/cart_address_shop_item" />
 
+                    <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:text="@string/text_list_item_cart"
+                        android:textColor="@color/black"/>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey400"/>
+
                     <!--LIST SHOP ITEM-->
                     <android.support.v7.widget.RecyclerView
                         android:id="@+id/rvShopList"
@@ -72,7 +88,6 @@
                         android:paddingTop="6dp"
                         android:paddingLeft="2dp"
                         android:paddingRight="2dp"
-                        app:adaptercart="@{cart.cartShopDataList}"
                         tools:listitem="@layout/cart_shop_list_item"/>
 
                     <!--FOOTER TOTAL & BTN-->
@@ -84,13 +99,16 @@
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_gravity="end"
-                            android:padding="6dp">
+                            android:layout_gravity="center"
+                            android:padding="6dp"
+                            tools:ignore="UselessParent">
                             <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
                                 android:id="@+id/subtitle_total_bayar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_centerHorizontal="true"
+                                android:layout_marginRight="8dp"
+                                android:layout_marginEnd="8dp"
+                                android:layout_centerVertical="true"
                                 android:text="@string/text_total_price"
                                 android:textColor="@color/black"/>
                             <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
@@ -99,35 +117,35 @@
                                 android:layout_height="wrap_content"
                                 android:layout_toEndOf="@+id/subtitle_total_bayar"
                                 android:layout_toRightOf="@+id/subtitle_total_bayar"
-                                android:layout_alignParentEnd="true"
-                                android:layout_alignParentRight="true"
                                 android:layout_marginEnd="12dp"
                                 android:layout_marginRight="12dp"
                                 android:gravity="end"
                                 android:textColor="@color/red500" />
                         </RelativeLayout>
-                        <LinearLayout
-                            android:id="@+id/btn_buy_now"
-                            android:layout_width="match_parent"
-                            android:layout_height="50dp"
-                            android:layout_gravity="bottom"
-                            android:layout_marginTop="10dp"
-                            android:background="@drawable/background_btn_buy"
-                            android:clickable="true"
-                            android:gravity="center"
-                            android:orientation="vertical"
-                            android:focusable="true">
-                            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/text_btn_beli_item"
-                                android:textColor="@drawable/text_color_common"
-                                android:textSize="18sp" />
-                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-        </ScrollView>
+            </android.support.v4.widget.NestedScrollView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btn_buy_now"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/background_btn_buy"
+            android:clickable="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:focusable="true">
+            <com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/text_btn_beli_item"
+                android:textColor="@drawable/text_color_common"
+                android:textSize="18sp" />
+        </LinearLayout>
+
         <android.support.v4.widget.ContentLoadingProgressBar
             android:id="@+id/loading"
             style="?android:attr/progressBarStyleLarge"
