@@ -166,6 +166,7 @@
     <string name="title_about_us">Tentang Kami</string>
     <string name="title_privacy_policy">Kebijakan Privasi</string>
     <string name="title_detail_produk">Detail Produk</string>
+    <string name="title_cart">Keranjang</string>
     <!--Miscellaneous Text-->
     <string name="text_yes">YA</string>
     <string name="text_no">TIDAK</string>
