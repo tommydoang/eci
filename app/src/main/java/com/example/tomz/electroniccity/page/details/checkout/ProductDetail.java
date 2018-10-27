@@ -4,11 +4,12 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
-import android.os.Looper;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.ContentLoadingProgressBar;
 import android.os.Bundle;
@@ -45,8 +46,8 @@ import com.example.tomz.electroniccity.utils.CommonUtils;
 import com.example.tomz.electroniccity.utils.base.BaseActivity;
 import com.example.tomz.electroniccity.utils.font.CustomTextViewLatoFont;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.inject.Inject;
 
@@ -63,15 +64,14 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
     @Inject CartDao mCartDao;
     private ContentLoadingProgressBar mLoadingBar;
     private ImageView mIvProd;
-    private LinearLayout mLayoutBtnBuyNow;
     private RelativeLayout mLayoutDiskon;
     private ScrollView mLayoutScrollDetail;
     private ProductDetailsBinding mBinding;
     private PopupWindow popupWindow;
-    private String idProd, imgUrl, namaProd, skuProd, hargaProd, spcHargaProd, descProd, longDescProd;
+    private String idProd, imgUrl, namaProd, skuProd, hargaProd, spcHargaProd,
+            descProd, longDescProd, spcHargaProdFormatCurr;
     private CustomTextViewLatoFont mTvNamaProduk, mTvSkuArtikel, mTvNormalPrice,
             mTvSpcPrice, mTvBesarDiskon, mTvSpekProd, mTvDescProd;
-    private List<CartMdl> mCartMdlList;
     private int dbSize = 0;
 
     @Override
@@ -96,7 +96,6 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
         mDetailViewModel.setNavigator(this);
         setupView();
 
-        mCartMdlList = new ArrayList<>();
         new Handler().postDelayed(() -> {
             mLoadingBar.setVisibility(GONE);
             receiveItemIntent();
@@ -126,8 +125,8 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
         setSupportActionBar(mToolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            mToolbar.getNavigationIcon().setColorFilter(getResources().getColor(R.color.white),
-                    PorterDuff.Mode.SRC_ATOP);
+            Objects.requireNonNull(mToolbar.getNavigationIcon())
+                    .setColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_ATOP);
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             mainStatusBarColor();
@@ -149,11 +148,18 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
         idProd = in.getStringExtra("TAG_ID_PROD");
         imgUrl = in.getStringExtra("TAG_IMG_PROD");
         namaProd = in.getStringExtra("TAG_NAMA_PROD");
-        skuProd = in.getStringExtra("TAG_SKU_PROD");
+        skuProd = "Model: " +in.getStringExtra("TAG_SKU_PROD");
         hargaProd = in.getStringExtra("TAG_NORMAL_PRICE");
         spcHargaProd = in.getStringExtra("TAG_SPC_PRICE");
         descProd = in.getStringExtra("TAG_PROD_DESC");
         longDescProd = in.getStringExtra("TAG_LONG_DESC");
+
+        if (spcHargaProd.isEmpty()){
+            spcHargaProd = CommonUtils.setCustomCurrency("120980"); //TODO FOR TESTING PURPOSE ONLY
+        } else {
+            spcHargaProdFormatCurr = CommonUtils.setCustomCurrency(spcHargaProd);
+        }
+
     }
 
     private void parsingData(){
@@ -179,9 +185,18 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
         if(spcHargaProd.isEmpty()){
             mLayoutDiskon.setVisibility(GONE);
             mTvNormalPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14);
+            mTvNormalPrice.setTextColor(Color.BLACK);
+            mTvSpcPrice.setVisibility(GONE);
         } else {
             mLayoutDiskon.setVisibility(VISIBLE);
-            mTvSpcPrice.setText(spcHargaProd);
+            mTvSpcPrice.setText(spcHargaProdFormatCurr);
+            mTvSpcPrice.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+            mTvNormalPrice.setPaintFlags(mTvNormalPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+
+            String percentage = String.valueOf((int)CommonUtils
+                    .countToDisc(hargaProd, spcHargaProd)) + "%";
+            Log.d("persen tes1 2", percentage);
+            mTvBesarDiskon.setText(percentage);
         }
     }
 
@@ -189,7 +204,6 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
     private void prepareDataToDatabase(){
         Log.d("prepareDatabase tes1", "MASUKK!!!");
         if (dbSize == 0){
-            Log.d("dbSize ToDB", "tes1 " + dbSize);
             CartMdl cartMdl = new CartMdl();
             cartMdl.setId_prod(idProd);
             cartMdl.setImageProduk(imgUrl);
@@ -200,39 +214,34 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
             cartMdl.setDeskripsiProd(descProd);
             cartMdl.setSpeksifikasiProd(longDescProd);
             cartMdl.setQtyItem(1);
+            if (spcHargaProd.isEmpty()) {
+                cartMdl.setTotalHargaPerItem(hargaProd);
+            } else {
+                cartMdl.setTotalHargaPerItem(spcHargaProd);
+            }
             mCartDao.insert(cartMdl);
         } else {
-            if (Looper.myLooper() == null) {
-                Looper.prepare();
-                try {
-                    //noinspection LoopStatementThatDoesntLoop
-                    for (int idxDB = 0; idxDB < dbSize; idxDB++) {
-                        Log.d("dbSize tes1 2", "MASUKK!!!");
-                        if (!mCartDao.loadAll().get(idxDB).getId_prod().equals(idProd)) {
-                            CartMdl cartMdl = new CartMdl();
-                            cartMdl.setId_prod(idProd);
-                            cartMdl.setImageProduk(imgUrl);
-                            cartMdl.setNameProduk(namaProd);
-                            cartMdl.setSkuProduk(skuProd);
-                            cartMdl.setHargaNormalProduk(hargaProd);
-                            cartMdl.setHargaPromoProduk(spcHargaProd);
-                            cartMdl.setDeskripsiProd(descProd);
-                            cartMdl.setSpeksifikasiProd(longDescProd);
-                            cartMdl.setQtyItem(1);
-                            mCartDao.insert(cartMdl);
-                        } else {
-                            Log.d("dbSize tes1 3", "MASUKK!!!");
-                            new Handler(Looper.getMainLooper()).post(() -> ToastHelper
-                                    .createToast(ProductDetail.this,
-                                            getString(R.string.text_item_in_cart_already), Toast.LENGTH_LONG));
-                        }
-                    }
-                    Looper.myLooper().quit();
-                } catch (Exception e) {
-                    Log.e("errData2DB tes1", e.getMessage() + "");
-                }
+            CartMdl cartMdl = mCartDao.isDataExist(Integer.parseInt(idProd));
+            if (cartMdl != null) {
+                runOnUiThread(() -> ToastHelper.createToast(ProductDetail.this,
+                        getString(R.string.text_item_in_cart_already), Toast.LENGTH_LONG));
             } else {
-                Looper.myLooper().quit();
+                CartMdl dataCartMdl = new CartMdl();
+                dataCartMdl.setId_prod(idProd);
+                dataCartMdl.setImageProduk(imgUrl);
+                dataCartMdl.setNameProduk(namaProd);
+                dataCartMdl.setSkuProduk(skuProd);
+                dataCartMdl.setHargaNormalProduk(hargaProd);
+                dataCartMdl.setHargaPromoProduk(spcHargaProd);
+                dataCartMdl.setDeskripsiProd(descProd);
+                dataCartMdl.setSpeksifikasiProd(longDescProd);
+                dataCartMdl.setQtyItem(1);
+                if (spcHargaProd.isEmpty()) {
+                    dataCartMdl.setTotalHargaPerItem(hargaProd);
+                } else {
+                    dataCartMdl.setTotalHargaPerItem(spcHargaProd);
+                }
+                mCartDao.insert(dataCartMdl);
             }
         }
     }
@@ -248,7 +257,7 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
         return true;
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint({"ClickableViewAccessibility", "InflateParams"})
     private void setupPopUpPayOrLater(View view){
         CustomTextViewLatoFont mTvBelanjaLagi, mTvBayar;
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
@@ -315,7 +324,7 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
                 Intent in = new Intent(this, Cart.class);
                 startActivity(in);
                 popupWindow.dismiss();
-                new Handler().postDelayed(this::finish, 700);
+                finish();
                 break;
         }
         return false;
@@ -343,12 +352,11 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
 
     @Override
     public void onSaveToDatabase() {
-        Log.d("onSaveDataB tes1", "MASUKKK!!");
         if (!mDataManager.getUserId().isEmpty()) {
             final ViewGroup viewGroup = (ViewGroup) ((ViewGroup) this
                     .findViewById(android.R.id.content)).getChildAt(0);
-            setupPopUpPayOrLater(viewGroup);
             new saveDB().execute();
+            new Handler().postDelayed(() -> setupPopUpPayOrLater(viewGroup), 600);
         } else {
             ToastHelper.createToast(this,
                     getString(R.string.text_login_add_to_cart), Toast.LENGTH_LONG);
@@ -361,7 +369,6 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
         @Override
         protected List<CartMdl> doInBackground(Void... voids) {
             if (mCartDao.countItem() >= 0){
-                Log.d("onSaveDB tes1", mCartDao.countItem()+"");
                 dbSize = mCartDao.countItem();
                 prepareDataToDatabase();
                 //noinspection LoopStatementThatDoesntLoop
@@ -370,18 +377,6 @@ public class ProductDetail extends BaseActivity<ProductDetailsBinding, ProductDe
                 }
             }
             return null;
-        }
-
-        @Override
-        protected void onPostExecute(List<CartMdl> cartMdlList) {
-            berak(cartMdlList);
-            mCartMdlList.addAll(cartMdlList);
-        }
-    }
-
-    private void berak(final List<CartMdl> cartMdl){
-        for (int idx = 0; idx < cartMdl.size(); idx++) {
-            Log.d("onPostExe tes1", cartMdl.get(idx).getId_prod());
         }
     }
 
